@@ -1,40 +1,131 @@
-:root{
-    --max:1100px; --accent:#2563eb; --muted:#6b7280; --bg:#fbfcff;
-    --glass: rgba(255,255,255,0.6);
-  }
-  *{box-sizing:border-box}
-  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0f172a;background:var(--bg);line-height:1.5}
-  .wrap{max-width:var(--max);margin:0 auto;padding:2rem}
-  .header-inner{display:flex;align-items:center;justify-content:space-between}
-  .site-header{position:sticky;top:0;background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-bottom:1px solid rgba(15,23,42,0.06);z-index:40}
-  .logo{font-weight:700;text-decoration:none;color:inherit}
-  .nav a{margin-left:1rem;text-decoration:none;color:var(--muted)}
-  .nav .cta{padding:.5rem .75rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
-  .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center;padding:4rem 0}
-  .hero h1{font-size:2rem;margin-bottom:.5rem}
-  .lead{color:var(--muted)}
-  .btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
-  .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,.12);color:var(--accent)}
-  .hero-preview .code-preview{background:#0b1220;color:#9ae6b4;padding:1rem;border-radius:8px;max-width:360px;overflow:auto}
-  .section-head{display:flex;align-items:center;justify-content:space-between}
-  .filters button{margin-left:.5rem;padding:.4rem .6rem;border-radius:8px;border:1px solid #e6eefc;background:white}
-  .filters button.active{background:var(--accent);color:white;border-color:var(--accent)}
-  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
-  .card{background:white;border-radius:12px;box-shadow:0 4px 18px rgba(2,6,23,.06);overflow:hidden;display:flex;flex-direction:column}
-  .card img{width:100%;height:140px;object-fit:cover}
-  .card-body{padding:1rem;flex:1;display:flex;flex-direction:column}
-  .card-links{margin-top:auto}
-  .card-links a{margin-right:.6rem}
-  .resume-row{display:grid;grid-template-columns:1fr 320px;gap:1.25rem}
-  .timeline{list-style:none;padding-left:0}
-  .download-box{background:linear-gradient(180deg,#fff,#fbfdff);padding:1rem;border-radius:10px;border:1px solid rgba(15,23,42,.04)}
-  .skill-bar{display:inline-block;height:10px;width:120px;background:linear-gradient(90deg,#e6eefc,#dbeafe);border-radius:8px;vertical-align:middle;margin-left:.5rem}
-  .reveal{opacity:0;transform:translateY(10px);transition:all .5s ease}
-  .reveal.visible{opacity:1;transform:none}
-  .site-footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04)}
+/* ==============================
+   Global Variables
+   ============================== */
+   :root {
+    --max: 1100px;
   
-  @media(max-width:900px){
-    .hero{grid-template-columns:1fr; padding:2rem 0}
-    .resume-row{grid-template-columns:1fr}
+    /* Brand Colors */
+    --accent: #2563eb;
+    --accent-light: #3b82f6;
+    --accent-dark: #1e40af;
+  
+    /* Neutral Colors */
+    --muted: #6b7280;
+    --text: #0f172a;
+    --bg: #fbfcff;
+    --card-bg: #ffffff;
+  
+    /* Effects */
+    --glass: rgba(255, 255, 255, 0.6);
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --radius: 12px;
+  }
+  
+  /* ==============================
+     Base Styles
+     ============================== */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  section {
+    padding: 5rem 0;
+  }
+  
+  /* ==============================
+     Typography
+     ============================== */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  
+  p {
+    color: var(--muted);
+    max-width: 65ch;
+    margin-bottom: 1.25rem;
+  }
+  
+  /* ==============================
+     Card / Glassmorphism
+     ============================== */
+  .card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* ==============================
+     Buttons
+     ============================== */
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .button:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  
+  /* ==============================
+     Layout Helpers
+     ============================== */
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  /* ==============================
+     Footer
+     ============================== */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
   }
   
