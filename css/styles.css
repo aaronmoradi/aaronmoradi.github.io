@@ -15,8 +15,10 @@
   .hero-photo img {
     width: 100%;
     max-width: 360px;          /* control image size */
-    border-radius: 50%;        /* make it a circle (optional) */
+    border-radius: 1rem;        /* make it a circle (optional) */
     object-fit: cover;         /* keeps image proportional */
+    border: 4px black;
+    height: auto;
   }  
   .lead{color:var(--muted)}
   .btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
