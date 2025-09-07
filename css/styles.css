@@ -37,7 +37,7 @@
   .cursor {
     display: inline-block;
     margin-left: 2px;
-    animation: blink 1s infinite;
+    animation: blink 1.3s infinite;
   }
   @keyframes blink {
     0%, 100% { opacity: 0;}
