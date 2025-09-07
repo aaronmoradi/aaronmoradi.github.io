@@ -57,9 +57,9 @@
             const textElement = document.querySelector('.typing-header .text');
             const phrases = [
               "Web Developer",
-              " Creative Coder",
-              " Problem Solver",
-              " Computer Scientist"
+              "Creative Coder",
+              "Problem Solver",
+              "Computer Scientist"
             ];
           
             let currentPhrase = 0;
@@ -78,7 +78,7 @@
                   return;
                 }
               } else {
-                textElement.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
+                textElement.textContent = phrase.substring(1, currentChar - 1) || "\u00A0";
                 currentChar--;
                 if (currentChar === 0) {
                   typing = true;
