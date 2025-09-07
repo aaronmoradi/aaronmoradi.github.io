@@ -80,7 +80,7 @@
               } else {
                 textElement.textContent = phrase.substring(1, currentChar - 1) || "\u00A0";
                 currentChar--;
-                if (currentChar === 0) {
+                if (currentChar === 1) {
                   typing = true;
                   currentPhrase = (currentPhrase + 1) % phrases.length;
                 }
