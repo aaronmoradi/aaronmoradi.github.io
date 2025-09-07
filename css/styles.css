@@ -33,6 +33,10 @@
     color: #a30047;
     white-space: nowrap;
     overflow: hidden;
+    display: inline-flex;
+  }
+  .text {
+    min-width: 20ch;
   }
   .cursor {
     display: inline-block;
