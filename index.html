@@ -56,8 +56,8 @@
             const phrases = [
               "Web Developer",
               "Creative Coder",
-              "Portfolio Designer",
-              "Problem Solver"
+              "Problem Solver",
+              "Computer Scientist"
             ];
           
             let currentPhrase = 0;
@@ -76,7 +76,7 @@
                   return;
                 }
               } else {
-                header.textContent = phrase.substring(0, currentChar - 1);
+                header.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
                 currentChar--;
                 if (currentChar === 0) {
                   typing = true;
