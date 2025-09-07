@@ -27,6 +27,22 @@
   .card-links a{margin-right:.6rem}
   .resume-row{display:grid;grid-template-columns:1fr 320px;gap:1.25rem}
   .timeline{list-style:none;padding-left:0}
+  .typing-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2563eb;
+    border-right: 2px solid #2563eb; /* Cursor effect */
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  /* Blinking cursor animation */
+  @keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #2563eb; }
+  }
+  .typing-header {
+    animation: blink 0.7s infinite;
+  }  
   .download-box{background:linear-gradient(180deg,#fff,#fbfdff);padding:1rem;border-radius:10px;border:1px solid rgba(15,23,42,.04)}
   .skill-bar{display:inline-block;height:10px;width:120px;background:linear-gradient(90deg,#e6eefc,#dbeafe);border-radius:8px;vertical-align:middle;margin-left:.5rem}
   .reveal{opacity:0;transform:translateY(10px);transition:all .5s ease}
