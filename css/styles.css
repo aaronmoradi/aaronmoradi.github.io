@@ -12,6 +12,22 @@
   .nav .cta{padding:.5rem 2.5rem;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none}
   .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center;padding:4rem 0}
   .hero h1{font-size:2rem;margin-bottom:.5rem}
+  .hero-inner {
+    display: flex;             /* makes side-by-side layout */
+    align-items: center;       /* vertically centers text & photo */
+    justify-content: space-between; /* space between text and image */
+    gap: 2rem;                 /* spacing between columns */
+  }
+  
+  .hero-text {
+    flex: 1;                   /* text takes available space */
+  }
+  
+  .hero-photo img {
+    max-width: 300px;          /* control image size */
+    border-radius: 50%;        /* make it a circle (optional) */
+    object-fit: cover;         /* keeps image proportional */
+  }  
   .lead{color:var(--muted)}
   .btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
   .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,.12);color:var(--accent)}
