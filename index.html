@@ -45,12 +45,50 @@
     <section class="hero">
       <div class="wrap hero-inner">
         <div>
-          <h1>Hi, I am recent Computer Science graduate from Syracuse University looking for opportunities in the tech field.</h1>
+          <h1 class="typing-header"></h1>
           <p class="lead">I pride myself on being hard working, creative, determined, and personable.</p>
 <!--           <p class="hero-ctas">
             <a class="btn" href="#projects">See Projects</a>
             <a class="btn ghost" href="#resume">View Resume</a>
           </p> -->
+          <script>
+            const header = document.querySelector('.typing-header');
+            const phrases = [
+              "Web Developer",
+              "Creative Coder",
+              "Portfolio Designer",
+              "Problem Solver"
+            ];
+          
+            let currentPhrase = 0;
+            let currentChar = 0;
+            let typing = true;
+          
+            function typeEffect() {
+              const phrase = phrases[currentPhrase];
+          
+              if (typing) {
+                header.textContent += phrase.charAt(currentChar);
+                currentChar++;
+                if (currentChar === phrase.length) {
+                  typing = false;
+                  setTimeout(typeEffect, 1500); // Wait before deleting
+                  return;
+                }
+              } else {
+                header.textContent = phrase.substring(0, currentChar - 1);
+                currentChar--;
+                if (currentChar === 0) {
+                  typing = true;
+                  currentPhrase = (currentPhrase + 1) % phrases.length;
+                }
+              }
+          
+              setTimeout(typeEffect, typing ? 100 : 50); // Typing speed / deleting speed
+            }
+          
+            window.onload = typeEffect;
+          </script>          
         </div>
         <div class="hero-preview" aria-hidden="true">
           <!-- small code mockup -->
