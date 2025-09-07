@@ -54,7 +54,7 @@
             <a class="btn ghost" href="#resume">View Resume</a>
           </p> -->
           <script>
-            const header = document.querySelector('.typing-header');
+            const textElement = document.querySelector('.typing-header .text');
             const phrases = [
               "Web Developer",
               "Creative Coder",
@@ -70,7 +70,7 @@
               const phrase = phrases[currentPhrase];
           
               if (typing) {
-                header.textContent += phrase.charAt(currentChar);
+                textElement.textContent += phrase.charAt(currentChar);
                 currentChar++;
                 if (currentChar === phrase.length) {
                   typing = false;
@@ -78,7 +78,7 @@
                   return;
                 }
               } else {
-                header.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
+                textElement.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
                 currentChar--;
                 if (currentChar === 0) {
                   typing = true;
