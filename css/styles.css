@@ -10,15 +10,21 @@
   .logo{font-weight:900;text-decoration:none;color:inherit}
   .nav a{margin-left:1rem;text-decoration:none;color:var(--muted)}
   .nav .cta{padding:.5rem 2.5rem;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none}
-  .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center;padding:4rem 0}
+  .hero{padding:4rem 0}
   .hero h1{font-size:2rem;margin-bottom:.5rem}
+  .hero .wrap{
+    display: grid;
+    grid-template-columns: 1fr 360px; /* left = text, right = photo */
+    gap: 2rem;
+    align-items: center;
+  }
   .hero-photo img {
-    width: 50%;
+    width: 100%;
     max-width: 360px;          /* control image size */
     border-radius: 1rem;        /* make it a circle (optional) */
     object-fit: cover;         /* keeps image proportional */
-    border: 4px black;
     height: auto;
+    display: block;
   }  
   .lead{color:var(--muted)}
   .btn{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
