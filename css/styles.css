@@ -30,13 +30,9 @@
   .typing-header {
     font-size: 10rem;
     font-weight: bold;
-    color: #a30047;
+    color: #eb257b;
     white-space: nowrap;
     overflow: hidden;
-    display: inline-flex;
-  }
-  .text {
-    min-width: 20ch;
   }
   .cursor {
     display: inline-block;
