@@ -13,7 +13,7 @@
   .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center;padding:4rem 0}
   .hero h1{font-size:2rem;margin-bottom:.5rem}
   .hero-photo img {
-    width: 100%;
+    width: 50%;
     max-width: 360px;          /* control image size */
     border-radius: 1rem;        /* make it a circle (optional) */
     object-fit: cover;         /* keeps image proportional */
