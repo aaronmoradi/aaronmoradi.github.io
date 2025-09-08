@@ -66,5 +66,16 @@
   @media(max-width:900px){
     .hero{grid-template-columns:1fr; padding:2rem 0}
     .resume-row{grid-template-columns:1fr}
+    .hero .wrap {
+        grid-template-columns: 1fr;  /* stack text + image */
+        text-align: center;          /* center text for mobile */
+    }
+    .hero-photo img {
+        max-width: 200px;            /* shrink image on mobile */
+        margin: 1.5rem auto 0;       /* center image with spacing */
+    }
+    .typing-header {
+        font-size: 2rem;             /* prevent giant text overflow */
+    }     
   }
   
