@@ -1,5 +1,5 @@
 :root{
-    --max:1100px; --accent:#2563eb; --muted:#6b7280; --bg:#fbfcff;
+    --max:1100px; --accent:#9500c2; --muted:#000000; --bg:#a8bbf6;
     --glass: rgba(255,255,255,0.6);
   }
   *{box-sizing:border-box}
@@ -8,7 +8,7 @@
   .header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .site-header{position:sticky;top:0;background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-bottom:1px solid rgba(15,23,42,0.06);z-index:40}
   .logo{font-weight:900;text-decoration:none;color:inherit}
-  .nav{display:flex;align-items:center;flex-wrap:wrap;gap:0.75rem}
+  .nav{display:flex;align-items:center;flex-wrap:wrap;gap:1.5rem}
   .nav a{text-decoration:none;color:var(--muted);font-size:0.95rem}
   .nav .cta{padding:.5rem 2rem;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;white-space:nowrap}
   .hero{padding:4rem 0}
