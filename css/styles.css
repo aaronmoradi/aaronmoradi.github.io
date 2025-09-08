@@ -58,7 +58,8 @@
     color:#eb257b;
     white-space:nowrap;
     overflow:hidden;
-    margin: 0.2rem 0; /* 0.2rem top/bottom, 0 left/right */
+    margin: 0;        /* remove default top/bottom margin */
+    padding: 0;   
   }
   .cursor {
     display:inline-block;
