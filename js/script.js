@@ -2,5 +2,5 @@
 document.getElementById('year').textContent = new Date().getFullYear(); */
 
 window.addEventListener('load', function() {
-    window.scrollTo(0, 0);
+    window.scrollTo(1, 1);
   });
