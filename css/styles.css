@@ -63,19 +63,68 @@
   .reveal.visible{opacity:1;transform:none}
   .site-footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04)}
   
-  @media(max-width:900px){
-    .hero{grid-template-columns:1fr; padding:2rem 0}
-    .resume-row{grid-template-columns:1fr}
-    .hero .wrap {
-        grid-template-columns: 1fr;  /* stack text + image */
-        text-align: center;          /* center text for mobile */
+ /* =========================
+   Responsive adjustments
+   ========================= */
+@media (max-width: 900px) {
+    /* Hero section */
+    .hero {
+      grid-template-columns: 1fr;   /* stack text and image */
+      padding: 2rem 0;
+      text-align: center;
     }
+  
     .hero-photo img {
-        max-width: 200px;            /* shrink image on mobile */
-        margin: 1.5rem auto 0;       /* center image with spacing */
+      max-width: 220px;             /* shrink image on tablet */
+      margin: 1.5rem auto 0;        /* center image */
+      display: block;
     }
+  
     .typing-header {
-        font-size: 2rem;             /* prevent giant text overflow */
-    }     
+      font-size: 2.5rem;            /* scale down typing effect */
+    }
+  
+    /* Resume section */
+    .resume-row {
+      grid-template-columns: 1fr;   /* stack education + skills */
+      gap: 2rem;
+    }
+  
+    /* Navigation */
+    .nav a {
+      margin-left: 0.75rem;
+      font-size: 0.95rem;
+    }
   }
   
+  @media (max-width: 600px) {
+    /* Global adjustments */
+    .wrap {
+      padding: 1rem;                /* less padding on small screens */
+    }
+  
+    body {
+      line-height: 1.7;             /* increase readability */
+      font-size: 0.95rem;           /* slightly smaller text */
+    }
+  
+    /* Hero */
+    .hero-photo img {
+      max-width: 160px;             /* even smaller image on phones */
+    }
+  
+    .typing-header {
+      font-size: 1.75rem;           /* prevent overflow on narrow screens */
+    }
+  
+    /* Navigation */
+    .nav a {
+      margin-left: 0.5rem;
+      font-size: 0.85rem;
+    }
+  
+    /* Project cards */
+    .projects-grid {
+      grid-template-columns: 1fr;   /* single column for projects */
+    }
+  }  
