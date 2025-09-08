@@ -33,7 +33,7 @@
     <div class="wrap header-inner">
       <a class="logo" href="/">Aaron Moradi</a>
       <nav class="nav" aria-label="Main">
-        <a href="#number">Test #20</a>
+        <a href="#number">Test #21</a>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
@@ -164,7 +164,7 @@
             <h4>Skills</h4>
             <ul>
               <li>Python <span class="skill-bar" data-level="85"></span></li>
-              <li>C "    "    <span class="skill-bar" data-level="85"></span></li>
+              <li>C     <span class="skill-bar" data-level="85"></span></li>
               <li>Java  <span class="skill-bar" data-level="60"></span></li>
               <li>Racket <span class="skill-bar" data-level="25"></span></li>
               <li>Haskell <span class="skill-bar" data-level="25"></span></li>
@@ -201,6 +201,13 @@
   <footer class="site-footer">
     <div class="wrap">© <span id="year"></span> Aaron Moradi | <a href="/assets/AaronMoradiResume.pdf">Resume</a> • <a href="https://github.com/aaronmoradi">GitHub</a></div>
   </footer>
+<!-- This might need to be removed just be mindful-->
+  <script>
+    document.querySelectorAll('.skill-bar').forEach(bar => {
+      const level = bar.dataset.level;
+      bar.style.width = level + '%';
+    });
+  </script>  
 
   <script src="/js/main.js"></script>
   <script src="js/script.js"></script>
