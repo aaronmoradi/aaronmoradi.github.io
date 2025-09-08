@@ -63,9 +63,6 @@
   .reveal.visible{opacity:1;transform:none}
   .site-footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid rgba(15,23,42,0.04)}
   
- /* =========================
-   Responsive adjustments
-   ========================= */
 @media (max-width: 900px) {
     /* Hero section */
     .hero {
@@ -73,58 +70,52 @@
       padding: 2rem 0;
       text-align: center;
     }
-  
     .hero-photo img {
       max-width: 220px;             /* shrink image on tablet */
       margin: 1.5rem auto 0;        /* center image */
       display: block;
     }
-  
     .typing-header {
       font-size: 2.5rem;            /* scale down typing effect */
     }
-  
     /* Resume section */
     .resume-row {
       grid-template-columns: 1fr;   /* stack education + skills */
       gap: 2rem;
     }
-  
     /* Navigation */
     .nav a {
       margin-left: 0.75rem;
       font-size: 0.95rem;
     }
   }
-  
   @media (max-width: 600px) {
-    /* Global adjustments */
+    /* Wrap already included earlier */
     .wrap {
-      padding: 1rem;                /* less padding on small screens */
+      padding: 1rem;
     }
   
-    body {
-      line-height: 1.7;             /* increase readability */
-      font-size: 0.95rem;           /* slightly smaller text */
+    /* Header */
+    .header-inner {
+      flex-direction: column;       /* stack logo + nav */
+      align-items: flex-start;      /* left-align inside header */
     }
   
-    /* Hero */
-    .hero-photo img {
-      max-width: 160px;             /* even smaller image on phones */
+    .nav {
+      display: flex;
+      flex-direction: column;       /* stack nav links */
+      gap: 0.5rem;                  /* spacing between links */
+      width: 100%;
+      margin-top: 0.75rem;
     }
   
-    .typing-header {
-      font-size: 1.75rem;           /* prevent overflow on narrow screens */
-    }
-  
-    /* Navigation */
     .nav a {
-      margin-left: 0.5rem;
-      font-size: 0.85rem;
+      margin: 0;                    /* remove side margins */
+      font-size: 1rem;
     }
   
-    /* Project cards */
-    .projects-grid {
-      grid-template-columns: 1fr;   /* single column for projects */
+    .nav .cta {
+      align-self: flex-start;       /* keep button aligned left */
+      padding: 0.6rem 1.5rem;       /* smaller padding */
     }
   }  
