@@ -5,5 +5,5 @@ if ('scrollRestoration' in history) {
   }
 
 window.addEventListener('load', function() {
-    window.scrollTo(1, 1);
+    window.scrollTo(10, 0);
   });
