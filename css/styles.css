@@ -42,7 +42,7 @@
   .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,.12);color:var(--accent)}
   .hero-preview .code-preview{background:#0b1220;color:#9ae6b4;padding:1rem;border-radius:8px;max-width:360px;overflow:auto}
   .section-head{display:flex;align-items:center;justify-content:space-between}
-  .filters button{margin-left:.5rem;padding:.4rem .6rem;border-radius:8px;border:3px solid #000000;background:white}
+  .filters button{margin-left:.5rem;padding:.4rem .6rem;border-radius:8px;border:2.67px solid #000000;background:white}
   .filters button.active{background:var(--accent);color:white;border-color:var(--accent)}
   .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
   .card{background:white;border-radius:12px;box-shadow:0 4px 18px rgba(2,6,23,.06);overflow:hidden;display:flex;flex-direction:column}
