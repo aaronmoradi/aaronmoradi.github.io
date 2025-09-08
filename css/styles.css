@@ -170,7 +170,7 @@
   }
   
   .contact-form button {
-    background: #2563eb;
+    background: #9500c2;
     color: white;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
@@ -182,5 +182,5 @@
   }
   
   .contact-form button:hover {
-    background: #1e40af; /* slightly darker on hover */
+    background: #9500c2; /* slightly darker on hover */
   }  
