@@ -6,6 +6,6 @@ if ('scrollRestoration' in history) {
 
 window.addEventListener('load', function() {
     setTimeout(() => {
-        window.scrollTo(10, 0); // negative values aren't needed
+        window.scrollTo(top); // negative values aren't needed
     }, 0);
 });
