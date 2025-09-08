@@ -89,33 +89,29 @@
       font-size: 0.95rem;
     }
   }
-  @media (max-width: 600px) {
-    /* Wrap already included earlier */
+@media (max-width: 600px) {
+    /* Global adjustments */
     .wrap {
-      padding: 1rem;
+      padding: 1rem;                /* less padding on small screens */
     }
-  
-    /* Header */
-    .header-inner {
-      flex-direction: column;       /* stack logo + nav */
-      align-items: flex-start;      /* left-align inside header */
+    body {
+      line-height: 1.7;             /* increase readability */
+      font-size: 0.95rem;           /* slightly smaller text */
     }
-  
-    .nav {
-      display: flex;
-      flex-direction: column;       /* stack nav links */
-      gap: 0.5rem;                  /* spacing between links */
-      width: 100%;
-      margin-top: 0.75rem;
+    /* Hero */
+    .hero-photo img {
+      max-width: 160px;             /* even smaller image on phones */
     }
-  
+    .typing-header {
+      font-size: 1.75rem;           /* prevent overflow on narrow screens */
+    }
+    /* Navigation */
     .nav a {
-      margin: 0;                    /* remove side margins */
-      font-size: 1rem;
+      margin-left: 0.5rem;
+      font-size: 0.85rem;
     }
-  
-    .nav .cta {
-      align-self: flex-start;       /* keep button aligned left */
-      padding: 0.6rem 1.5rem;       /* smaller padding */
+    /* Project cards */
+    .projects-grid {
+      grid-template-columns: 1fr;   /* single column for projects */
     }
   }  
