@@ -138,8 +138,7 @@
     display: flex;
     flex: 2;
     min-width: 300px;
-/*     flex-direction: column;
- */    
+    flex-direction: column;
     gap: 1rem;
     max-width: 600px;
     margin: 0 auto;
