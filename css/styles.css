@@ -136,7 +136,10 @@
   
   .contact-form {
     display: flex;
-    flex-direction: column;
+    flex: 2;
+    min-width: 300px;
+/*     flex-direction: column;
+ */    
     gap: 1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -183,4 +186,16 @@
   
   .contact-form button:hover {
     background: #9500c2; /* slightly darker on hover */
-  }  
+  } 
+  
+  .contact-container {
+    display: flex;
+    gap: 2rem; /* spacing between text and form */
+    align-items: flex-start; /* keeps tops aligned */
+    flex-wrap: wrap; /* makes it responsive on small screens */
+  }
+
+  .contact-info {
+    flex: 1; /* text section takes some space */
+    min-width: 250px;
+  }
