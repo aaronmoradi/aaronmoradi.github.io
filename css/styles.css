@@ -229,6 +229,7 @@ flex: 1; /* text section takes some space */
 min-width: 250px;
 }
 
+/* Button Styles */
 .lakers-btn {
   background-color: #FDB927;
   color: #552583;
@@ -238,10 +239,49 @@ min-width: 250px;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .lakers-btn:hover {
   background-color: #552583;
   color: #FDB927;
   box-shadow: 0 0 10px #FDB927;
+}
+
+/* Confetti Container */
+#confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Individual Confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #FDB927;
+  opacity: 0.8;
+  animation: fall linear forwards;
+}
+
+.confetti-purple { background-color: #552583; }
+.confetti-yellow { background-color: #FDB927; }
+
+/* Confetti Animation */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
 }

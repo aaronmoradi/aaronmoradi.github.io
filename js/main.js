@@ -28,3 +28,33 @@ document.querySelectorAll('.skill-bar').forEach(sb => {
   const level = +sb.dataset.level || 0;
   sb.style.background = `linear-gradient(90deg,var(--accent) ${level}%, #e6eefc ${level}%)`;
 });
+
+const button = document.getElementById('lakersBtn');
+const confettiContainer = document.getElementById('confetti-container');
+
+button.addEventListener('click', () => {
+  for (let i = 0; i < 100; i++) { // number of confetti pieces
+    createConfetti();
+  }
+});
+
+function createConfetti() {
+  const confetti = document.createElement('div');
+  confetti.classList.add('confetti');
+
+  // Randomly make it purple or yellow
+  confetti.classList.add(Math.random() > 0.5 ? 'confetti-purple' : 'confetti-yellow');
+
+  // Random starting position
+  confetti.style.left = Math.random() * window.innerWidth + 'px';
+  confetti.style.animationDuration = 2 + Math.random() * 3 + 's'; // 2-5 seconds
+  confetti.style.width = 5 + Math.random() * 10 + 'px';
+  confetti.style.height = 5 + Math.random() * 10 + 'px';
+
+  confettiContainer.appendChild(confetti);
+
+  // Remove confetti after animation
+  confetti.addEventListener('animationend', () => {
+    confetti.remove();
+  });
+}
