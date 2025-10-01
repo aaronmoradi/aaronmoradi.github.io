@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -28,12 +29,13 @@
   }
   </script>
 </head>
+
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="logo" href="/">Aaron Moradi</a>
       <nav class="nav" aria-label="Main">
-        <a href="#number">Test #78</a>
+        <a href="#number">Test #79</a>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#life">Life</a>
@@ -48,64 +50,67 @@
       <div class="wrap">
         <!-- LEFT COLUMN (text) -->
         <div class="hero-text">
-          <h1>Hello World! My name is <br/> Aaron Moradi and I am a...</h1>
+          <h1>Hello World! My name is <br /> Aaron Moradi and I am a...</h1>
           <h1 class="typing-header">
             <span class="text"></span><span class="cursor">|</span>
           </h1>
           <p class="lead">I pride myself on being professional, creative, determined, and personable.</p>
         </div>
-    
+
         <!-- RIGHT COLUMN (photo) -->
         <div class="hero-photo">
           <img src="/assets/img/AaronGrad.jpg" alt="Photo of Aaron Moradi" />
         </div>
-          <script>
-            const textElement = document.querySelector('.typing-header .text');
-            const phrases = [
-              " Web Developer",
-              " Creative Coder",
-              " Problem Solver",
-              " Computer Scientist"
-            ];
-          
-            let currentPhrase = 0;
-            let currentChar = 0;
-            let typing = true;
-          
-            function typeEffect() {
-              const phrase = phrases[currentPhrase];
-          
-              if (typing) {
-                textElement.textContent += phrase.charAt(currentChar);
-                currentChar++;
-                if (currentChar === phrase.length) {
-                  typing = false;
-                  setTimeout(typeEffect, 1500); // Wait before deleting
-                  return;
-                }
-              } else {
-                textElement.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
-                currentChar--;
-                if (currentChar === 1) {
-                  typing = true;
-                  currentPhrase = (currentPhrase + 1) % phrases.length;
-                }
+        <script>
+          const textElement = document.querySelector('.typing-header .text');
+          const phrases = [
+            " Web Developer",
+            " Creative Coder",
+            " Problem Solver",
+            " Computer Scientist"
+          ];
+
+          let currentPhrase = 0;
+          let currentChar = 0;
+          let typing = true;
+
+          function typeEffect() {
+            const phrase = phrases[currentPhrase];
+
+            if (typing) {
+              textElement.textContent += phrase.charAt(currentChar);
+              currentChar++;
+              if (currentChar === phrase.length) {
+                typing = false;
+                setTimeout(typeEffect, 1500); // Wait before deleting
+                return;
               }
-          
-              setTimeout(typeEffect, typing ? 100 : 50); // Typing speed / deleting speed
+            } else {
+              textElement.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
+              currentChar--;
+              if (currentChar === 1) {
+                typing = true;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+              }
             }
-          
-            window.onload = typeEffect;
-          </script>          
+
+            setTimeout(typeEffect, typing ? 100 : 50); // Typing speed / deleting speed
+          }
+
+          window.onload = typeEffect;
+        </script>
       </div>
     </section>
-    
+
     <section id="about" class="wrap about reveal">
       <h2>About</h2>
       <div class="grid two-col">
         <div>
-          <p>I'm a recent Computer Science gradute from Syracuse University, exploring opportunities for full-time positions. I love improving people's lives by creating impactful products and providing support to those who need it.</p>
-          <p>Programming Languages: <strong>Python</strong>, <strong> C</strong>, HTML, CSS, Java, Javascript, Racket, and Haskell.</p>
+          <p>I'm a recent Computer Science gradute from Syracuse University, exploring opportunities for full-time
+            positions. I love improving people's lives by creating impactful products and providing support to those who
+            need it.</p>
+          <p>Programming Languages: <strong>Python</strong>, <strong> C</strong>, HTML, CSS, Java, Javascript, Racket,
+            and Haskell.</p>
           <p>Outside Computer Science: I love playing/watching basketball, enjoying music, and art.</p>
           <p>I was born and raised in Los Angeles, California.</p>
         </div>
@@ -128,11 +133,12 @@
         <article class="card" data-tags="website">
           <img src="/assets/img/websitess.png" alt="Website screenshot" />
           <div class="card-body">
-            <h3>Website</h3>
-            <p>Designed and created my own website to display information about myself and to engage networking opportunities.
-            <br>
-            <br>
-            <br>
+            <h3>My Website</h3>
+            <p>Designed and created my own website to display information about myself and to engage networking
+              opportunities.
+              <br>
+              <br>
+              <br>
             </p>
             <p class="meta">HTML • CSS • JavaScript</p>
             <p class="card-links">
@@ -143,20 +149,40 @@
           </div>
         </article>
 
+        <article class="card" data-tags="website">
+          <img src="/assets/img/websitess.png" alt="Website screenshot" />
+          <div class="card-body">
+            <h3>Law Firm Website</h3>
+            <p>Designed and created a law firm's website to display information about their firm and to engage clients
+              and increase case opportunities.
+              <br>
+              <br>
+              <br>
+            </p>
+            <p class="meta">HTML • CSS • JavaScript</p>
+            <p class="card-links">
+              <a href="https://moradilaw.com" target="_blank" rel="noopener">Law Firm Website</a>
+              <a>|</a>
+              <a href="https://github.com/aaronmoradi/moradilaw-website" target="_blank" rel="noopener">GitHub</a>
+            </p>
+          </div>
+        </article>
+
         <article class="card" data-tags="data">
           <img src="/assets/img/DataMining.png" alt="Data Mining screenshot" />
           <div class="card-body">
             <h3>Data Mining Project</h3>
             <p>Comparative Sentiment Analysis of X (Twitter) and Bluesky.<br>
-            <br>
-            <br>
-            <br>
+              <br>
+              <br>
+              <br>
             </p>
             <p class="meta">Python • Data</p>
             <p class="card-links">
               <a href="/assets/DataMiningPresentation.pdf" target="_blank">Presentation</a>
               <a>|</a>
-              <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank"
+                rel="noopener">GitHub</a>
             </p>
           </div>
         </article>
@@ -165,9 +191,10 @@
           <img src="/assets/img/SU.png" alt="SU screenshot" />
           <div class="card-body">
             <h3>Encryption Project</h3>
-            <p>This project is designed for taking in a text file, compressing it into binary digits, and decrypting it back into its original state.
-            <br>
-            <br>
+            <p>This project is designed for taking in a text file, compressing it into binary digits, and decrypting it
+              back into its original state.
+              <br>
+              <br>
             </p>
             <p class="meta">Python • Collaboration</p>
             <p class="card-links">
@@ -185,7 +212,8 @@
           <h3><u>Education</u></h3>
           <ol class="timeline">
             <li>
-              <p><strong>Syracuse University - </strong>College of Engineering & Computer Science <strong>May 2025</strong></p>
+              <p><strong>Syracuse University - </strong>College of Engineering & Computer Science <strong>May
+                  2025</strong></p>
               <p>Bachelor of Science, Computer Science</p>
               <p> Minor, Engineering & Computer Science Management</p>
               <p>Cum Laude</p>
@@ -197,7 +225,8 @@
             <li>
               <p><strong>Data Science Analyst Intern,</strong><em> PlanetArt,</em> Calabasas, CA</p>
               <p>June 2024 – August 2024</p>
-              <p><strong>Panel Member,</strong><em> Engineering and Computer Science Dean’s Advisory Panel,</em> Syracuse, NY</p>
+              <p><strong>Panel Member,</strong><em> Engineering and Computer Science Dean’s Advisory Panel,</em>
+                Syracuse, NY</p>
               <p>May 2022 – May 2025</p>
               <p><strong>Guest Services,</strong><em> Barnes Center at The Arch,</em> Syracuse, NY</p>
               <p>August 2022 – May 2025</p>
@@ -211,30 +240,42 @@
             <h4>Programming Languages</h4>
             <div class="skill">
               <span class="skill-name">Python</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:85%"></div>
+              </div>
             </div>
             <div class="skill">
               <span class="skill-name">C</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:85%"></div>
+              </div>
             </div>
             <div class="skill">
               <span class="skill-name">HTML</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:60%"></div>
+              </div>
             </div>
             <div class="skill">
               <span class="skill-name">Java</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:60%"></div>
+              </div>
             </div>
             <div class="skill">
               <span class="skill-name">CSS</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:30%"></div>
+              </div>
             </div>
             <div class="skill">
               <span class="skill-name">Javascript</span>
-              <div class="skill-bar"><div class="skill-fill" style="width:25%"></div></div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width:25%"></div>
+              </div>
             </div>
         </aside>
-        
+
       </div>
     </section>
 
@@ -246,51 +287,53 @@
           <p>Email: <a href="mailto:aaronmoradi2@gmail.com">aaronmoradi2@gmail.com</a></p>
           <a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
-    
+
         <!-- Formspree example -->
         <form class="contact-form" action="https://formspree.io/f/xdklynry" method="POST">
           <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="Your full name" required />
           </div>
-      
+
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" name="_replyto" placeholder="your@email.com" required />
           </div>
-      
+
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
           </div>
-      
+
           <button class="btn" type="submit">Send Message</button>
         </form>
       </div>
-    </section>      
+    </section>
 
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      © <span id="year"></span> Aaron Moradi | 
-      <a href="/assets/AaronMoradiResume.pdf" target="_blank">Resume</a> • 
+      © <span id="year"></span> Aaron Moradi |
+      <a href="/assets/AaronMoradiResume.pdf" target="_blank">Resume</a> •
       <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
     <button class="lakers-btn" id="lakersBtn">Go Lakers!</button>
 
     <!-- Container for confetti -->
-    <div id="confetti-container"></div>  </footer>
-  
-<!-- This might need to be removed just be mindful-->
+    <div id="confetti-container"></div>
+  </footer>
+
+  <!-- This might need to be removed just be mindful-->
   <script>
     document.querySelectorAll('.skill-bar').forEach(bar => {
       const level = bar.dataset.level;
       bar.style.width = level + '%';
     });
-  </script>  
+  </script>
 
   <script src="/js/main.js"></script>
   <script src="js/script.js"></script>
 </body>
+
 </html>
