@@ -43,8 +43,35 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;c
 .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,.12);color:var(--accent)}
 .hero-preview .code-preview{background:#0b1220;color:#9ae6b4;padding:1rem;border-radius:8px;max-width:360px;overflow:auto}
 .section-head{display:flex;align-items:center;justify-content:space-between}
-.filters button{margin-left:.5rem;padding:.4rem .6rem;border-radius:8px;border:2.67px solid #000000;background:white}
-.filters button.active{background:var(--accent);color:white;border-color:var(--accent)}
+.filters {
+  display: flex;
+  flex-wrap: wrap;                /* let buttons wrap to new lines instead of overlapping */
+  gap: 8px;                       /* consistent spacing between buttons */
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+  overflow-x: auto;               /* allow horizontal scroll when space is tight */
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.filters button {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  white-space: nowrap;            /* keep label readable */
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.filters button.active {
+  background: #222;
+  color: #fff;
+  border-color: transparent;
+}
+
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
 .card{background:white;border-radius:12px;box-shadow:0 4px 18px rgba(2,6,23,.06);overflow:hidden;display:flex;flex-direction:column}
 .card img{width:100%;height:140px;object-fit:cover}
