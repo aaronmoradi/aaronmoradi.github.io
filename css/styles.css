@@ -45,31 +45,48 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;c
 .section-head{display:flex;align-items:center;justify-content:space-between}
 .filters {
   display: flex;
-  flex-wrap: wrap;                /* let buttons wrap to new lines instead of overlapping */
-  gap: 8px;                       /* consistent spacing between buttons */
+  flex-wrap: nowrap;               /* force a single row */
+  gap: 8px;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 0.5rem;
-  overflow-x: auto;               /* allow horizontal scroll when space is tight */
+  overflow-x: auto;                /* allow horizontal scrolling when required */
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
 }
 
+/* optional: hide native scrollbar on WebKit while keeping scrolling usable */
+.filters::-webkit-scrollbar {
+  height: 8px;
+}
+.filters::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 8px;
+}
+
+/* Buttons remain fixed-size and won't shrink to overlap */
 .filters button {
   flex: 0 0 auto;
+  white-space: nowrap;
   padding: 6px 10px;
   font-size: 0.95rem;
   border-radius: 6px;
-  white-space: nowrap;            /* keep label readable */
   cursor: pointer;
   border: 1px solid rgba(0,0,0,0.08);
   background: #fff;
+  scroll-snap-align: start;
 }
 
-.filters button.active {
-  background: #222;
-  color: #fff;
-  border-color: transparent;
+/* Slightly smaller buttons on very small screens */
+@media (max-width: 420px) {
+  .filters {
+    gap: 6px;
+  }
+  .filters button {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
 }
 
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1rem}
