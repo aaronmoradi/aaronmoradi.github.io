@@ -256,6 +256,24 @@ min-width: 250px;
   box-shadow: 0 0 10px #FDB927;
 }
 
+.dodgers-btn {
+  background-color: #005A9C;
+  color: #FFFFFF;
+  border: 2px solid #EF3E42;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.dodgers-btn:hover {
+  background-color: #FFFFFF;
+  color: #005A9C;
+  box-shadow: 0 0 10px #EF3E42;
+}
 /* Confetti Container */
 #confetti-container {
   position: fixed;
@@ -280,6 +298,9 @@ min-width: 250px;
 
 .confetti-purple { background-color: #552583; }
 .confetti-yellow { background-color: #FDB927; }
+
+.confetti-blue { background-color: #005A9C; }
+.confetti-white { background-color: #FFFFFF; }
 
 /* Confetti Animation */
 @keyframes fall {
