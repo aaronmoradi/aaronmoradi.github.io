@@ -29,31 +29,42 @@ document.querySelectorAll('.skill-bar').forEach(sb => {
   sb.style.background = `linear-gradient(90deg,var(--accent) ${level}%, #e6eefc ${level}%)`;
 });
 
-const button = document.getElementById('lakersBtn');
+const lakersBtn = document.getElementById('lakersBtn');
+const dodgersBtn = document.getElementById('dodgersBtn');
 const confettiContainer = document.getElementById('confetti-container');
 
-button.addEventListener('click', () => {
-  for (let i = 0; i < 100; i++) { // number of confetti pieces
-    createConfetti();
-  }
-});
+function attachConfetti(btn, team) {
+  btn.addEventListener('click', () => {
+    for (let i = 0; i < 100; i++) {
+      createConfetti(team);
+    }
+  });
+}
 
-function createConfetti() {
+// Lakers → purple & yellow
+attachConfetti(lakersBtn, 'lakers');
+
+// Dodgers → blue & white
+attachConfetti(dodgersBtn, 'dodgers');
+
+function createConfetti(team) {
   const confetti = document.createElement('div');
   confetti.classList.add('confetti');
 
-  // Randomly make it purple or yellow
-  confetti.classList.add(Math.random() > 0.5 ? 'confetti-purple' : 'confetti-yellow');
+  // Apply team-specific classes
+  if (team === 'lakers') {
+    confetti.classList.add('confetti-purple', 'confetti-yellow');
+  } else if (team === 'dodgers') {
+    confetti.classList.add('confetti-blue', 'confetti-white');
+  }
 
-  // Random starting position
   confetti.style.left = Math.random() * window.innerWidth + 'px';
-  confetti.style.animationDuration = 2 + Math.random() * 3 + 's'; // 2-5 seconds
+  confetti.style.animationDuration = 2 + Math.random() * 3 + 's';
   confetti.style.width = 5 + Math.random() * 10 + 'px';
   confetti.style.height = 5 + Math.random() * 10 + 'px';
 
   confettiContainer.appendChild(confetti);
 
-  // Remove confetti after animation
   confetti.addEventListener('animationend', () => {
     confetti.remove();
   });
