@@ -41,7 +41,7 @@ function attachConfetti(btn, team) {
   });
 }
 
-// Lakers → purple & yellow
+// Lakers → purple & gold
 attachConfetti(lakersBtn, 'lakers');
 
 // Dodgers → blue & white
@@ -51,11 +51,13 @@ function createConfetti(team) {
   const confetti = document.createElement('div');
   confetti.classList.add('confetti');
 
-  // Apply team-specific classes
+  // Randomly pick one color from the team's colors
   if (team === 'lakers') {
-    confetti.classList.add('confetti-purple', 'confetti-yellow');
+    const lakersColors = ['confetti-purple', 'confetti-yellow'];
+    confetti.classList.add(lakersColors[Math.floor(Math.random() * 2)]);
   } else if (team === 'dodgers') {
-    confetti.classList.add('confetti-blue', 'confetti-white');
+    const dodgersColors = ['confetti-blue', 'confetti-white'];
+    confetti.classList.add(dodgersColors[Math.floor(Math.random() * 2)]);
   }
 
   confetti.style.left = Math.random() * window.innerWidth + 'px';
