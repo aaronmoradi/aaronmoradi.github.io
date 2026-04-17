@@ -171,7 +171,6 @@ body {
 }
 }
 
-/* Hide Spotify player on small screens so it doesn't overlap nav */
 @media (max-width: 600px) {
   .spotify-fixed {
     display: none !important;
