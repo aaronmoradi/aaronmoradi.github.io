@@ -103,20 +103,15 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  fetch('https://api.counterapi.dev/v2/aaron-moradis-team-3783/ronmo/up', {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer YOUR_API_KEY'
-    }
+fetch('https://api.counterapi.dev/v2/aaron-moradis-team-3783/ronmo/up')
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById('visit-count');
+    if (el) el.textContent = data.count.toLocaleString();
   })
-    .then(res => res.json())
-    .then(data => {
-      const el = document.getElementById('visit-count');
-      if (el) el.textContent = data.count.toLocaleString();
-    })
-    .catch(() => {
-      const el = document.getElementById('visit-count');
-      if (el) el.textContent = '--';
+  .catch(() => {
+    const el = document.getElementById('visit-count');
+    if (el) el.textContent = '--';
   });
 
   </script>
