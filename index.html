@@ -75,11 +75,9 @@
   <!-- Visitor Counter -->
   <div class="bottom-widget">
     <div class="widget-label">Visitors</div>
-    <img
-      src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Faaronmoradi.com&count_bg=%23000000&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true"
-      alt="Visitor Count"
-      style="height:24px;" />
-  </div>>
+    <div id="visit-count" style="font-size:22px; font-weight:600; letter-spacing:0.04em;">...</div>
+    <div style="font-size:11px; opacity:0.5;">total visits</div>
+  </div>
 
 </div>
 <!-- End Bottom Widget Bar -->
@@ -104,6 +102,18 @@
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  fetch('https://api.countapi.xyz/hit/aaronmoradi.com/visits')
+    .then(res => res.json())
+    .then(data => {
+      const el = document.getElementById('visit-count');
+      if (el) el.textContent = data.value.toLocaleString();
+    })
+    .catch(() => {
+      const el = document.getElementById('visit-count');
+      if (el) el.textContent = '--';
+    });
+
   </script>
 
   <header class="site-header">
