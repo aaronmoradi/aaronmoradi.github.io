@@ -73,11 +73,11 @@
   </div>
 
   <!-- Visitor Counter -->
-  <div class="bottom-widget">
-    <div class="widget-label">Visitors</div>
-    <div id="visit-count" style="font-size:22px; font-weight:600; letter-spacing:0.04em;">...</div>
-    <div style="font-size:11px; opacity:0.5;">total visits</div>
-  </div>
+<div class="bottom-widget">
+  <div class="widget-label">Visitors</div>
+  <div id="visit-count" style="font-size:22px; font-weight:600; letter-spacing:0.04em;">...</div>
+  <div style="font-size:11px; opacity:0.5;">total visits</div>
+</div>
 
 </div>
 <!-- End Bottom Widget Bar -->
@@ -103,16 +103,21 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  fetch('https://api.countapi.xyz/hit/aaronmoradi.com/visits')
+  fetch('https://api.counterapi.dev/v2/aaron-moradis-team-3783/ronmo/up', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY'
+    }
+  })
     .then(res => res.json())
     .then(data => {
       const el = document.getElementById('visit-count');
-      if (el) el.textContent = data.value.toLocaleString();
+      if (el) el.textContent = data.count.toLocaleString();
     })
     .catch(() => {
       const el = document.getElementById('visit-count');
       if (el) el.textContent = '--';
-    });
+  });
 
   </script>
 
