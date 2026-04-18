@@ -171,9 +171,79 @@ body {
 }
 }
 
-@media (max-width: 600px) {
-  .spotify-fixed {
-    display: none !important;
+/* Bottom Widget Bar */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #e8e8e8;
+}
+
+.bottom-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.widget-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0.4;
+}
+
+.song-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.song-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1DB954;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.song-btn:hover {
+  background: #17a349;
+  transform: scale(1.1);
+}
+
+.song-btn.active-song {
+  background: #fff;
+  color: #1DB954;
+  outline: 2px solid #1DB954;
+}
+
+/* Push page content above the bar */
+body {
+  padding-bottom: 130px;
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+  .bottom-bar {
+    display: none;
+  }
+  body {
+    padding-bottom: 0;
   }
 }
 

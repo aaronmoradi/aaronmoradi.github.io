@@ -32,39 +32,78 @@
 
 <body>
 
-  <!-- Spotify Fixed Player -->
-  <div class="spotify-fixed" style="position: fixed; top: 16px; right: 16px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-    
-    <!-- Song Selector Buttons -->
-    <div style="display: flex; gap: 6px;">
-      <button onclick="switchSong('0dbTQYW3Ad1FTzIA9t90E8')" style="background:#000000; color:#fff; border:none; border-radius:20px; padding:6px 14px; cursor:pointer; font-size:13px; font-weight:bold;">1</button>
-      <button onclick="switchSong('6HfOzLLjsaXsehIFEsrxTk')" style="background:#000000; color:#fff; border:none; border-radius:20px; padding:6px 14px; cursor:pointer; font-size:13px; font-weight:bold;">2</button>
-      <button onclick="switchSong('3cjF2OFRmip8spwZYQRKxP')" style="background:#000000; color:#fff; border:none; border-radius:20px; padding:6px 14px; cursor:pointer; font-size:13px; font-weight:bold;">3</button>
-      <button onclick="switchSong('0qZqbfudgogv0mFQOJ9TrB')" style="background:#000000; color:#fff; border:none; border-radius:20px; padding:6px 14px; cursor:pointer; font-size:13px; font-weight:bold;">4</button>
-    </div>
+<!-- Bottom Widget Bar -->
+<div class="bottom-bar">
 
-    <!-- Spotify Iframe -->
+  <!-- Spotify -->
+  <div class="bottom-widget">
+    <div class="song-buttons">
+      <button class="song-btn" onclick="switchSong('0dbTQYW3Ad1FTzIA9t90E8', this)">1</button>
+      <button class="song-btn" onclick="switchSong('6HfOzLLjsaXsehIFEsrxTk', this)">2</button>
+      <button class="song-btn" onclick="switchSong('3cjF2OFRmip8spwZYQRKxP', this)">3</button>
+      <button class="song-btn" onclick="switchSong('0qZqbfudgogv0mFQOJ9TrB', this)">4</button>
+    </div>
     <iframe
       id="spotify-player"
-      data-testid="embed-iframe"
       style="border-radius:12px; display:block;"
       src="https://open.spotify.com/embed/track/0dbTQYW3Ad1FTzIA9t90E8?utm_source=generator&theme=0"
-      width="300"
-      height="152"
+      width="260"
+      height="80"
       frameBorder="0"
       allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy">
     </iframe>
-
   </div>
-  <!-- End Spotify Fixed Player -->
+
+  <!-- GitHub Activity -->
+  <div class="bottom-widget">
+    <div class="widget-label">GitHub Activity</div>
+    <img
+      src="https://ghchart.rshah.org/aaronmoradi"
+      alt="Aaron's GitHub Activity"
+      style="height:60px; width:auto; border-radius:8px;" />
+  </div>
+
+  <!-- LA Clock -->
+  <div class="bottom-widget">
+    <div class="widget-label">Los Angeles</div>
+    <div id="bottom-clock" style="font-size:22px; font-weight:600; letter-spacing:0.04em;">--:-- --</div>
+    <div style="font-size:11px; opacity:0.5;">Pacific Time</div>
+  </div>
+
+  <!-- Visitor Counter -->
+  <div class="bottom-widget">
+    <div class="widget-label">Visitors</div>
+    <img
+      src="https://hits.sh/aaronmoradi.com.svg?style=flat&label=visits&color=1DB954"
+      alt="Visitor Count"
+      style="height:28px;" />
+  </div>
+
+</div>
+<!-- End Bottom Widget Bar -->
 
   <script>
-    function switchSong(trackId) {
-      const player = document.getElementById('spotify-player');
-      player.src = 'https://open.spotify.com/embed/track/' + trackId + '?utm_source=generator&theme=0';
-    }
+  function switchSong(trackId, btn) {
+    document.getElementById('spotify-player').src =
+      'https://open.spotify.com/embed/track/' + trackId + '?utm_source=generator&theme=0';
+    document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active-song'));
+    btn.classList.add('active-song');
+  }
+
+  function updateClock() {
+    const el = document.getElementById('bottom-clock');
+    if (!el) return;
+    el.textContent = new Date().toLocaleTimeString('en-US', {
+      timeZone: 'America/Los_Angeles',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
   </script>
 
   <header class="site-header">
