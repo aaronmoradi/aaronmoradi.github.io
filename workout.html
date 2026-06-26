@@ -204,18 +204,31 @@
 
 <script>
 // ── PIN GATE ──────────────────────────────────────────────
-const CORRECT = "0426"; // ← change this to whatever you want
+const WORKER_URL = "https://your-worker.your-subdomain.workers.dev"; // ← your Worker URL
 const pinInput = document.getElementById('pin-input');
 const pinError = document.getElementById('pin-error');
 
-pinInput.addEventListener('input', () => {
+pinInput.addEventListener('input', async () => {
   pinError.style.display = 'none';
   if (pinInput.value.length === 4) {
-    if (pinInput.value === CORRECT) {
-      document.getElementById('lock-screen').style.display = 'none';
-      document.getElementById('main-content').style.display = 'block';
-      sessionStorage.setItem('wk_auth', '1');
-    } else {
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: pinInput.value })
+      });
+      const { ok, error } = await res.json();
+      if (ok) {
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        sessionStorage.setItem('wk_auth', '1');
+      } else {
+        pinError.textContent = res.status === 429 ? error : "Wrong PIN.";
+        pinError.style.display = 'block';
+        pinInput.value = '';
+      }
+    } catch {
+      pinError.textContent = "Connection error. Try again.";
       pinError.style.display = 'block';
       pinInput.value = '';
     }
