@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>— </title>
+  <!-- No SEO, no OG tags, no indexing -->
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <link rel="icon" href="/assets/img/sfpng.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F8FA;
+      --card: #ffffff;
+      --text: #111;
+      --muted: #888;
+      --faint: #aaa;
+      --border: #F0F0F0;
+      --shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 28px 16px 60px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; }
+
+    /* Header */
+    .page-header { margin-bottom: 28px; }
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .page-header h1 { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .page-header p { font-size: 14px; color: #666; }
+
+    /* Card base */
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    /* Weekly grid */
+    .weekly-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--faint);
+      padding: 18px 20px 12px;
+    }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      padding: 0 20px 18px;
+    }
+    .week-cell {
+      border-radius: 10px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, transform 0.1s;
+      user-select: none;
+    }
+    .week-cell:hover:not(.rest) { transform: translateY(-1px); }
+    .week-cell.rest { cursor: default; background: #F4F4F4; }
+    .week-cell.active { border-color: var(--cell-accent) !important; }
+    .week-day { font-size: 10px; font-weight: 700; color: #999; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .week-icon { font-size: 16px; }
+    .week-name { font-size: 9px; font-weight: 600; margin-top: 4px; line-height: 1.2; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--card);
+      color: #555;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.15s;
+    }
+    .tab-btn.active { color: #fff; }
+
+    /* Active day card */
+    .day-header {
+      padding: 18px 24px;
+      border-radius: 16px 16px 0 0;
+    }
+    .day-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 4px;
+    }
+    .day-title { font-size: 22px; font-weight: 800; color: #fff; }
+    .day-cardio { font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 8px; font-style: italic; }
+
+    /* Exercise rows */
+    .exercise-list { padding: 8px 0; }
+    .exercise-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .exercise-row:last-child { border-bottom: none; }
+    .ex-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .ex-name { font-size: 15px; font-weight: 700; color: var(--text); }
+    .new-badge {
+      font-size: 10px; font-weight: 700; border-radius: 4px;
+      padding: 2px 6px; letter-spacing: 0.06em; color: #fff; margin-left: 8px;
+    }
+    .ex-meta { display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap; }
+    .ex-meta span { font-size: 12px; color: #777; }
+    .ex-weight { font-weight: 600; }
+    .ex-note { font-size: 12px; color: #999; margin-top: 5px; font-style: italic; line-height: 1.4; }
+
+    /* Tips */
+    .tips-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--faint);
+      padding: 18px 24px 12px;
+    }
+    .tip-row { display: flex; gap: 12px; align-items: flex-start; padding: 0 24px 10px; }
+    .tip-row:last-child { padding-bottom: 18px; }
+    .tip-emoji { font-size: 16px; flex-shrink: 0; }
+    .tip-text { font-size: 13px; color: #555; line-height: 1.5; }
+
+    .footer-note {
+      font-size: 11px; color: #ccc; text-align: center; margin-top: 20px;
+    }
+
+    /* Hidden — no nav, no back link, nothing to suggest this page exists */
+    #lock-screen {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; flex-direction: column; gap: 12px;
+    }
+    #lock-screen p { font-size: 13px; color: var(--muted); }
+    #pin-input {
+      font-size: 28px; letter-spacing: 0.3em; text-align: center;
+      width: 160px; border: 2px solid #ddd; border-radius: 12px;
+      padding: 10px 14px; outline: none; background: var(--card);
+      color: var(--text); font-family: monospace;
+      transition: border-color 0.2s;
+    }
+    #pin-input:focus { border-color: #555; }
+    #pin-error { font-size: 12px; color: #C0392B; display: none; }
+    #main-content { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- Lock Screen -->
+<div id="lock-screen">
+  <p>🔒</p>
+  <input id="pin-input" type="password" inputmode="numeric" maxlength="4" placeholder="····" autocomplete="off" />
+  <p id="pin-error">Wrong PIN.</p>
+</div>
+
+<!-- Hidden until unlocked -->
+<div id="main-content">
+  <div class="wrap">
+
+    <div class="page-header">
+      <p class="eyebrow">No More BS</p>
+      <h1>Your Revised Workout Plan</h1>
+      <p>4–5 days/week · Push / Legs / Pull / Legs / Cardio</p>
+    </div>
+
+    <!-- Weekly overview -->
+    <div class="card">
+      <div class="weekly-label">Weekly Layout</div>
+      <div class="week-grid" id="week-grid"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" id="tabs"></div>
+
+    <!-- Active day card -->
+    <div class="card" id="day-card"></div>
+
+    <!-- Tips -->
+    <div class="card" id="tips-card">
+      <div class="tips-label">Key Focus Areas</div>
+    </div>
+
+    <p class="footer-note">Built from your workout log · June 2024 – June 2026</p>
+  </div>
+</div>
+
+<script>
+// ── PIN GATE ──────────────────────────────────────────────
+const CORRECT = "0426"; // ← change this to whatever you want
+const pinInput = document.getElementById('pin-input');
+const pinError = document.getElementById('pin-error');
+
+pinInput.addEventListener('input', () => {
+  pinError.style.display = 'none';
+  if (pinInput.value.length === 4) {
+    if (pinInput.value === CORRECT) {
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      sessionStorage.setItem('wk_auth', '1');
+    } else {
+      pinError.style.display = 'block';
+      pinInput.value = '';
+    }
+  }
+});
+
+// Skip PIN if already authed this session
+if (sessionStorage.getItem('wk_auth') === '1') {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+}
+
+// ── DATA ──────────────────────────────────────────────────
+const days = [
+  {
+    id: "A", label: "Day A", name: "Push", color: "#E8F4FD", accent: "#2E86AB", icon: "💪",
+    cardio: "Optional: 10 min incline treadmill (12 incline, 3 mph) warm-up",
+    exercises: [
+      { name: "Chest Press", sets: "3 sets", reps: "10 reps", weight: "20lb → test 22.5lb on last set", note: "Start with 15lb warm-up set" },
+      { name: "Shoulder Press", sets: "3 sets", reps: "10 reps", weight: "15lb → test 17.5lb on last set", note: "Keep core braced, don't arch back" },
+      { name: "Lateral Raises", sets: "2 sets", reps: "12 reps", weight: "8–10lb", note: "NEW — slow and controlled, no momentum", isNew: true },
+      { name: "Skull Crushers", sets: "3 sets", reps: "10 reps", weight: "10lb (form focus)", note: "Elbows locked in, don't flare — rebuild to 15lb" },
+      { name: "Plank", sets: "2 sets", reps: "1 minute", weight: "Bodyweight", note: "Squeeze glutes and core, don't let hips sag" },
+      { name: "Curl Ups", sets: "4 sets", reps: "25 reps", weight: "Bodyweight", note: "Controlled tempo, don't pull on neck" },
+    ],
+  },
+  {
+    id: "B", label: "Day B", name: "Legs (Strength Focus)", color: "#FDF3E8", accent: "#E07A2F", icon: "🦵",
+    cardio: "Optional: 10 min incline treadmill warm-up",
+    exercises: [
+      { name: "Machine Squats / Leg Press", sets: "3 sets + 1 heavy", reps: "20 reps / 8–10 reps (heavy set)", weight: "12.5lb + increase heavy set gradually", note: "Add one heavier lower-rep set to build strength" },
+      { name: "Weighted Lunges", sets: "3 sets", reps: "10 each leg", weight: "20lb", note: "Stay in lunge position, track which leg you're on" },
+      { name: "Romanian Deadlift", sets: "3 sets", reps: "12 reps", weight: "20lb (start with 15lb)", note: "Hinge at hips, feel the hamstring stretch" },
+      { name: "Calf Raises", sets: "2 sets", reps: "15 reps", weight: "20lb", note: "Pause at the top, slow on the way down" },
+      { name: "Curl Ups", sets: "4 sets", reps: "25 reps", weight: "Bodyweight", note: "" },
+      { name: "Side Plank", sets: "2 sets each side", reps: "30 seconds", weight: "Bodyweight", note: "Stack feet or stagger — keep hips lifted" },
+    ],
+  },
+  {
+    id: "C", label: "Day C", name: "Pull", color: "#EDF8F0", accent: "#2D9E5F", icon: "🏋️",
+    cardio: "Optional: 10 min incline treadmill warm-up",
+    exercises: [
+      { name: "Lat Pulldown", sets: "3 sets", reps: "10 reps", weight: "27.5lb → test 47.5lb on last set", note: "Pull to upper chest, squeeze lats at bottom" },
+      { name: "Single Arm Rows", sets: "3 sets", reps: "10 reps each arm", weight: "20lb (start with 15lb)", note: "Elbow close to body, full range of motion" },
+      { name: "Bicep Curls", sets: "3 sets", reps: "10 reps", weight: "15lb", note: "Don't swing — control the negative" },
+      { name: "Face Pulls", sets: "3 sets", reps: "12 reps", weight: "22.5lb → test 25lb", note: "Great for rear delts and rotator cuff health" },
+      { name: "Russian Twists", sets: "4 sets", reps: "25 reps", weight: "4lb → alternate with 6lb", note: "Controlled rotation, don't rush" },
+      { name: "Mountain Climbers", sets: "2 sets", reps: "20 reps", weight: "Bodyweight", note: "Core tight, hips level — not a race" },
+    ],
+  },
+  {
+    id: "D", label: "Day D", name: "Legs (Glute & Core Focus)", color: "#F5EDF8", accent: "#7B3FA0", icon: "🍑",
+    cardio: "Optional: 10 min incline treadmill warm-up",
+    exercises: [
+      { name: "Machine Squats / Leg Press", sets: "3 sets", reps: "20 reps", weight: "12.5lb", note: "Endurance focus, controlled pace" },
+      { name: "Weighted Lunges", sets: "3 sets", reps: "10 each leg", weight: "20lb", note: "Stay in lunge position — go up and down" },
+      { name: "Glute Bridges", sets: "3 sets", reps: "20 reps", weight: "Bodyweight or add plate", note: "Drive through heels, squeeze at top" },
+      { name: "Calf Raises", sets: "2 sets", reps: "15 reps", weight: "20lb", note: "" },
+      { name: "Curl Ups", sets: "4 sets", reps: "25 reps", weight: "Bodyweight", note: "" },
+      { name: "Bicycle Crunches", sets: "2 sets", reps: "20 reps", weight: "Bodyweight", note: "Slow and deliberate — opposite elbow to knee" },
+    ],
+  },
+  {
+    id: "E", label: "Day E", name: "Cardio", color: "#FEF0F0", accent: "#C0392B", icon: "🏃",
+    cardio: null,
+    exercises: [
+      { name: "Incline Treadmill Walk", sets: "1 session", reps: "1+ mile", weight: "12 incline, 3 mph", note: "This is your base — work up to 2 miles over time" },
+      { name: "OR: Stationary Bike", sets: "1 session", reps: "30 minutes", weight: "High/Low intervals (6/2)", note: "Finish last minute at max effort" },
+    ],
+  },
+];
+
+const weekTemplate = [
+  { day: "Mon", workout: "A", label: "Push" },
+  { day: "Tue", workout: "B", label: "Legs (Strength)" },
+  { day: "Wed", workout: "E", label: "Cardio" },
+  { day: "Thu", workout: "C", label: "Pull" },
+  { day: "Fri", workout: "D", label: "Legs (Glute)" },
+  { day: "Sat", workout: null, label: "Rest" },
+  { day: "Sun", workout: null, label: "Rest" },
+];
+
+const tips = [
+  { emoji: "📈", tip: "Progressive overload — add weight when last set feels comfortable for 10+ reps" },
+  { emoji: "🫀", tip: "Reintroduce cardio — 2–3x/week will accelerate your results at your current weight" },
+  { emoji: "💧", tip: "Hydration and protein — aim for ~150g protein/day to support muscle building at 200lb" },
+  { emoji: "😴", tip: "Sleep is training — muscle is built at rest, not in the gym" },
+  { emoji: "📓", tip: "Keep logging — your 2-year log is your biggest asset, keep tracking weights and reps" },
+];
+
+// ── RENDER ────────────────────────────────────────────────
+let activeDay = "A";
+
+function getDay(id) { return days.find(d => d.id === id); }
+
+function renderWeekGrid() {
+  const grid = document.getElementById('week-grid');
+  grid.innerHTML = weekTemplate.map(({ day, workout, label }) => {
+    const match = workout ? getDay(workout) : null;
+    const isRest = !workout;
+    const isActive = activeDay === workout;
+    return `
+      <div class="week-cell ${isRest ? 'rest' : ''} ${isActive ? 'active' : ''}"
+           style="background:${isRest ? '#F4F4F4' : match.color}; --cell-accent:${match?.accent || 'transparent'};"
+           ${workout ? `onclick="setDay('${workout}')"` : ''}>
+        <div class="week-day">${day}</div>
+        <div class="week-icon">${isRest ? '😴' : match.icon}</div>
+        <div class="week-name" style="color:${isRest ? '#bbb' : match.accent}">${isRest ? 'Rest' : label}</div>
+      </div>`;
+  }).join('');
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = days.map(d => `
+    <button class="tab-btn ${activeDay === d.id ? 'active' : ''}"
+            style="${activeDay === d.id ? `background:${d.accent};` : ''}"
+            onclick="setDay('${d.id}')">
+      ${d.icon} ${d.label}: ${d.name}
+    </button>`).join('');
+}
+
+function renderDayCard() {
+  const d = getDay(activeDay);
+  const card = document.getElementById('day-card');
+  card.innerHTML = `
+    <div class="day-header" style="background:${d.accent};">
+      <div class="day-label">${d.label}</div>
+      <div class="day-title">${d.icon} ${d.name}</div>
+      ${d.cardio ? `<div class="day-cardio">🔥 ${d.cardio}</div>` : ''}
+    </div>
+    <div class="exercise-list">
+      ${d.exercises.map((ex, i) => `
+        <div class="exercise-row">
+          <div class="ex-num" style="background:${d.color}; color:${d.accent};">${i + 1}</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;flex-wrap:wrap;">
+              <span class="ex-name">${ex.name}</span>
+              ${ex.isNew ? `<span class="new-badge" style="background:${d.accent};">NEW</span>` : ''}
+            </div>
+            <div class="ex-meta">
+              <span>📦 ${ex.sets}</span>
+              <span>🔁 ${ex.reps}</span>
+              <span class="ex-weight" style="color:${d.accent};">⚖️ ${ex.weight}</span>
+            </div>
+            ${ex.note ? `<div class="ex-note">💡 ${ex.note}</div>` : ''}
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderTips() {
+  const card = document.getElementById('tips-card');
+  card.innerHTML = `<div class="tips-label">Key Focus Areas</div>` +
+    tips.map(({ emoji, tip }) => `
+      <div class="tip-row">
+        <span class="tip-emoji">${emoji}</span>
+        <span class="tip-text">${tip}</span>
+      </div>`).join('');
+}
+
+function setDay(id) {
+  activeDay = id;
+  renderWeekGrid();
+  renderTabs();
+  renderDayCard();
+}
+
+function render() {
+  renderWeekGrid();
+  renderTabs();
+  renderDayCard();
+  renderTips();
+}
+
+render();
+</script>
+</body>
+</html>
