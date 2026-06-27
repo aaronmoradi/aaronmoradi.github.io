@@ -184,7 +184,6 @@ function initApp() {
   const days = [
     {
       id: "A", label: "Day A", name: "Push", color: "#E8F4FD", accent: "#2E86AB", icon: "💪",
-      cardio: "Optional: 10 min incline treadmill (12 incline, 3 mph) warm-up",
       exercises: [
         { name: "Chest Press", sets: "3 sets", reps: "10 reps", weight: "20lb → test 22.5lb on last set", note: "" },
         { name: "Shoulder Press", sets: "3 sets", reps: "10 reps", weight: "15lb → test 17.5lb on last set", note: "Keep core braced, don't arch back" },
@@ -196,7 +195,6 @@ function initApp() {
     },
     {
       id: "B", label: "Day B", name: "Legs (Strength Focus)", color: "#FDF3E8", accent: "#E07A2F", icon: "🦵",
-      cardio: "Optional: 10 min incline treadmill warm-up",
       exercises: [
         { name: "Squats", sets: "3 sets", reps: "20 reps", weight: "Bodyweight", note: "Straight back, keep feet flat" },
         { name: "Weighted Lunges", sets: "3 sets", reps: "10 each leg", weight: "20lb", note: "Stay in lunge position, track which leg you're on" },
@@ -208,7 +206,6 @@ function initApp() {
     },
     {
       id: "C", label: "Day C", name: "Pull", color: "#EDF8F0", accent: "#2D9E5F", icon: "🏋️",
-      cardio: "Optional: 10 min incline treadmill warm-up",
       exercises: [
         { name: "Lat Pulldown", sets: "3 sets", reps: "10 reps", weight: "47.5lb", note: "Pull to upper chest, squeeze lats at bottom" },
         { name: "Single Arm Rows", sets: "3 sets", reps: "10 reps each arm", weight: "20lb", note: "Elbow close to body, full range of motion" },
@@ -220,7 +217,6 @@ function initApp() {
     },
     {
       id: "D", label: "Day D", name: "Legs (Glute & Core Focus)", color: "#F5EDF8", accent: "#7B3FA0", icon: "🍑",
-      cardio: "Optional: 10 min incline treadmill warm-up",
       exercises: [
         { name: "Squats", sets: "3 sets", reps: "20 reps", weight: "Bodyweight", note: "Endurance focus, controlled pace" },
         { name: "Weighted Lunges", sets: "3 sets", reps: "10 each leg", weight: "20lb", note: "Stay in lunge position — go up and down" },
@@ -234,6 +230,7 @@ function initApp() {
       id: "E", label: "Day E", name: "Rest", color: "#FEF0F0", accent: "#C0392B", icon: "🏃",
       cardio: null,
       exercises: [
+        { name: "Cardio", sets: "1 session", reps: "at least 20 minutes", weight: "12 incline - 3.0 mph", note: "This is your cardio." },
         { name: "Pool", sets: "1 session", reps: "at least 30 minutes", weight: "Bodyweight", note: "This is your rest day - enjoy it at least" },
         { name: "Steam", sets: "1 session", reps: "10-12 minutes", weight: "Bodyweight", note: "just sit and think" },
       ],
