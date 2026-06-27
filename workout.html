@@ -148,7 +148,7 @@ pinInput.addEventListener("input", async () => {
     const res = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pin: pinInput.value }),
+      body: JSON.stringify({ pin: pinInput.value, deviceId }),
     });
 
     let data;
