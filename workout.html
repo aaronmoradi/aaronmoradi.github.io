@@ -85,7 +85,21 @@
 
 <script>
 const WORKER_URL = "https://flat-base-e6f6.aaronmoradi2.workers.dev";
-const TOKEN_SECRET = null; // validation is server-side; client just checks structure
+
+// ── DEVICE ID ─────────────────────────────────────────────
+// Generated once per browser, stored in localStorage.
+// This is what ties lockout to a device, not an IP.
+function getDeviceId() {
+  const key = "wk_did";
+  let id = localStorage.getItem(key);
+  if (!id || !/^[a-f0-9]{32}$/.test(id)) {
+    id = Array.from(crypto.getRandomValues(new Uint8Array(16)))
+      .map(b => b.toString(16).padStart(2, "0")).join("");
+    localStorage.setItem(key, id);
+  }
+  return id;
+}
+const deviceId = getDeviceId();
 
 // ── TOKEN VALIDATION ──────────────────────────────────────
 // Verifies the token has the right shape and isn't expired (8 hours).
