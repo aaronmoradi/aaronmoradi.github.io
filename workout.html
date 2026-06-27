@@ -278,8 +278,6 @@ function initApp() {
     document.getElementById("tabs").innerHTML = days.map(d => `
       <button class="tab-btn ${activeDay === d.id ? "active" : ""}"
         style="${activeDay === d.id ? `background:${d.accent};` : ""}"
-        onclick="setDay('${d.id}')">
-        ${d.icon} ${d.label}: ${d.name}
       </button>`).join("");
   }
 
