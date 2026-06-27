@@ -274,6 +274,15 @@ function initApp() {
     }).join("");
   }
 
+  function renderTabs() {
+    document.getElementById("tabs").innerHTML = days.map(d => `
+      <button class="tab-btn ${activeDay === d.id ? "active" : ""}"
+        style="${activeDay === d.id ? `background:${d.accent};` : ""}"
+        onclick="setDay('${d.id}')">
+        ${d.icon} ${d.label}: ${d.name}
+      </button>`).join("");
+  }
+
   function renderDayCard() {
     const d = getDay(activeDay);
     document.getElementById("day-card").innerHTML = `
