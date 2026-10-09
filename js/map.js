@@ -1,4 +1,4 @@
-/* Atlas: the life map. Leaflet + CARTO tiles. */
+/* Atlas: the life map. Leaflet + OpenStreetMap tiles (keyless). */
 (() => {
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
@@ -49,13 +49,28 @@
 
   /* ---------- map ---------- */
   const map = L.map('map', { zoomControl: true, worldCopyJump: true, minZoom: 3 }).setView([38.5, -97], 4);
-  const tileUrl = () => `https://{s}.basemaps.cartocdn.com/${AM.isDark() ? 'dark_all' : 'light_all'}/{z}/{x}/{y}{r}.png`;
-  const tiles = L.tileLayer(tileUrl(), {
-    subdomains: 'abcd',
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  }).addTo(map);
-  addEventListener('am:theme', () => { tiles.setUrl(tileUrl()); route.setStyle({ color: accent() }); });
+  // Keyless tile providers, tried in order. Dark mode is a CSS filter on the tile pane.
+  const PROVIDERS = [
+    { url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' },
+    { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', maxZoom: 19,
+      attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>, OpenStreetMap contributors, and the GIS user community' },
+  ];
+  let provider = 0, tileErrors = 0;
+  const tiles = L.tileLayer(PROVIDERS[0].url, { maxZoom: PROVIDERS[0].maxZoom, attribution: PROVIDERS[0].attribution }).addTo(map);
+  tiles.on('tileerror', () => {
+    if (++tileErrors < 4 || provider >= PROVIDERS.length - 1) return;
+    const p = PROVIDERS[++provider];
+    tileErrors = 0;
+    map.attributionControl.removeAttribution(tiles.options.attribution);
+    tiles.options.attribution = p.attribution;
+    tiles.options.maxZoom = p.maxZoom;
+    map.attributionControl.addAttribution(p.attribution);
+    tiles.setUrl(p.url);
+  });
+  const paintTiles = () => document.getElementById('map').classList.toggle('dark-tiles', AM.isDark());
+  paintTiles();
+  addEventListener('am:theme', () => { paintTiles(); route.setStyle({ color: accent() }); });
 
   const la = PLACES[0].ll, syr = PLACES[2].ll;
   const route = L.polyline(arc(la, syr), { color: accent(), weight: 3, dashArray: '2 9', lineCap: 'round', opacity: 0.9 }).addTo(map);

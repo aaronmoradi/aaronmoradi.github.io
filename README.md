@@ -7,7 +7,7 @@ My personal website, built by hand with plain HTML, CSS and JavaScript (no frame
 | Page | What it is |
 | --- | --- |
 | `index.html` | Home: hero with a live LA clock and a sky that follows LA time, about bento, projects, experience timeline, contact form |
-| `map.html` | **Atlas**: an interactive life map (Leaflet + CARTO tiles) with a guided tour and a "how far am I?" button |
+| `map.html` | **Atlas**: an interactive life map (Leaflet + OpenStreetMap tiles, no API key needed) with a guided tour and a "how far am I?" button |
 | `404.html` | Custom 404 with a playable basketball mini-game |
 | `vault.html` | The secret easter-egg tracker |
 | `about.html` | The forgotten page, preserved as a museum exhibit |
