@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Atlas · Aaron Moradi</title>
+  <meta name="description" content="An interactive map of the places that shaped Aaron Moradi, from Los Angeles to Syracuse and back." />
+  <meta property="og:title" content="Atlas · Aaron Moradi" />
+  <meta property="og:description" content="Coast to coast: an interactive life map." />
+  <meta property="og:url" content="https://aaronmoradi.com/map.html" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="/assets/img/favicon-192.png" />
+  <style>
+    body { overflow: hidden; }
+    .atlas { display: grid; grid-template-columns: 380px 1fr; height: calc(100vh - 68px); height: calc(100dvh - 68px); }
+    .atlas-side { overflow-y: auto; border-right: 1px solid var(--line); padding: 28px 24px 24px; display: flex; flex-direction: column; gap: 18px; }
+    .atlas-side h1 { font-family: var(--font-display); font-weight: 400; font-size: 56px; line-height: .95; margin: 6px 0 0; letter-spacing: -.02em; }
+    .atlas-side h1 em { color: var(--accent); }
+    .atlas-side .intro { color: var(--muted); margin: 0; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+    .stat b { display: block; font: 600 20px var(--font-mono); letter-spacing: -.03em; }
+    .stat span { font-size: 11px; color: var(--muted); }
+    .map-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .map-actions .btn { padding: 10px 16px; font-size: 14px; }
+    .chapters { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .chapter {
+      width: 100%; text-align: left; cursor: pointer; font: inherit; color: inherit;
+      display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center;
+      padding: 12px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface);
+      transition: border-color .2s, transform .2s, background .2s;
+    }
+    .chapter:hover { border-color: var(--ink); transform: translateX(3px); }
+    .chapter.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+    .chapter .em { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--bg-2); font-size: 20px; }
+    .chapter .t { font-weight: 600; line-height: 1.2; }
+    .chapter .w { font: 500 11px var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .secret-hint { font: 12px var(--font-mono); color: var(--muted); margin-top: auto; padding-top: 8px; }
+    #map { height: 100%; width: 100%; background: var(--bg-2); z-index: 1; }
+
+    /* pins */
+    .pin { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 22px;
+      background: var(--surface); border: 3px solid var(--accent); box-shadow: 0 8px 20px -6px rgba(0,0,0,.45);
+      transition: transform .25s cubic-bezier(.2,1.4,.4,1); }
+    .pin:hover, .pin.active { transform: scale(1.18); }
+    .pin.active { background: var(--accent); }
+    .pin.secret { width: 30px; height: 30px; font-size: 15px; border-style: dashed; border-color: var(--gold); opacity: .9; }
+    .pin.me { border-color: var(--blue); font-size: 18px; }
+    .leaflet-div-icon { background: transparent; border: none; }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+    .leaflet-popup-content-wrapper { border-radius: 16px; }
+    .leaflet-popup-content { margin: 16px 18px; font: 14px/1.5 var(--font-sans); }
+    .leaflet-popup-content h3 { font-family: var(--font-display); font-weight: 400; font-size: 26px; margin: 2px 0 6px; line-height: 1.05; }
+    .leaflet-popup-content p { margin: 0; color: var(--ink-2); }
+    .pop-when { font: 500 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+    .leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+    .leaflet-bar a { background: var(--surface); color: var(--ink); border-color: var(--line); }
+    .leaflet-control-attribution { background: color-mix(in srgb, var(--surface) 80%, transparent) !important; color: var(--muted); }
+    .leaflet-control-attribution a { color: var(--ink-2); }
+
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .atlas { grid-template-columns: 1fr; grid-template-rows: 62vh auto; height: auto; }
+      .atlas-side { order: 2; border-right: none; border-top: 1px solid var(--line); padding: 22px 16px 32px; }
+      .atlas-side h1 { font-size: 44px; }
+      .chapters { flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+      .chapters li { flex: 0 0 78%; scroll-snap-align: start; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Aaron Moradi, home"><span class="logo-mark">a</span><span>Aaron Moradi</span></a>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="/#about">About</a>
+        <a href="/#projects">Work</a>
+        <a href="/#path">Path</a>
+        <a href="/map.html" aria-current="page">Map</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/#contact" class="cta">Contact</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-btn" data-terminal aria-label="Open terminal" title="Terminal (press `)">&gt;_</button>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="atlas">
+    <aside class="atlas-side">
+      <div>
+        <span class="eyebrow">Atlas</span>
+        <h1>Coast to <em>coast</em></h1>
+      </div>
+      <p class="intro">The places that made me, from the 405 to the snowbelt and back again. Tap a stop, or let the tour drive.</p>
+
+      <div class="stats">
+        <div class="stat"><b id="statPlaces">6</b><span>places</span></div>
+        <div class="stat"><b id="statMiles">—</b><span>miles LA ↔ SYR</span></div>
+        <div class="stat"><b>?</b><span>hidden pins</span></div>
+      </div>
+
+      <div class="map-actions">
+        <button class="btn" id="tourBtn">▶ Take the tour</button>
+        <button class="btn ghost" id="overviewBtn">Overview</button>
+        <button class="btn ghost" id="meBtn" title="Uses your location once, never stored">📍 How far am I?</button>
+      </div>
+
+      <ol class="chapters" id="chapters"></ol>
+
+      <p class="secret-hint">🔍 Some places only show up if you look closely.</p>
+    </aside>
+
+    <div id="map" role="region" aria-label="Interactive map"></div>
+  </main>
+
+  <script src="/vendor/leaflet-1.9.4/leaflet.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/map.js"></script>
+</body>
+</html>
