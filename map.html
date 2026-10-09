@@ -42,6 +42,8 @@
     .chapter .w { font: 500 11px var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
     .secret-hint { font: 12px var(--font-mono); color: var(--muted); margin-top: auto; padding-top: 8px; }
     #map { height: 100%; width: 100%; background: var(--bg-2); z-index: 1; }
+    #map .leaflet-tile-pane { transition: filter .4s ease; filter: saturate(.75) contrast(.95); }
+    #map.dark-tiles .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.85) saturate(.55); }
 
     /* pins */
     .pin { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 22px;
