@@ -1,2 +1,66 @@
-<h2>This is my about page test</h2>
-<h1>I completely forgot about this...</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>about (forgotten)</title>
+  <meta name="robots" content="noindex" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="/assets/img/favicon-192.png" />
+  <style>
+    .exhibit { margin: 28px auto; max-width: 560px; text-align: left; background: #fff; color: #000; border: 1px solid #bbb; border-radius: 4px; padding: 20px 24px; font-family: "Times New Roman", serif; box-shadow: 0 12px 30px -16px rgba(0,0,0,.4); transform: rotate(-1deg); }
+    .exhibit h2 { font-size: 24px; margin: 0 0 12px; font-weight: bold; }
+    .exhibit h1 { font-size: 32px; margin: 0; font-weight: bold; }
+    .placard { font: 12px var(--font-mono); color: var(--muted); }
+    .cobweb { position: fixed; top: 68px; right: 0; width: 140px; opacity: .35; pointer-events: none; }
+  </style>
+</head>
+
+<body data-egg="forgotten">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Aaron Moradi, home"><span class="logo-mark">a</span><span>Aaron Moradi</span></a>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="/#about">About</a>
+        <a href="/#projects">Work</a>
+        <a href="/#path">Path</a>
+        <a href="/map.html">Map</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/#contact" class="cta">Contact</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-btn" data-terminal aria-label="Open terminal" title="Terminal (press `)">&gt;_</button>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <svg class="cobweb" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width=".6">
+    <path d="M100 0 L0 100 M100 0 L40 100 M100 0 L0 50 M100 0 L70 100 M100 0 L0 20"/>
+    <path d="M85 0 Q88 12 100 15 M70 0 Q76 24 100 30 M52 0 Q62 38 100 48 M30 0 Q46 54 100 70"/>
+  </svg>
+
+  <main class="page-center">
+    <div class="wrap">
+      <span class="eyebrow">Museum of the old internet · Exhibit A</span>
+      <h1>The <em>forgotten</em> page</h1>
+      <p>Long before the redesign, this URL held the very first draft of an About page. It was promptly forgotten. It has been preserved here, exactly as found, for historical purposes.</p>
+
+      <div class="exhibit">
+        <h2>This is my about page test</h2>
+        <h1>I completely forgot about this...</h1>
+      </div>
+      <p class="placard">"about.html", c. 2025 · HTML, no CSS · on loan from the git history</p>
+
+      <a class="btn" href="/#about">See the real About section <span class="arrow">→</span></a>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

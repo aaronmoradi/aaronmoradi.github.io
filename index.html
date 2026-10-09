@@ -1,444 +1,396 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Aaron Moradi</title>
-
-  <!-- SEO & Social -->
-  <meta name="description" content="Aaron Moradi: Resume, Projects, Experience, Contact...." />
-  <meta property="og:title" content="Aaron Moradi's Website'" />
-  <meta property="og:description" content="Aaron Moradi's Portfolio and Experience" />
+  <meta name="description" content="Aaron Moradi — Computer Science grad from Syracuse University, Assistant Chief of Staff at XYZ, born and raised in Los Angeles. Projects, experience, a life map, and a few secrets." />
+  <meta name="theme-color" content="#f5f1ea" />
+  <meta property="og:title" content="Aaron Moradi" />
+  <meta property="og:description" content="Portfolio, experience, a life map — and a few hidden secrets." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aaronmoradi.com" />
-  <meta property="twitter:card" content="summary_large_image" />
-
+  <meta property="og:image" content="https://aaronmoradi.com/assets/img/aaron-grad-900.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   <link rel="stylesheet" href="/css/styles.css" />
-  <link rel="icon" href="/assets/img/sfpng.png" />
-  <!-- structured data (resume snippet) -->
+  <link rel="icon" href="/assets/img/favicon-192.png" />
   <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Person",
     "name": "Aaron Moradi",
     "url": "https://aaronmoradi.com",
-    "sameAs": ["https://github.com/aaronmoradi","https://www.linkedin.com/in/aaronmoradi"],
-    "jobTitle": "Assistant Chief of Staff ",
-    "worksFor": {"@type":"Organization","name":"XYZ"}
+    "image": "https://aaronmoradi.com/assets/img/aaron-grad-900.jpg",
+    "sameAs": ["https://github.com/aaronmoradi", "https://www.linkedin.com/in/aaronmoradi"],
+    "jobTitle": "Assistant Chief of Staff",
+    "worksFor": { "@type": "Organization", "name": "XYZ" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Syracuse University" },
+    "homeLocation": { "@type": "Place", "name": "Los Angeles, CA" }
   }
   </script>
+  <!--
+    Hello, source-code reader. You clearly know where to look.
+    A few hints, since you made it this far:
+      - the key under Esc opens something
+      - robots.txt is hiding something from robots, not from you
+      - aaron.hi() in the console
+  -->
 </head>
 
 <body>
-
-<!-- Bottom Widget Bar -->
-<div class="bottom-bar">
-
-  <!-- Spotify -->
-  <div class="bottom-widget">
-    <div class="song-buttons">
-      <button class="song-btn" onclick="switchSong('0dbTQYW3Ad1FTzIA9t90E8', this)">1</button>
-      <button class="song-btn" onclick="switchSong('6HfOzLLjsaXsehIFEsrxTk', this)">2</button>
-      <button class="song-btn" onclick="switchSong('3cjF2OFRmip8spwZYQRKxP', this)">3</button>
-      <button class="song-btn" onclick="switchSong('0qZqbfudgogv0mFQOJ9TrB', this)">4</button>
-    </div>
-    <iframe
-      id="spotify-player"
-      style="border-radius:12px; display:block;"
-      src="https://open.spotify.com/embed/track/0dbTQYW3Ad1FTzIA9t90E8?utm_source=generator&theme=0"
-      width="260"
-      height="80"
-      frameBorder="0"
-      allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <!-- GitHub Activity -->
-  <div class="bottom-widget">
-    <div class="widget-label">GitHub Activity</div>
-    <img
-      src="https://ghchart.rshah.org/aaronmoradi"
-      alt="Aaron's GitHub Activity"
-      style="height:60px; width:auto; border-radius:8px;" />
-  </div>
-
-  <!-- LA Clock -->
-  <div class="bottom-widget">
-    <div class="widget-label">Los Angeles</div>
-    <div id="bottom-clock" style="font-size:22px; font-weight:600; letter-spacing:0.04em;">--:-- --</div>
-    <div style="font-size:11px; opacity:0.5;">Pacific Time</div>
-  </div>
-
-  <!-- Quick Links -->
-  <div class="bottom-widget">
-    <div class="widget-label">Links</div>
-    <div style="display:flex; flex-direction:column; gap:6px;">
-      <a href="https://gen.xyz/a/138004" target="_blank" rel="noopener noreferrer" class="bar-btn">Get an .xyz domain!</a>
-      <a href="/photos" class="bar-btn">📷 Photos</a>
-    </div>
-  </div>
-</div>
-<!-- End Bottom Widget Bar -->
-
-  <script>
-  function switchSong(trackId, btn) {
-    document.getElementById('spotify-player').src =
-      'https://open.spotify.com/embed/track/' + trackId + '?utm_source=generator&theme=0';
-    document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active-song'));
-    btn.classList.add('active-song');
-  }
-
-  function updateClock() {
-    const el = document.getElementById('bottom-clock');
-    if (!el) return;
-    el.textContent = new Date().toLocaleTimeString('en-US', {
-      timeZone: 'America/Los_Angeles',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-fetch('https://api.counterapi.dev/v2/aaron-moradis-team-3783/ronmo/up')
-  .then(res => res.json())
-  .then(data => {
-    const el = document.getElementById('visit-count');
-    if (el) el.textContent = data.count.toLocaleString();
-  })
-  .catch(() => {
-    const el = document.getElementById('visit-count');
-    if (el) el.textContent = '--';
-  });
-
-  </script>
+  <a class="sr-only" href="#main">Skip to content</a>
 
   <header class="site-header">
-
     <div class="wrap header-inner">
-      <a class="logo" href="/">Aaron Moradi</a>
-      <nav class="nav" aria-label="Main">
-      <!--<a href="#number">Test #85</a>-->
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#life">Life</a>
-        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a href="#contact" class="cta">Contact</a>
+      <a class="logo" href="/" aria-label="Aaron Moradi, home"><span class="logo-mark">a</span><span>Aaron Moradi</span></a>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="/#about">About</a>
+        <a href="/#projects">Work</a>
+        <a href="/#path">Path</a>
+        <a href="/map.html">Map</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/#contact" class="cta">Contact</a>
       </nav>
+      <div class="header-tools">
+        <button class="icon-btn" data-terminal aria-label="Open terminal" title="Terminal (press `)">&gt;_</button>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
     </div>
   </header>
 
-  <main>
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
     <section class="hero">
-      <div class="wrap">
-        <!-- LEFT COLUMN (text) -->
-        <div class="hero-text">
-          <h1>Hello World! My name is <br /> Aaron Moradi and I am a...</h1>
-          <h1 class="typing-header">
-            <span class="text"></span><span class="cursor">|</span>
-          </h1>
-          <p class="lead">I pride myself on being professional, creative, determined, and personable.</p>
-        </div>
-
-        <!-- RIGHT COLUMN (photo) -->
-        <div class="hero-photo">
-          <img src="/assets/img/AaronGrad.jpg" alt="Photo of Aaron Moradi" />
-        </div>
-        <script>
-          const textElement = document.querySelector('.typing-header .text');
-          const phrases = [
-            " Web Developer",
-            " Creative Thinker",
-            " Problem Solver",
-            " Computer Scientist"
-          ];
-
-          let currentPhrase = 0;
-          let currentChar = 0;
-          let typing = true;
-
-          function typeEffect() {
-            const phrase = phrases[currentPhrase];
-
-            if (typing) {
-              textElement.textContent += phrase.charAt(currentChar);
-              currentChar++;
-              if (currentChar === phrase.length) {
-                typing = false;
-                setTimeout(typeEffect, 1500); // Wait before deleting
-                return;
-              }
-            } else {
-              textElement.textContent = phrase.substring(0, currentChar - 1) || "\u00A0";
-              currentChar--;
-              if (currentChar === 1) {
-                typing = true;
-                currentPhrase = (currentPhrase + 1) % phrases.length;
-              }
-            }
-
-            setTimeout(typeEffect, typing ? 100 : 50); // Typing speed / deleting speed
-          }
-
-          window.onload = typeEffect;
-        </script>
-      </div>
-    </section>
-
-    <section id="about" class="wrap about reveal">
-      <h2>About</h2>
-      <div class="grid two-col">
+      <div class="wrap hero-grid">
         <div>
-          <p>I'm a Computer Science graduate from Syracuse University and now work as Assistant Chief of Staff at XYZ.
-            I love improving people's lives by creating impactful products and providing support to those who
-            need it.</p>
-          <p>Programming Languages: <strong>Python</strong>, <strong> C</strong>, HTML, CSS, Java, Javascript, Racket,
-            and Haskell.</p>
-          <p>Outside Computer Science: I love playing/watching basketball, enjoying music, and admiring art.</p>
-          <p>I was born and raised in Los Angeles, California
-            <small> (but I will always have a special place in my heart for Syracuse, New York).</small>
-          </p>
+          <span class="eyebrow">Los Angeles, CA · Syracuse '25</span>
+          <h1>Hello, world.<br />I'm <em>Aaron.</em></h1>
+          <p class="typed-line">I'm a <span class="typed" data-words='["computer scientist","problem solver","creative thinker","web developer","lifelong Lakers fan"]'></span><span class="caret"></span></p>
+          <p class="lead">Assistant Chief of Staff at XYZ and a Computer Science grad from Syracuse University. I love improving people's lives by building impactful things and supporting the people who need it.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="#projects">See my work <span class="arrow">→</span></a>
+            <a class="btn ghost" href="/map.html">Explore the map</a>
+          </div>
+          <p class="hint">psst. press <kbd>`</kbd> for a terminal. there are <span data-egg-total>13</span> secrets hidden on this site.</p>
+        </div>
 
+        <div class="hero-photo">
+          <div class="sky-orb" id="skyOrb" aria-hidden="true"></div>
+          <div class="frame">
+            <img src="/assets/img/aaron-grad-900.jpg" width="900" height="1498" alt="Aaron in his cap and gown at Syracuse University" fetchpriority="high" />
+          </div>
+          <div class="sky-badge" aria-live="off">
+            <div class="t" id="laClock">--:--</div>
+            <div class="s"><span class="sky-dot"></span><span id="skyLabel">Los Angeles</span></div>
+          </div>
+          <button class="sticker" id="sticker" aria-label="Est. Los Angeles sticker">Est.<br />L.A.<br />💜💛</button>
         </div>
       </div>
     </section>
 
-    <section id="projects" class="wrap reveal">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <div class="filters" role="tablist" aria-label="Project filters">
-          <button data-filter="*" class="active">All</button>
-          <button data-filter="website">Website</button>
-          <button data-filter="data">Data</button>
-          <button data-filter="encryption">Encryption</button>
-        </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Computer Science</span><span>Syracuse '25</span><span>Los Angeles</span><span>Python</span><span>Data</span><span>Chief of Staff</span><span>Basketball</span><span>Music</span><span>Art</span>
+        <span>Computer Science</span><span>Syracuse '25</span><span>Los Angeles</span><span>Python</span><span>Data</span><span>Chief of Staff</span><span>Basketball</span><span>Music</span><span>Art</span>
       </div>
+    </div>
 
-      <div class="projects-grid" id="projects-grid">
-        <!-- Example card -->
-        <article class="card" data-tags="website">
-          <img src="/assets/img/websitess.png" alt="Website screenshot" />
-          <div class="card-body">
-            <h3>My Website</h3>
-            <p>Designed and created my own website to display information about myself and to engage networking
-              opportunities.
-              <br>
-              <br>
-              <br>
-            </p>
-            <p class="meta">HTML • CSS • JavaScript</p>
-            <p class="card-links">
-              <a href="https://aaronmoradi.com" target="_blank" rel="noopener">Website</a>
-              <a>|</a>
-              <a href="https://github.com/aaronmoradi/aaronmoradi.github.io" target="_blank" rel="noopener">GitHub</a>
-            </p>
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">01 · About</span>
+            <h2>A little about <em>me</em></h2>
           </div>
-        </article>
+          <p>Born in LA, educated in Syracuse, back home building things in Santa Monica.</p>
+        </div>
 
-        <!-- <article class="card" data-tags="website">
-          <img src="assets/img/MLGwebsitess.png" alt="Website screenshot" />
-          <div class="card-body">
-            <h3>Law Firm Website</h3>
-            <p>Designed and created a law firm's website to display information about their firm and to engage clients
-              and increase case opportunities.
-              <br>
-              <br>
-              <br>
-            </p>
-            <p class="meta">HTML • CSS • JavaScript</p>
-            <p class="card-links">
-              <a href="https://moradilaw.com" target="_blank" rel="noopener">Law Firm Website</a>
-              <a>|</a>
-              <a href="https://github.com/aaronmoradi/moradilaw-website" target="_blank" rel="noopener">GitHub</a>
-            </p>
-          </div>
-        </article> -->
+        <div class="bento reveal">
+          <article class="tile span-4 dark">
+            <span class="label">Right now</span>
+            <h3>Assistant Chief of Staff at XYZ</h3>
+            <p>Santa Monica, CA · since October 2025.</p>
+            <div class="chips">
+              <span class="chip">Operations</span><span class="chip">Strategy</span><span class="chip">People</span>
+              <a class="chip" href="https://gen.xyz/a/138004" target="_blank" rel="noopener noreferrer">Get an .xyz domain ↗</a>
+            </div>
+            <span class="corner">🌊</span>
+          </article>
 
-        <article class="card" data-tags="data">
-          <img src="/assets/img/DataMining.png" alt="Data Mining screenshot" />
-          <div class="card-body">
-            <h3>Data Mining Project</h3>
-            <p>Comparative Sentiment Analysis of X (Twitter) and Bluesky.<br>
-              <br>
-              <br>
-              <br>
-            </p>
-            <p class="meta">Python • Data</p>
-            <p class="card-links">
-              <a href="/assets/DataMiningPresentation.pdf" target="_blank">Presentation</a>
-              <a>|</a>
-              <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank"
-                rel="noopener">GitHub</a>
-            </p>
-          </div>
-        </article>
+          <article class="tile span-2 photo half">
+            <img src="/assets/img/aaron-otto-1200.jpg" alt="Aaron with Otto the Orange at graduation" loading="lazy" />
+            <div class="caption">Graduation day with Otto 🍊</div>
+          </article>
 
-        <article class="card" data-tags="encryption">
-          <img src="/assets/img/SU.png" alt="SU screenshot" />
-          <div class="card-body">
-            <h3>Encryption Project</h3>
-            <p>This project is designed for taking in a text file, compressing it into binary digits, and decrypting it
-              back into its original state.
-              <br>
-              <br>
-            </p>
-            <p class="meta">Python • Collaboration</p>
-            <p class="card-links">
-              <a href="https://github.com/aaronmoradi/M013-Group12" target="_blank" rel="noopener">GitHub</a>
-            </p>
-          </div>
-        </article>
+          <article class="tile span-2 orange half">
+            <span class="label">Education</span>
+            <h3>Syracuse University</h3>
+            <p>B.S. Computer Science · Minor in Engineering &amp; CS Management · <em>Cum Laude</em> · May 2025</p>
+          </article>
+
+          <article class="tile span-2 half">
+            <span class="label">Languages I speak</span>
+            <h3>Fluent in a few</h3>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">C</span><span class="chip">Java</span><span class="chip">JavaScript</span>
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Racket</span><span class="chip">Haskell</span>
+            </div>
+          </article>
+
+          <article class="tile span-2 half">
+            <span class="label">Off the clock</span>
+            <h3>Hoops, music &amp; art</h3>
+            <p>Playing and watching basketball, finding new music, and admiring art.</p>
+            <span class="corner">🏀</span>
+          </article>
+
+          <article class="tile span-3 dark">
+            <span class="label">On repeat</span>
+            <div class="song-buttons" role="group" aria-label="Pick a song">
+              <button class="song-btn active-song" data-track="0dbTQYW3Ad1FTzIA9t90E8">1</button>
+              <button class="song-btn" data-track="6HfOzLLjsaXsehIFEsrxTk">2</button>
+              <button class="song-btn" data-track="3cjF2OFRmip8spwZYQRKxP">3</button>
+              <button class="song-btn" data-track="0qZqbfudgogv0mFQOJ9TrB">4</button>
+            </div>
+            <iframe id="spotify-player" title="Spotify player" style="border-radius:12px; border:0; margin-top:auto;"
+              src="https://open.spotify.com/embed/track/0dbTQYW3Ad1FTzIA9t90E8?utm_source=generator&amp;theme=0"
+              width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </article>
+
+          <article class="tile span-3">
+            <span class="label">Commits, lately</span>
+            <h3>GitHub activity</h3>
+            <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener" style="margin-top:auto">
+              <img class="gh-chart" src="https://ghchart.rshah.org/f2541b/aaronmoradi" alt="Aaron's GitHub contribution chart" loading="lazy" />
+            </a>
+          </article>
+
+          <article class="tile span-4">
+            <span class="label">Home base</span>
+            <h3>Los Angeles, California</h3>
+            <p>Born and raised. But Syracuse, New York will always have a special place in my heart.</p>
+            <div class="chips"><a class="chip" href="/map.html">See it on the map →</a></div>
+            <span class="corner">🌴</span>
+          </article>
+
+          <article class="tile span-2 half">
+            <span class="label">Visitors</span>
+            <div class="big" id="visit-count">···</div>
+            <p>You're one of them. Hi! 👋</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="life" class="wrap reveal">
-      <h2>Life</h2>
-      <div class="resume-row">
-        <div class="resume-left">
-          <h3><u>Education</u></h3>
-          <ol class="timeline">
-            <li>
-              <p><strong>Syracuse University - </strong>College of Engineering & Computer Science <strong>May
-                  2025</strong></p>
-              <p><u>Bachelor of Science</u>, Computer Science</p>
-              <p><u>Minor</u>, Engineering & Computer Science Management</p>
-              <p><em>Cum Laude</em></p>
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">02 · Work</span>
+            <h2>Selected <em>projects</em></h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter projects">
+            <button data-filter="*" class="active">All</button>
+            <button data-filter="website">Web</button>
+            <button data-filter="data">Data</button>
+            <button data-filter="encryption">Encryption</button>
+          </div>
+        </div>
+
+        <div class="projects-grid reveal" id="projects-grid">
+          <article class="project" data-tags="website">
+            <div class="thumb"><img src="/assets/img/websitess-900.jpg" alt="Screenshot of the first version of aaronmoradi.com" loading="lazy" /></div>
+            <div class="body">
+              <span class="num">01 · HTML · CSS · JavaScript</span>
+              <h3>This website</h3>
+              <p>Designed and built from scratch, twice. You're looking at v2: a life map, a working terminal, a basketball game on the 404 page, and a pile of easter eggs.</p>
+              <div class="links">
+                <a href="https://aaronmoradi.com" target="_blank" rel="noopener">Live</a>
+                <a href="https://github.com/aaronmoradi/aaronmoradi.github.io" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project" data-tags="data">
+            <div class="thumb"><img src="/assets/img/DataMining.png" alt="Data mining project chart" loading="lazy" /></div>
+            <div class="body">
+              <span class="num">02 · Python · Data</span>
+              <h3>Sentiment: X vs. Bluesky</h3>
+              <p>A comparative sentiment analysis of X (Twitter) and Bluesky: how the conversation feels on each platform.</p>
+              <div class="links">
+                <a href="/assets/DataMiningPresentation.pdf" target="_blank" rel="noopener">Presentation</a>
+                <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project" data-tags="encryption">
+            <div class="thumb"><img src="/assets/img/SU.png" alt="Syracuse University logo" loading="lazy" /></div>
+            <div class="body">
+              <span class="num">03 · Python · Collaboration</span>
+              <h3>Compress &amp; encrypt</h3>
+              <p>Takes in a text file, compresses it into binary digits, and decrypts it back into its original state.</p>
+              <div class="links">
+                <a href="https://github.com/aaronmoradi/M013-Group12" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PATH ================= -->
+    <section id="path" class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">03 · Path</span>
+            <h2>Where I've <em>been</em></h2>
+          </div>
+          <p>From pulling espresso in Hollywood to the Chief of Staff's office in Santa Monica.</p>
+        </div>
+
+        <div class="xp-grid">
+          <ol class="timeline reveal">
+            <li class="now">
+              <div class="when">Oct 2025 · Present</div>
+              <h4>Assistant Chief of Staff</h4>
+              <div class="where">XYZ · Santa Monica, CA <span class="tag">now</span></div>
             </li>
-            <!-- more items -->
-          </ol>
-          <h3><u>Experience</u></h3>
-          <ol class="timeline">
             <li>
-              <p><strong>Assistant Chief of Staff,</strong><em> XYZ,</em> Santa Monica, CA</p>
-              <p>October 2025 – Present</p>             
-              <p><strong>Data Science Analyst Intern,</strong><em> PlanetArt,</em> Calabasas, CA</p>
-              <p>June 2024 – August 2024</p>
-              <p><strong>Guest Services,</strong><em> Barnes Center at The Arch,</em> Syracuse, NY</p>
-              <p>August 2022 – May 2025</p>
-              <p><strong>Food Server,</strong><em> Diddy Riese Cookies,</em>
-                Los Angeles, CA</p>
-              <p>May 2022 – June 2022</p>
-              <p><strong>Barista,</strong><em> Tea & Coffee Exchange,</em>
-                Hollywood, CA</p>
-              <p>July 2019 – August 2019</p>
+              <div class="when">May 2025</div>
+              <h4>B.S. Computer Science, <em>Cum Laude</em></h4>
+              <div class="where">Syracuse University · College of Engineering &amp; Computer Science · Minor in Engineering &amp; CS Management</div>
             </li>
-            <!-- more items -->
+            <li>
+              <div class="when">Aug 2022 · May 2025</div>
+              <h4>Guest Services</h4>
+              <div class="where">Barnes Center at The Arch · Syracuse, NY</div>
+            </li>
+            <li>
+              <div class="when">Jun 2024 · Aug 2024</div>
+              <h4>Data Science Analyst Intern</h4>
+              <div class="where">PlanetArt · Calabasas, CA</div>
+            </li>
+            <li>
+              <div class="when">May 2022 · Jun 2022</div>
+              <h4>Food Server</h4>
+              <div class="where">Diddy Riese Cookies · Los Angeles, CA</div>
+            </li>
+            <li>
+              <div class="when">Jul 2019 · Aug 2019</div>
+              <h4>Barista</h4>
+              <div class="where">Tea &amp; Coffee Exchange · Hollywood, CA</div>
+            </li>
           </ol>
+
+          <aside class="reveal">
+            <div class="side-card">
+              <h3>Programming</h3>
+              <div class="skill"><div class="skill-top"><span>Python</span><span>85</span></div><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+              <div class="skill"><div class="skill-top"><span>C</span><span>85</span></div><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+              <div class="skill"><div class="skill-top"><span>HTML</span><span>60</span></div><div class="skill-bar"><div class="skill-fill" data-level="60"></div></div></div>
+              <div class="skill"><div class="skill-top"><span>Java</span><span>60</span></div><div class="skill-bar"><div class="skill-fill" data-level="60"></div></div></div>
+              <div class="skill"><div class="skill-top"><span>CSS</span><span>30</span></div><div class="skill-bar"><div class="skill-fill" data-level="30"></div></div></div>
+              <div class="skill"><div class="skill-top"><span>JavaScript</span><span>25</span></div><div class="skill-bar"><div class="skill-fill" data-level="25"></div></div></div>
+            </div>
+            <div class="side-card">
+              <h3>Certifications</h3>
+              <ul class="certs">
+                <li>Inside LVMH</li>
+                <li>ServSafe Food Handler</li>
+                <li>Adult First Aid / CPR / AED (Red Cross)</li>
+                <li>Employee Transportation Coordinator (GoSaMo TMO)</li>
+              </ul>
+            </div>
+            <a class="btn" href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Download resume <span class="arrow">↓</span></a>
+          </aside>
         </div>
-
-        <aside class="resume-right">
-          <div class="skills">
-            <h4>Programming Languages</h4>
-            <div class="skill">
-              <span class="skill-name">Python</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:85%"></div>
-              </div>
-            </div>
-            <div class="skill">
-              <span class="skill-name">C</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:85%"></div>
-              </div>
-            </div>
-            <div class="skill">
-              <span class="skill-name">HTML</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:60%"></div>
-              </div>
-            </div>
-            <div class="skill">
-              <span class="skill-name">Java</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:60%"></div>
-              </div>
-            </div>
-            <div class="skill">
-              <span class="skill-name">CSS</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:30%"></div>
-              </div>
-            </div>
-            <div class="skill">
-              <span class="skill-name">Javascript</span>
-              <div class="skill-bar">
-                <div class="skill-fill" style="width:25%"></div>
-              </div>
-            </div>
-            <p>
-              <br>
-            </p>
-            <h4>Certifications</h4>
-            <p> Inside LVMH</p>
-            <p> ServSafe Food Handler</p>
-            <p> Adult First Aid/CPR/AED (Red Cross)</p>
-            <p> Employee Transportation Coordinator (GoSaMo TMO)</p>
-        </aside>
-
       </div>
     </section>
 
-    <section id="contact" class="wrap reveal">
-      <h2>Contact</h2>
-      <div class="contact-container">
-        <div class="contact-info">
-          <p>Complete this contact form to reach out to me</p>
-          <p>Email: <a href="mailto:aaronmoradi2@gmail.com">aaronmoradi2@gmail.com</a></p>
-        </div>
-
-        <!-- Formspree example -->
-        <form class="contact-form" action="https://formspree.io/f/xdklynry" method="POST">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required />
+    <!-- ================= MAP TEASER ================= -->
+    <section class="section" style="padding-top:0">
+      <div class="wrap reveal">
+        <a class="map-teaser" href="/map.html">
+          <div class="copy">
+            <span class="eyebrow">04 · Atlas</span>
+            <h2>Coast to <em>coast</em></h2>
+            <p>An interactive map of the places that made me, from LA to Syracuse and back. Take the guided tour, or go exploring. Some places only show up if you look closely.</p>
+            <span class="btn">Open the map <span class="arrow">→</span></span>
           </div>
-
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="_replyto" placeholder="your@email.com" required />
-          </div>
-
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
-          </div>
-
-          <button class="btn" type="submit">Send Message</button>
-        </form>
+          <svg id="usDots" viewBox="0 0 600 360" role="img" aria-label="Dot map of the United States with a route from Los Angeles to Syracuse"></svg>
+        </a>
       </div>
     </section>
 
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">05 · Contact</span>
+            <h2>Let's <em>talk</em></h2>
+          </div>
+        </div>
+        <div class="contact-grid">
+          <div class="reveal">
+            <p class="contact-big">Drop me a line at <a href="mailto:aaronmoradi2@gmail.com">aaronmoradi2@gmail.com</a>, or use the form.</p>
+            <div class="socials">
+              <a class="btn ghost" href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a class="btn ghost" href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub ↗</a>
+              <a class="btn ghost" href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+            </div>
+          </div>
+          <form class="form reveal" action="https://formspree.io/f/xdklynry" method="POST">
+            <div>
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="_replyto" placeholder="you@email.com" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Write your message here…" required></textarea>
+            </div>
+            <button class="btn" type="submit" style="justify-self:start">Send message <span class="arrow">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      © <span id="year"></span> Aaron Moradi |
-      <a href="/assets/AaronMoradiResume.pdf" target="_blank">Resume</a> •
-      <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener noreferrer">GitHub</a> •
-      <a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <div class="footer-giant" aria-hidden="true">Aaron <em>Moradi</em></div>
+      <div class="footer-inner">
+        <div>© <span data-year></span> Aaron Moradi · Made by hand in Los Angeles.</div>
+        <div class="footer-links">
+          <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/map.html">Map</a>
+        </div>
+        <a class="egg-meter" href="/vault.html" data-egg-meter hidden></a>
+        <div class="team-btns">
+          <button class="team-btn lakers" data-team="lakers">Go Lakers!</button>
+          <button class="team-btn dodgers" data-team="dodgers">Go Dodgers!</button>
+        </div>
+      </div>
     </div>
-    <button class="lakers-btn" id="lakersBtn">Go Lakers!</button>
-    <button class="dodgers-btn" id="dodgersBtn">Go Dodgers!</button>
-
-    <!-- Container for confetti -->
-    <div id="confetti-container"></div>
-    <div id="confetti-container"></div>
   </footer>
 
-  <!-- This might need to be removed just be mindful-->
-  <script>
-    document.querySelectorAll('.skill-bar').forEach(bar => {
-      const level = bar.dataset.level;
-      bar.style.width = level + '%';
-    });
-  </script>
-
   <script src="/js/main.js"></script>
-  <script src="js/script.js"></script>
+  <script src="/js/home.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Vault · Aaron Moradi</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="icon" href="/assets/img/favicon-192.png" />
+  <style>
+    .vault-head { padding: clamp(48px, 8vw, 96px) 0 32px; }
+    .vault-head h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 10vw, 120px); line-height: .92; margin: 14px 0 16px; letter-spacing: -.02em; }
+    .vault-head h1 em { color: var(--accent); }
+    .vault-head p { color: var(--muted); max-width: 54ch; margin: 0; }
+    .progress { margin: 32px 0 8px; height: 14px; border-radius: 99px; background: var(--bg-2); overflow: hidden; border: 1px solid var(--line); }
+    .progress div { height: 100%; width: 0; background: linear-gradient(90deg, var(--violet), var(--accent), var(--gold)); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+    .progress-label { font: 500 13px var(--font-mono); color: var(--muted); display: flex; justify-content: space-between; }
+    .eggs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; margin: 32px 0 48px; }
+    .egg {
+      position: relative; border-radius: 20px; padding: 20px; min-height: 160px;
+      background: var(--surface); border: 1px dashed var(--line);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .egg .ico { font-size: 34px; line-height: 1; filter: grayscale(1) blur(1px); opacity: .35; }
+    .egg h3 { margin: auto 0 0; font-size: 18px; letter-spacing: -.01em; }
+    .egg p { margin: 0; font-size: 13px; color: var(--muted); }
+    .egg .n { position: absolute; right: 16px; top: 16px; font: 500 11px var(--font-mono); color: var(--muted); }
+    .egg.found { border-style: solid; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+    .egg.found .ico { filter: none; opacity: 1; }
+    .egg:not(.found) h3 { letter-spacing: .2em; color: var(--muted); }
+    .egg.found::after { content: "FOUND"; position: absolute; right: 14px; bottom: 14px; font: 600 10px var(--font-mono); letter-spacing: .12em; color: var(--accent); }
+    .complete { display: none; text-align: center; padding: 40px 24px; border-radius: 28px; background: var(--ink); color: var(--bg); margin-bottom: 40px; }
+    .complete.on { display: block; }
+    .complete h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 6vw, 64px); margin: 0 0 8px; }
+    .complete p { color: color-mix(in srgb, var(--bg) 70%, transparent); margin: 0 auto 20px; max-width: 48ch; }
+    .complete .btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .vault-foot { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+  </style>
+</head>
+
+<body data-egg="vault">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="/" aria-label="Aaron Moradi, home"><span class="logo-mark">a</span><span>Aaron Moradi</span></a>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="/#about">About</a>
+        <a href="/#projects">Work</a>
+        <a href="/#path">Path</a>
+        <a href="/map.html">Map</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/#contact" class="cta">Contact</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-btn" data-terminal aria-label="Open terminal" title="Terminal (press `)">&gt;_</button>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="vault-head">
+      <span class="eyebrow">🗝️ Restricted area</span>
+      <h1>The <em>Vault</em></h1>
+      <p>Well, well. You found the room where I keep score. Every easter egg on this site is listed below. Found ones light up, and the rest come with a hint. Progress is saved in your browser only.</p>
+      <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+      <div class="progress-label"><span id="count">0 / 0 found</span><span id="rank">Rookie</span></div>
+    </section>
+
+    <div class="complete" id="complete">
+      <h2>Hall of Famer 🏆</h2>
+      <p>You found every single egg. That's genuinely impressive. Send me a message and tell me which one was hardest. I want to know.</p>
+      <a class="btn" href="/#contact">Tell me about it →</a>
+    </div>
+
+    <div class="eggs" id="eggs"></div>
+
+    <div class="vault-foot">
+      <a class="btn" href="/">Back to the site <span class="arrow">→</span></a>
+      <button class="btn ghost" id="resetBtn">Reset my progress</button>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script>
+  (() => {
+    const RANKS = [[0, 'Rookie'], [3, 'Sixth man'], [6, 'Starter'], [9, 'All-Star'], [12, 'MVP'], [13, 'Hall of Famer']];
+    function render() {
+      const found = AM.foundEggs();
+      const n = AM.EGGS.filter((e) => found.has(e.id)).length;
+      document.getElementById('eggs').innerHTML = AM.EGGS.map((e, i) => {
+        const f = found.has(e.id);
+        return `<article class="egg${f ? ' found' : ''}">
+          <span class="n">#${String(i + 1).padStart(2, '0')}</span>
+          <div class="ico">${e.icon}</div>
+          <h3>${f ? e.name : '? ? ? ? ?'}</h3>
+          <p>${e.hint}</p>
+        </article>`;
+      }).join('');
+      document.getElementById('count').textContent = `${n} / ${AM.EGGS.length} found`;
+      document.getElementById('rank').textContent = RANKS.filter(([min]) => n >= min).pop()[1];
+      requestAnimationFrame(() => { document.getElementById('bar').style.width = (n / AM.EGGS.length) * 100 + '%'; });
+      document.getElementById('complete').classList.toggle('on', n === AM.EGGS.length);
+    }
+    render();
+    addEventListener('am:egg', render);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('Reset all your easter egg progress?')) return;
+      AM.resetEggs();
+      render();
+      AM.toast('Progress wiped. Happy hunting. 🥚');
+    });
+  })();
+  </script>
+</body>
+</html>
