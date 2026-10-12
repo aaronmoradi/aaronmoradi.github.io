@@ -54,6 +54,7 @@
     if (found.has(id)) return false;
     found.add(id);
     store.set(EGG_KEY, JSON.stringify([...found]));
+    store.set(EGG_KEY + '_dates', JSON.stringify({ ...foundDates(), [id]: new Date().toISOString() }));
     updateEggMeters();
     if (!quiet) {
       toast(SKIN.toastEgg ? SKIN.toastEgg(egg, found.size, EGGS.length) : `${egg.icon} Easter egg found: <b>${esc(egg.name)}</b> &nbsp;(${found.size}/${EGGS.length})`);
@@ -69,8 +70,13 @@
     return true;
   }
 
+  function foundDates() {
+    try { return JSON.parse(store.get(EGG_KEY + '_dates', '{}')) || {}; } catch { return {}; }
+  }
+
   function resetEggs() {
     store.del(EGG_KEY);
+    store.del(EGG_KEY + '_dates');
     updateEggMeters();
   }
 
@@ -618,7 +624,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
   window.aaron.hello = window.aaron.hi;
 
   // Public API for page-specific scripts (map, vault, hoops)
-  window.AM = { EGGS, foundEggs, findEgg, resetEggs, confetti, toast, isDark, openTerminal, store, skin: SKIN };
+  window.AM = { EGGS, foundEggs, foundDates, findEgg, resetEggs, confetti, toast, isDark, openTerminal, store, skin: SKIN };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
   else wire();
