@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>This page was torn out · The Shoebox · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#7a5d42" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/shoebox/shoebox.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .ripped { position: relative; padding-top: 44px; }
+    .ripped::before { /* the ragged stub of a torn-out page */
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30px; background: var(--paper);
+      -webkit-mask: conic-gradient(from 150deg at bottom, #0000, #000 1deg 59deg, #0000 60deg) bottom / 22px 100%;
+              mask: conic-gradient(from 150deg at bottom, #0000, #000 1deg 59deg, #0000 60deg) bottom / 22px 100%;
+      opacity: .9;
+    }
+    .tear-title { font: 400 clamp(64px, 10vw, 120px)/.85 var(--hand); color: var(--pen); margin: 0 0 8px; transform: rotate(-2deg); }
+    .tear-title em { font-style: normal; color: var(--red); }
+    .bin-stats { display: flex; gap: 18px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .bin-stats span { font: 26px/1 var(--hand); color: var(--pen); }
+    .bin-stats b { font-weight: 400; color: var(--red); }
+    .desk { position: relative; border: 2px solid rgba(0,0,0,.15); background: repeating-linear-gradient(transparent 0 31px, rgba(80, 120, 190, .22) 31px 32px), var(--white); box-shadow: inset 0 0 40px rgba(120, 90, 40, .12); }
+    #bin { display: block; width: 100%; height: 440px; touch-action: none; cursor: grab; }
+    #bin:active { cursor: grabbing; }
+    .shout { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; font: clamp(56px, 9vw, 96px)/1 var(--hand); color: var(--red); opacity: 0; transform: rotate(-6deg) scale(.7); transition: opacity .2s, transform .35s cubic-bezier(.2, 1.5, .4, 1); }
+    .shout.on { opacity: 1; transform: rotate(-6deg) scale(1); }
+    .after { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+    .after a { font: 28px var(--hand); color: var(--pen); }
+    @media (max-width: 600px) { #bin { height: 380px; } }
+  </style>
+</head>
+
+<body data-egg="lost">
+  <header class="shelf">
+    <div class="in">
+      <a class="signature logo" href="/shoebox/" aria-label="Aaron Moradi, home">Aaron Moradi</a>
+      <nav class="tabs" id="tabs" aria-label="Sections">
+        <a href="/shoebox/#letter">letter</a>
+        <a href="/shoebox/#trail">receipts</a>
+        <a href="/shoebox/#folders">folders</a>
+        <a href="/shoebox/map.html">corkboard</a>
+        <a href="/shoebox/#postcard">postcard</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">resume</a>
+      </nav>
+      <div class="shelf-tools">
+        <button class="knob hide-sm" data-terminal title="Printout (press `)">🖨️</button>
+        <button class="knob" data-theme-toggle aria-label="Desk lamp">💡</button>
+        <button class="knob menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="tabs">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="book">
+    <section class="spread single ripped">
+      <div class="leaf">
+        <span class="label-typed">error 404 · page missing</span>
+        <h1 class="tear-title">this page was <em>torn out.</em></h1>
+        <p style="max-width:56ch;margin:0 0 6px">Whatever was here got ripped out of the scrapbook. While you're here, crumple up a draft and shoot it into the wastebasket: drag back from the paper ball and let go. Five in a row and you've earned a sticker.</p>
+        <div class="bin-stats"><span>in the bin: <b id="score">0</b></span><span>streak: <b id="streak">0</b></span><span>best: <b id="best">0</b></span></div>
+        <div class="desk">
+          <canvas id="bin" aria-label="Paper toss mini-game: drag back from the paper ball and release to throw it into the wastebasket"></canvas>
+          <div class="shout" id="shout">swish!</div>
+        </div>
+        <div class="after"><a href="/shoebox/">← back to the scrapbook</a><a href="/shoebox/map.html">the corkboard →</a></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/shoebox/shoebox-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/shoebox/shoebox.js"></script>
+  <script>
+  (() => {
+    const cv = document.getElementById('bin'), ctx = cv.getContext('2d');
+    const $ = (id) => document.getElementById(id);
+    const R = 15, G = 0.38, BIN_W = 96, BIN_H = 104, FLOOR = 18;
+    let W = 0, H = 0, bin = { x: 0 }, ball, drag = null, inFlight = false, shotAt = 0, scored = false;
+    let score = 0, streak = 0, best = Number(AM.store.get('am_bin_best', 0)) || 0;
+    $('best').textContent = best;
+    // each paper ball gets a random crumpled outline
+    let shape = [];
+    const crumple = () => { shape = Array.from({ length: 11 }, (_, i) => [i / 11 * Math.PI * 2, R * (0.82 + Math.random() * 0.3)]); };
+
+    function resize() {
+      const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      moveBin(true); reset();
+    }
+    function moveBin(first) { bin.x = first ? W * 0.72 : W * (0.5 + Math.random() * 0.36); }
+    const top = () => H - FLOOR - BIN_H;
+    const rimL = () => ({ x: bin.x - BIN_W / 2, y: top() }), rimR = () => ({ x: bin.x + BIN_W / 2, y: top() });
+    function reset() { const x = Math.max(56, W * (0.08 + Math.random() * 0.14)); ball = { x, y: H - FLOOR - R, vx: 0, vy: 0, a: 0 }; inFlight = false; scored = false; crumple(); }
+    function bounce(p) {
+      const dx = ball.x - p.x, dy = ball.y - p.y, d = Math.hypot(dx, dy);
+      if (d < R + 3 && d > 0) {
+        const nx = dx / d, ny = dy / d, dot = ball.vx * nx + ball.vy * ny;
+        if (dot < 0) { ball.vx -= 1.6 * dot * nx; ball.vy -= 1.6 * dot * ny; }
+        ball.x = p.x + nx * (R + 3); ball.y = p.y + ny * (R + 3);
+      }
+    }
+    function physics() {
+      const py = ball.y;
+      ball.vy += G; ball.vx *= 0.998; ball.x += ball.vx; ball.y += ball.vy; ball.a += ball.vx * 0.06;
+      bounce(rimL()); bounce(rimR());
+      const inside = ball.x > bin.x - BIN_W / 2 && ball.x < bin.x + BIN_W / 2;
+      if (!scored && py < top() && ball.y >= top() && inside) { scored = true; onScore(); }
+      if (scored) { // settle in the bottom of the bin
+        ball.x = Math.min(Math.max(ball.x, bin.x - BIN_W / 2 + R + 4), bin.x + BIN_W / 2 - R - 4);
+        if (ball.y > H - FLOOR - R - 6) { ball.y = H - FLOOR - R - 6; ball.vy = 0; ball.vx = 0; }
+      } else {
+        // outside walls of the bin
+        if (ball.y > top() && Math.abs(ball.x - (bin.x - BIN_W / 2)) < R && ball.x < bin.x) { ball.x = bin.x - BIN_W / 2 - R; ball.vx *= -0.5; }
+        if (ball.y > top() && Math.abs(ball.x - (bin.x + BIN_W / 2)) < R && ball.x > bin.x) { ball.x = bin.x + BIN_W / 2 + R; ball.vx *= -0.5; }
+        if (ball.y + R > H - FLOOR) { ball.y = H - FLOOR - R; ball.vy *= -0.35; ball.vx *= 0.7; }
+        if (ball.x - R < 0) { ball.x = R; ball.vx *= -0.5; }
+      }
+      const done = (scored && ball.vy === 0) || (!scored && Math.abs(ball.vy) < 0.8 && ball.y + R >= H - FLOOR - 1 && Math.abs(ball.vx) < 0.3) || ball.x - R > W || performance.now() - shotAt > 6000;
+      if (done) setTimeout(end, scored ? 350 : 0), inFlight = false;
+    }
+    let ending = false;
+    function end() {
+      if (ending) return; ending = true;
+      if (!scored) { if (streak) shout('nope.'); streak = 0; $('streak').textContent = 0; } else moveBin(false);
+      reset(); ending = false;
+    }
+    function shout(t) { $('shout').textContent = t; $('shout').classList.add('on'); clearTimeout(shout.t); shout.t = setTimeout(() => $('shout').classList.remove('on'), 900); }
+    function onScore() {
+      score++; streak++;
+      $('score').textContent = score; $('streak').textContent = streak;
+      if (streak > best) { best = streak; AM.store.set('am_bin_best', best); $('best').textContent = best; }
+      shout(['swish!', 'nice!', 'again!', 'unreal!', 'sticker earned!'][Math.min(streak - 1, 4)]);
+      if (streak === 5) { AM.findEgg('hoops'); AM.confetti('party', 160); }
+    }
+    function shotVel() { const dx = drag.sx - drag.x, dy = drag.sy - drag.y, k = 0.13, max = 21; let vx = dx * k, vy = dy * k; const m = Math.hypot(vx, vy); if (m > max) { vx *= max / m; vy *= max / m; } return { vx, vy }; }
+    function predict(vx, vy) { const p = []; let x = ball.x, y = ball.y; for (let i = 0; i < 24; i++) { vy += G; x += vx; y += vy; if (i % 2) p.push([x, y]); } return p; }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // desk edge
+      ctx.fillStyle = '#b8936a'; ctx.fillRect(0, H - FLOOR, W, FLOOR);
+      ctx.fillStyle = 'rgba(0,0,0,.12)'; ctx.fillRect(0, H - FLOOR, W, 3);
+      // wastebasket: wire mesh, slightly tapered
+      const t = top(), l = bin.x - BIN_W / 2, r = bin.x + BIN_W / 2, inset = 10;
+      ctx.strokeStyle = '#5b5f66'; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (let i = 0; i <= 8; i++) { const fx = l + (BIN_W * i) / 8, bx = l + inset + ((BIN_W - inset * 2) * i) / 8; ctx.moveTo(fx, t); ctx.lineTo(bx, H - FLOOR); }
+      for (let j = 1; j < 5; j++) { const y = t + (BIN_H * j) / 5, k = (inset * j) / 5; ctx.moveTo(l + k, y); ctx.lineTo(r - k, y); }
+      ctx.stroke();
+      ctx.lineWidth = 4; ctx.strokeStyle = '#3d4046'; ctx.beginPath(); ctx.moveTo(l, t); ctx.lineTo(r, t); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(l, t); ctx.lineTo(l + inset, H - FLOOR); ctx.moveTo(r, t); ctx.lineTo(r - inset, H - FLOOR); ctx.stroke();
+      // aim
+      if (drag) { const v = shotVel(); ctx.fillStyle = '#23336b'; predict(v.vx, v.vy).forEach(([x, y], i) => { ctx.globalAlpha = 1 - i / 13; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill(); }); ctx.globalAlpha = 1; }
+      // crumpled paper ball
+      ctx.save(); ctx.translate(ball.x, ball.y); ctx.rotate(ball.a);
+      ctx.beginPath(); shape.forEach(([a, rr], i) => { const x = Math.cos(a) * rr, y = Math.sin(a) * rr; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath();
+      ctx.fillStyle = '#fdfbf6'; ctx.fill(); ctx.strokeStyle = '#8f8676'; ctx.lineWidth = 1.4; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-8, -4); ctx.lineTo(2, 1); ctx.lineTo(-2, 9); ctx.moveTo(4, -9); ctx.lineTo(1, 1); ctx.lineTo(9, 5); ctx.strokeStyle = 'rgba(80, 120, 190, .55)'; ctx.stroke();
+      ctx.restore();
+      if (!inFlight && !drag && score === 0) { ctx.fillStyle = '#23336b'; ctx.font = '26px "Aaron Hand", cursive'; ctx.fillText('← drag back + let go', ball.x + R + 12, ball.y - 4); }
+    }
+    const pt = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.addEventListener('pointerdown', (e) => { if (inFlight) return; const p = pt(e); drag = { sx: p.x, sy: p.y, x: p.x, y: p.y }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', (e) => { if (drag) { const p = pt(e); drag.x = p.x; drag.y = p.y; } });
+    cv.addEventListener('pointerup', () => { if (!drag) return; const v = shotVel(); drag = null; if (Math.hypot(v.vx, v.vy) < 2) return; ball.vx = v.vx; ball.vy = v.vy; inFlight = true; shotAt = performance.now(); });
+    addEventListener('resize', resize);
+    resize();
+    let last = performance.now(), acc = 0;
+    (function loop(now) {
+      acc += Math.min(now - last, 100); last = now;
+      while (acc >= 1000 / 60) { if (inFlight) physics(); acc -= 1000 / 60; }
+      draw(); requestAnimationFrame(loop);
+    })(last);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Shoebox · Aaron Moradi</title>
+  <meta name="description" content="Aaron Moradi's scrapbook: Los Angeles, Syracuse '25, and every job on the way to XYZ." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#7a5d42" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preload" href="/shoebox/fonts/hand.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/shoebox/shoebox.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=2" />
+  <!-- if you're reading the source: hi. the key under Esc feeds the printer. -->
+</head>
+
+<body>
+  <a class="sr-only" href="#book">Skip to the scrapbook</a>
+  <header class="shelf">
+    <div class="in">
+      <a class="signature logo" href="/shoebox/" aria-label="Aaron Moradi, home">Aaron Moradi</a>
+      <nav class="tabs" id="tabs" aria-label="Sections">
+        <a href="/shoebox/#letter">letter</a>
+        <a href="/shoebox/#trail">receipts</a>
+        <a href="/shoebox/#folders">folders</a>
+        <a href="/shoebox/map.html">corkboard</a>
+        <a href="/shoebox/#postcard">postcard</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">resume</a>
+      </nav>
+      <div class="shelf-tools">
+        <button class="knob hide-sm" data-terminal title="Printout (press `)">🖨️</button>
+        <button class="knob" data-theme-toggle aria-label="Desk lamp">💡</button>
+        <button class="knob menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="tabs">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="book" id="book">
+
+    <!-- ============ spread 1: hello ============ -->
+    <section class="spread">
+      <div class="leaf">
+        <span class="label-typed">The Shoebox · kept since 2019</span>
+        <h1 class="hello">hi, I'm <em>Aaron.</em></h1>
+        <div class="intro">
+          <p>Born and raised in Los Angeles. Syracuse University '25, B.S. in Computer Science, <span class="hl">cum laude</span>. Now Assistant Chief of Staff at XYZ in Santa Monica.</p>
+          <p>This is the scrapbook: every job, school, and project on the way here, glued in by hand. Flip through.</p>
+        </div>
+        <div class="clock-wrap">
+          <svg class="clock doodle" id="laClock" viewBox="0 0 100 100" role="img" aria-label="Clock showing the time in Los Angeles" style="position:static"></svg>
+          <div class="clock-note">it's <span data-la-time>…</span><br />back home in LA<small>America/Los_Angeles</small></div>
+        </div>
+        <span class="folio">1</span>
+      </div>
+      <div class="leaf">
+        <figure class="obj print shadow hero-photo" style="--ar: 4/5">
+          <span class="tape tl"></span><span class="tape tr"></span>
+          <img src="/assets/img/aaron-grad-900.jpg" width="900" height="1498" alt="Aaron in his cap and gown at Syracuse University" fetchpriority="high" />
+          <figcaption>Syracuse, May 2025. made it!</figcaption>
+          <button class="sticker hero-sticker" id="estSticker" aria-label="Est. L.A. sticker" style="--r: 10deg">Est.<br />L.A.<br />💜💛</button>
+        </figure>
+        <svg class="doodle" viewBox="0 0 80 90" style="width:74px;right:22px;top:26px;transform:rotate(8deg)" aria-hidden="true">
+          <path d="M40 88 C42 64 41 44 44 26"/><path d="M44 26 C34 14 20 14 10 22"/><path d="M44 26 C40 12 46 4 56 2"/><path d="M44 26 C56 16 70 18 76 28"/><path d="M44 26 C30 26 22 34 18 44"/><path d="M44 26 C58 28 64 38 64 48"/><path d="M20 88 L64 88"/>
+        </svg>
+        <p class="hand kbd-hint" style="position:absolute;right:28px;bottom:42px;font-size:24px;transform:rotate(-3deg);margin:0">psst: press ` for the printout</p>
+        <span class="folio">2</span>
+      </div>
+    </section>
+
+    <!-- ============ spread 2: the letter + pocket ============ -->
+    <section class="spread lined" id="letter">
+      <div class="leaf reveal">
+        <h2 class="title">a letter</h2>
+        <div class="letter">
+          <p>Hi there,</p>
+          <p>I love improving people's lives by building things that matter, and by supporting the people who need it.</p>
+          <p>I studied Computer Science at Syracuse <s>(survived the winters)</s> and graduated cum laude in May 2025, with a minor in Engineering &amp; CS Management. Now I'm the Assistant Chief of Staff at XYZ.</p>
+          <p>Off the clock: basketball (playing &amp; watching), music, and art.</p>
+          <p>Born and raised in LA, but Syracuse will always have a special place in my heart.</p>
+          <p><span class="sig">Aaron</span></p>
+        </div>
+        <span class="folio">3</span>
+      </div>
+      <div class="leaf reveal">
+        <span class="label-typed">the pocket</span>
+        <div class="pocket-grid">
+          <div class="obj bizcard shadow" style="--r:-3deg">
+            <span class="staple"></span>
+            <div><div class="nm">Aaron Moradi</div><div>Assistant Chief of Staff</div></div>
+            <div><div class="co">XYZ</div><div>Santa Monica, CA</div><a href="https://gen.xyz/a/138004" target="_blank" rel="noopener noreferrer" style="font-size:11px">get an .xyz domain →</a></div>
+          </div>
+          <div class="obj idcard shadow" style="--r:4deg">
+            <div class="band"><span>Syracuse University</span><span>Student</span></div>
+            <div class="ph"><img src="/assets/img/aaron-grad-900.jpg" alt="" loading="lazy" /></div>
+            <div class="info">
+              <b>Moradi, Aaron</b>
+              <span>Computer Science</span>
+              <span>Class of 2025</span>
+              <span>ID <span class="redact" title="redacted"></span></span>
+              <div class="bars"></div>
+            </div>
+          </div>
+          <figure class="obj print shadow" style="--r:-4deg;--ar:4/3;margin:0">
+            <span class="tape t"></span>
+            <img src="/assets/img/aaron-otto-1200.jpg" alt="Aaron with Otto the Orange at graduation" loading="lazy" />
+            <figcaption>me + Otto 🍊</figcaption>
+          </figure>
+          <div class="obj sticky" style="--r:3deg">
+            <h4>languages I speak:</h4>
+            <ul><li>Python</li><li>C</li><li>Java</li><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Racket</li><li>Haskell</li></ul>
+          </div>
+          <div class="obj jcard shadow wide" style="--r:-1.5deg;justify-self:center">
+            <div class="head">on repeat (side A/B)</div>
+            <div class="side">SIDE A</div>
+            <button class="on" data-track="0dbTQYW3Ad1FTzIA9t90E8"><b>A1</b>track one</button>
+            <button data-track="6HfOzLLjsaXsehIFEsrxTk"><b>A2</b>track two</button>
+            <div class="side">SIDE B</div>
+            <button data-track="3cjF2OFRmip8spwZYQRKxP"><b>B1</b>track three</button>
+            <button data-track="0qZqbfudgogv0mFQOJ9TrB"><b>B2</b>track four</button>
+            <iframe id="spotify-player" title="Spotify player" src="https://open.spotify.com/embed/track/0dbTQYW3Ad1FTzIA9t90E8?utm_source=generator&amp;theme=0" width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
+        </div>
+        <span class="folio">4</span>
+      </div>
+    </section>
+
+    <!-- ============ spread 3: the receipts ============ -->
+    <section class="spread single" id="trail">
+      <div class="leaf reveal" style="padding-bottom:64px">
+        <h2 class="title">I kept the receipts</h2>
+        <p class="path-note">every job, oldest first. it all adds up.</p>
+        <div class="trail">
+          <div class="item">
+            <p class="when">summer '19</p>
+            <div class="obj receipt" style="--r:-3deg">
+              <div class="store">Tea &amp; Coffee Exchange</div><div class="sub">Hollywood, CA</div><hr />
+              <div class="row"><span>Position</span><span>Barista</span></div>
+              <div class="row"><span>Dates</span><span>Jul–Aug 2019</span></div><hr />
+              <div class="row total"><span>Total</span><span>1st job</span></div>
+              <div class="thx">*** thank you, come again ***</div>
+              <div class="scrawl">my first job!</div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="when">'22</p>
+            <div class="obj receipt" style="--r:2.5deg">
+              <div class="store">Diddy Riese Cookies</div><div class="sub">Westwood · Los Angeles</div><hr />
+              <div class="row"><span>Position</span><span>Food server</span></div>
+              <div class="row"><span>Dates</span><span>May–Jun 2022</span></div><hr />
+              <div class="row total"><span>Cookies</span><span>a lot</span></div>
+              <div class="thx">*** keep this receipt ***</div>
+            </div>
+          </div>
+          <div class="item" style="padding-top:60px">
+            <p class="when">'22 → '25</p>
+            <div class="obj badge shadow" style="--r:-2deg;--lan:#f76900">
+              <span class="lanyard"></span>
+              <b>Barnes Center</b>at The Arch
+              <div class="role">Guest Services</div>
+              Syracuse, NY<br />2022 – 2025
+            </div>
+          </div>
+          <div class="item" style="padding-top:60px">
+            <p class="when">summer '24</p>
+            <div class="obj badge shadow" style="--r:3deg;--lan:#1f7a74">
+              <span class="lanyard"></span>
+              <b>PlanetArt</b>Calabasas, CA
+              <div class="role">Intern</div>
+              Data Science Analyst<br />Jun – Aug 2024
+            </div>
+          </div>
+          <div class="item">
+            <p class="when">May '25</p>
+            <div class="obj receipt" style="--r:-2deg">
+              <div class="store">Syracuse University</div><div class="sub">Commencement · Admit one graduate</div><hr />
+              <div class="row"><span>Degree</span><span>B.S. Comp Sci</span></div>
+              <div class="row"><span>Minor</span><span>Eng &amp; CS Mgmt</span></div>
+              <div class="row"><span>Honors</span><span>Cum laude</span></div><hr />
+              <div class="row total"><span>Status</span><span>Graduated</span></div>
+              <div class="scrawl">we did it!!</div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="when">Oct '25 → now</p>
+            <div class="obj sticky" style="--r:2deg;max-width:240px">
+              <h4>new job!!</h4>
+              <p class="hand" style="font-size:27px;margin:0;color:var(--ink)">Assistant Chief of Staff @ XYZ, Santa Monica. back home on the west coast ☀️</p>
+            </div>
+          </div>
+        </div>
+        <span class="folio" style="left:22px">5–6</span>
+      </div>
+    </section>
+
+    <!-- ============ spread 4: folders ============ -->
+    <section class="spread" id="folders">
+      <div class="leaf reveal">
+        <h2 class="title">the folders</h2>
+        <div class="folders">
+          <div class="folder" data-tab="project 01 · this site">
+            <span class="clip" aria-hidden="true"></span>
+            <figure class="obj shot shadow" style="margin:0"><img src="/assets/img/websitess-900.jpg" alt="Screenshot of the first version of aaronmoradi.com" loading="lazy" /></figure>
+            <h3>aaronmoradi.com</h3>
+            <p>Built by hand: HTML, CSS, and JavaScript, no framework and no build step. You're looking at one of its designs right now.</p>
+            <p class="margin-note">map broke when the tile service started demanding an API key. switched to OpenStreetMap</p>
+            <p class="margin-note">the favicon had a fake checkerboard baked into the pixels. cut it out</p>
+            <div class="links"><a href="https://aaronmoradi.com" target="_blank" rel="noopener">live site</a><a href="https://github.com/aaronmoradi/aaronmoradi.github.io" target="_blank" rel="noopener">github</a></div>
+          </div>
+        </div>
+        <span class="folio">7</span>
+      </div>
+      <div class="leaf reveal">
+        <div class="folders" style="padding-top:clamp(0px, 6vw, 70px)">
+          <div class="folder" data-tab="project 02 · data">
+            <span class="clip" aria-hidden="true"></span>
+            <figure class="obj shot shadow" style="margin:0;--r:2deg"><img src="/assets/img/DataMining.png" alt="Chart from the sentiment analysis project" loading="lazy" /></figure>
+            <h3>X vs. Bluesky</h3>
+            <p>A comparative sentiment analysis of X (Twitter) and Bluesky: how the conversation feels on each platform. Python.</p>
+            <div class="links"><a href="/assets/DataMiningPresentation.pdf" target="_blank" rel="noopener">presentation</a><a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank" rel="noopener">github</a></div>
+          </div>
+          <div class="folder" data-tab="project 03 · encryption">
+            <span class="clip" aria-hidden="true"></span>
+            <h3>Compress &amp; encrypt</h3>
+            <p>Takes in a text file, compresses it into binary digits, and decrypts it back into its original state. Python, built with a team.</p>
+            <div class="links"><a href="https://github.com/aaronmoradi/M013-Group12" target="_blank" rel="noopener">github</a></div>
+          </div>
+        </div>
+        <span class="folio">8</span>
+      </div>
+    </section>
+
+    <!-- ============ spread 5: atlas + postcard ============ -->
+    <section class="spread" id="postcard">
+      <div class="leaf reveal">
+        <h2 class="title">coast to coast</h2>
+        <div class="obj atlas-page torn-b shadow" style="--r:-1.5deg">
+          <span class="tape tl"></span>
+          <svg id="atlasSvg" viewBox="0 0 520 300" role="img" aria-label="Pen-drawn map of the US with a route from Los Angeles to Syracuse"></svg>
+        </div>
+        <p class="hand" style="font-size:28px;margin:22px 0 0">every stop is pinned on the <a href="/shoebox/map.html">corkboard →</a></p>
+        <span class="folio">9</span>
+      </div>
+      <div class="leaf reveal">
+        <h2 class="title">write me</h2>
+        <div class="obj postcard shadow" style="--r:1deg">
+          <div class="stamp">Los Angeles<b>24¢</b>USA</div>
+          <div class="postmark">LOS ANGELES<br />CA<br />★ SENT ★</div>
+          <form id="postcardForm" action="https://formspree.io/f/xdklynry" method="POST" style="display:contents">
+            <div class="msg">
+              <label for="message">your note</label>
+              <textarea id="message" name="message" required placeholder="Hi Aaron,"></textarea>
+            </div>
+            <div class="addr">
+              <div><label for="name">from</label><input id="name" name="name" autocomplete="name" required /></div>
+              <div><label for="email">reply to</label><input id="email" type="email" name="_replyto" autocomplete="email" required /></div>
+              <button class="send" type="submit">drop it in the mailbox ✉</button>
+            </div>
+          </form>
+        </div>
+        <p class="hand" style="font-size:26px;margin:22px 0 0">or just email <a href="mailto:aaronmoradi2@gmail.com">aaronmoradi2@gmail.com</a></p>
+        <span class="folio">10</span>
+      </div>
+    </section>
+
+    <!-- ============ spread 6: scraps ============ -->
+    <section class="spread">
+      <div class="leaf reveal">
+        <h2 class="title">practice log</h2>
+        <div class="obj graph shadow torn-b" style="--r:1.5deg">
+          <span class="tape t"></span>
+          <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener"><img src="https://ghchart.rshah.org/23336b/aaronmoradi" alt="Aaron's GitHub contribution chart" loading="lazy" /></a>
+          <p class="hand" style="font-size:24px;margin:10px 0 0">every square = a day I shipped something (GitHub)</p>
+        </div>
+        <span class="folio">11</span>
+      </div>
+      <div class="leaf reveal">
+        <h2 class="title">visitors</h2>
+        <div class="tally" id="tally" aria-hidden="true"></div>
+        <span class="count-stamp" id="countStamp">No. ···</span>
+        <p class="hand" style="font-size:26px;margin:10px 0 26px">you're one of them. hi! 👋</p>
+        <div class="obj index-card shadow" style="--r:-2deg;max-width:340px">
+          <h4>find me</h4>
+          <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">→ resume (pdf)</a>
+          <a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">→ linkedin</a>
+          <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">→ github</a>
+          <a href="mailto:aaronmoradi2@gmail.com">→ email</a>
+        </div>
+        <span class="folio">12</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cover-back">
+    <div class="in">
+      <div class="made">made by hand in Los Angeles<small>last glued in: <span data-glued></span> · <a href="/shoebox/pressed.html" style="color:inherit">something's pressed between these pages →</a></small></div>
+      <nav aria-label="Footer"><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">resume</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">github</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">linkedin</a><a href="/shoebox/map.html">corkboard</a></nav>
+      <a class="egg-meter" href="/shoebox/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn lakers" data-team="lakers">Go Lakers!</button><button class="team-btn dodgers" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </footer>
+
+  <script src="/shoebox/shoebox-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/shoebox/shoebox.js"></script>
+</body>
+</html>
