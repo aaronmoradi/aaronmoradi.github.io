@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tool crib · Rev. · Aaron Moradi</title>
+  <meta name="description" content="" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#eaf0e1" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;else if(+new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hourCycle:'h23'})<4)document.documentElement.dataset.theme='dark';if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/rev/rev.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .card { border: 2px solid var(--rule); background: #f6f1dc; color: #2a2a28; max-width: 860px; }
+    .card header { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 2px solid #2a2a28; font: 700 13px var(--mono); text-transform: uppercase; }
+    .card table { width: 100%; border-collapse: collapse; font: 14px/1.4 var(--mono); }
+    .card th, .card td { padding: 9px 12px; border-bottom: 1px solid rgba(42, 42, 40, .25); text-align: left; vertical-align: top; }
+    .card thead th { font-size: 11px; text-transform: uppercase; border-bottom: 2px solid #2a2a28; }
+    .card td.tool { width: 46%; }
+    .card .stamp { display: inline-block; border: 2px solid #c42b1c; color: #c42b1c; padding: 1px 6px; transform: rotate(-4deg); font-weight: 700; font-size: 12px; white-space: nowrap; }
+    .card tr.open td { color: rgba(42, 42, 40, .55); }
+    .seal { display: none; margin: 22px 0 0; border: 3px double var(--red); color: var(--red); padding: 14px 18px; max-width: 520px; font: 15px var(--mono); }
+    .seal.on { display: block; }
+    .seal b { display: block; font: 26px var(--serif); font-weight: 400; }
+  </style>
+</head>
+
+<body data-egg="vault">
+  <header class="bar">
+    <div class="wrap in">
+      <a class="sig logo" href="/rev/" aria-label="Aaron Moradi, home">A. Moradi</a>
+      <nav class="nav" id="nav" aria-label="Sheets">
+        <a href="/rev/">Title sheet</a>
+        <a href="/rev/log.html">Log</a>
+        <a href="/rev/versions.html">Versions</a>
+        <a href="/rev/map.html">Field survey</a>
+        <a href="/rev/#contact">Contact</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" data-terminal title="Teletype (press `)">TTY</button>
+        <button class="tool" data-theme-toggle aria-label="After hours (blueprint)">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sheet" style="border-bottom:0">
+      <div class="sheet-head"><h2>Tool crib</h2><span class="no">Sheet 5 · checkout card</span></div>
+      <p class="lead">Thirteen tools are hidden in this notebook. Each one you find gets checked out to you and stamped with the date. The card lives in this browser only.</p>
+      <div class="card">
+        <header><span>Checkout card · aaronmoradi.com</span><span id="tally">0 / 13 out</span></header>
+        <table><thead><tr><th>#</th><th>Tool</th><th>Checked out</th></tr></thead><tbody id="rows"></tbody></table>
+      </div>
+      <div class="seal" id="seal"><b>All thirteen. Hall of Famer.</b>Signed off: A. Moradi. Tell me which one took longest. <a href="/rev/#contact">Leave a note →</a></div>
+      <p style="margin-top:18px"><button class="btn ghost" id="resetBtn">Return all tools</button></p>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Rev</span><strong data-rev>—</strong></div>
+      <div><span>Sheet</span><strong>5 of 6</strong></div>
+      <div><span>LA time</span><strong data-la-time>—</strong></div>
+      <div><span>Title</span><strong>Tool crib checkout card</strong></div>
+    </div>
+    <div class="foot">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles · log built <span data-built>—</span></span>
+      <nav aria-label="Footer"><a href="/rev/log.html">Log</a><a href="/rev/versions.html">Versions</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <a class="egg-meter" href="/rev/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn" data-team="lakers">Go Lakers!</button><button class="team-btn" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </div>
+  <script src="/rev/rev-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/rev/rev.js"></script>
+  <script>
+  (() => {
+    function render() {
+      const f = AM.foundEggs(), d = AM.foundDates();
+      const n = AM.EGGS.filter((e) => f.has(e.id)).length;
+      document.getElementById('rows').innerHTML = AM.EGGS.map((e, i) => {
+        const got = f.has(e.id), when = d[e.id] ? new Date(d[e.id]).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase() : 'ON FILE';
+        return `<tr class="${got ? '' : 'open'}"><th>${String(i + 1).padStart(2, '0')}</th><td class="tool">${got ? e.icon + ' <b>' + e.name + '</b>' : e.hint}</td><td>${got ? '<span class="stamp">OUT · ' + when + '</span>' : '—'}</td></tr>`;
+      }).join('');
+      document.getElementById('tally').textContent = `${n} / ${AM.EGGS.length} out`;
+      document.getElementById('seal').classList.toggle('on', n === AM.EGGS.length);
+    }
+    render(); addEventListener('am:egg', render);
+    document.getElementById('resetBtn').addEventListener('click', () => { if (!confirm('Return every tool and clear the card?')) return; AM.resetEggs(); render(); });
+  })();
+  </script>
+</body>
+</html>

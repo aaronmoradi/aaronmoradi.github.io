@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scrap bin · Rev. · Aaron Moradi</title>
+  <meta name="description" content="" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#eaf0e1" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;else if(+new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hourCycle:'h23'})<4)document.documentElement.dataset.theme='dark';if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/rev/rev.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .bin-wrap { position: relative; border: 2px solid var(--rule); background: var(--pad); }
+    #bin { display: block; width: 100%; height: 440px; touch-action: none; cursor: grab; }
+    .counter { display: flex; gap: 22px; font: 700 13px var(--mono); margin: 0 0 10px; }
+    .counter b { color: var(--red); }
+    @media (max-width: 600px) { #bin { height: 380px; } }
+  </style>
+</head>
+
+<body data-egg="lost">
+  <header class="bar">
+    <div class="wrap in">
+      <a class="sig logo" href="/rev/" aria-label="Aaron Moradi, home">A. Moradi</a>
+      <nav class="nav" id="nav" aria-label="Sheets">
+        <a href="/rev/">Title sheet</a>
+        <a href="/rev/log.html">Log</a>
+        <a href="/rev/versions.html">Versions</a>
+        <a href="/rev/map.html">Field survey</a>
+        <a href="/rev/#contact">Contact</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" data-terminal title="Teletype (press `)">TTY</button>
+        <button class="tool" data-theme-toggle aria-label="After hours (blueprint)">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sheet" style="border-bottom:0">
+      <div class="sheet-head"><h2>Scrap bin</h2><span class="no">404 · sheet never drawn</span></div>
+      <p class="lead">This sheet was never drawn. What's here instead are the drafts: every paper ball is a real commit message from this site's history. Drag back and throw it in the bin. Five in a row and the tool crib will notice.</p>
+      <div class="counter"><span>in the bin: <b id="score">0</b></span><span>streak: <b id="streak">0</b></span><span>this draft: <b id="msg">—</b></span></div>
+      <div class="bin-wrap"><canvas id="bin" aria-label="Paper toss: drag back from the crumpled draft and release to throw it in the scrap bin"></canvas></div>
+      <p style="margin-top:16px"><a class="btn" href="/rev/">Back to the title sheet →</a></p>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Rev</span><strong data-rev>—</strong></div>
+      <div><span>Sheet</span><strong>404</strong></div>
+      <div><span>LA time</span><strong data-la-time>—</strong></div>
+      <div><span>Title</span><strong>Scrap bin</strong></div>
+    </div>
+    <div class="foot">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles · log built <span data-built>—</span></span>
+      <nav aria-label="Footer"><a href="/rev/log.html">Log</a><a href="/rev/versions.html">Versions</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <a class="egg-meter" href="/rev/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn" data-team="lakers">Go Lakers!</button><button class="team-btn" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </div>
+  <script src="/rev/rev-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/rev/rev.js"></script>
+  <script>
+  (() => {
+    const cv = document.getElementById('bin'), ctx = cv.getContext('2d'), $ = (id) => document.getElementById(id);
+    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    const R = 15, G = .38, BW = 96, BH = 104, FL = 16;
+    let W, H, binX, ball, drag = null, fly = false, scored = false, t0 = 0, score = 0, streak = 0, shape = [], msgs = ['idk anymore', 'wtf', 'go back!', 'lets hope', 'reload?!', 'revert', 'Shot in the dark', 'yeaq', 'lll', 'ignore the bs'];
+    window.REV_LOG().then(({ commits }) => { const m = commits.filter((c) => c.by === 'aaron' && !/^update /i.test(c.s) && c.s.length < 28).map((c) => c.s); if (m.length) msgs = m; next(); }).catch(() => {});
+    const pick = () => msgs[(Math.random() * msgs.length) | 0];
+    let cur = pick();
+    function next() { cur = pick(); $('msg').textContent = '"' + cur + '"'; }
+    function resize() { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); binX = W * .72; reset(); }
+    function reset() { const x = Math.max(56, W * (.08 + Math.random() * .14)); ball = { x, y: H - FL - R, vx: 0, vy: 0, a: 0 }; fly = false; scored = false; shape = Array.from({ length: 11 }, (_, i) => [i / 11 * Math.PI * 2, R * (.82 + Math.random() * .3)]); }
+    const top = () => H - FL - BH;
+    function bounce(p) { const dx = ball.x - p.x, dy = ball.y - p.y, d = Math.hypot(dx, dy); if (d < R + 3 && d > 0) { const nx = dx / d, ny = dy / d, k = ball.vx * nx + ball.vy * ny; if (k < 0) { ball.vx -= 1.6 * k * nx; ball.vy -= 1.6 * k * ny; } ball.x = p.x + nx * (R + 3); ball.y = p.y + ny * (R + 3); } }
+    function step() {
+      const py = ball.y; ball.vy += G; ball.x += ball.vx; ball.y += ball.vy; ball.a += ball.vx * .06;
+      bounce({ x: binX - BW / 2, y: top() }); bounce({ x: binX + BW / 2, y: top() });
+      const inside = ball.x > binX - BW / 2 && ball.x < binX + BW / 2;
+      if (!scored && py < top() && ball.y >= top() && inside) { scored = true; score++; streak++; $('score').textContent = score; $('streak').textContent = streak; if (streak === 5) { AM.findEgg('hoops'); AM.confetti('party', 140); } }
+      if (scored) { ball.x = Math.min(Math.max(ball.x, binX - BW / 2 + R + 4), binX + BW / 2 - R - 4); if (ball.y > H - FL - R - 6) { ball.y = H - FL - R - 6; ball.vx = ball.vy = 0; } }
+      else {
+        if (ball.y > top() && Math.abs(ball.x - (binX - BW / 2)) < R && ball.x < binX) { ball.x = binX - BW / 2 - R; ball.vx *= -.5; }
+        if (ball.y > top() && Math.abs(ball.x - (binX + BW / 2)) < R && ball.x > binX) { ball.x = binX + BW / 2 + R; ball.vx *= -.5; }
+        if (ball.y + R > H - FL) { ball.y = H - FL - R; ball.vy *= -.35; ball.vx *= .7; }
+        if (ball.x - R < 0) { ball.x = R; ball.vx *= -.5; }
+      }
+      const done = (scored && ball.vy === 0) || (!scored && Math.abs(ball.vy) < .8 && ball.y + R >= H - FL - 1 && Math.abs(ball.vx) < .3) || ball.x - R > W || performance.now() - t0 > 6000;
+      if (done) { fly = false; setTimeout(() => { if (!scored) { streak = 0; $('streak').textContent = 0; } else binX = W * (.5 + Math.random() * .36); reset(); next(); }, scored ? 300 : 0); }
+    }
+    function vel() { const k = .13, mx = 21; let vx = (drag.sx - drag.x) * k, vy = (drag.sy - drag.y) * k; const m = Math.hypot(vx, vy); if (m > mx) { vx *= mx / m; vy *= mx / m; } return { vx, vy }; }
+    function draw() {
+      const ink = css('--ink'), red = css('--red'), muted = css('--muted');
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = ink; ctx.fillRect(0, H - FL, W, 2);
+      const t = top(), l = binX - BW / 2, r = binX + BW / 2, inset = 10;
+      ctx.strokeStyle = ink; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (let i = 0; i <= 8; i++) { ctx.moveTo(l + BW * i / 8, t); ctx.lineTo(l + inset + (BW - 2 * inset) * i / 8, H - FL); }
+      for (let j = 1; j < 5; j++) { const y = t + BH * j / 5, k = inset * j / 5; ctx.moveTo(l + k, y); ctx.lineTo(r - k, y); }
+      ctx.stroke(); ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(l, t); ctx.lineTo(r, t); ctx.stroke();
+      ctx.font = '700 12px "Courier Prime", monospace'; ctx.fillStyle = muted; ctx.fillText('SCRAP', binX - 20, t + BH / 2);
+      if (drag) { const v = vel(); let x = ball.x, y = ball.y, vy = v.vy; ctx.setLineDash([3, 6]); ctx.strokeStyle = red; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, y); for (let i = 0; i < 30; i++) { vy += G; x += v.vx; y += vy; ctx.lineTo(x, y); } ctx.stroke(); ctx.setLineDash([]); }
+      ctx.save(); ctx.translate(ball.x, ball.y); ctx.rotate(ball.a); ctx.beginPath(); shape.forEach(([a, rr], i) => { const x = Math.cos(a) * rr, y = Math.sin(a) * rr; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath();
+      ctx.fillStyle = '#eaf0e1'; ctx.fill(); ctx.strokeStyle = '#2a2a28'; ctx.lineWidth = 1.3; ctx.stroke(); ctx.beginPath(); ctx.moveTo(-8, -4); ctx.lineTo(2, 1); ctx.lineTo(-2, 9); ctx.moveTo(4, -9); ctx.lineTo(1, 1); ctx.lineTo(9, 5); ctx.strokeStyle = 'rgba(110,160,210,.8)'; ctx.stroke(); ctx.restore();
+      if (!fly) { ctx.fillStyle = red; ctx.font = 'italic 14px "Courier Prime", monospace'; ctx.fillText('"' + cur + '"', ball.x - R, ball.y - R - 10); }
+    }
+    const pt = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.addEventListener('pointerdown', (e) => { if (fly) return; const p = pt(e); drag = { sx: p.x, sy: p.y, x: p.x, y: p.y }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', (e) => { if (drag) { const p = pt(e); drag.x = p.x; drag.y = p.y; } });
+    cv.addEventListener('pointerup', () => { if (!drag) return; const v = vel(); drag = null; if (Math.hypot(v.vx, v.vy) < 2) return; ball.vx = v.vx; ball.vy = v.vy; fly = true; t0 = performance.now(); });
+    addEventListener('resize', resize); resize(); next();
+    let lt = performance.now(), acc = 0;
+    (function loop(now) { acc += Math.min(now - lt, 100); lt = now; while (acc >= 1000 / 60) { if (fly) step(); acc -= 1000 / 60; } draw(); requestAnimationFrame(loop); })(lt);
+  })();
+  </script>
+</body>
+</html>
