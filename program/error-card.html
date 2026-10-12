@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Error Card · Official Program · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#40205f" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/program/program.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .err { padding: clamp(28px, 5vw, 56px) 0 70px; display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: clamp(28px, 5vw, 64px); align-items: center; }
+    .err h1 { margin: 0; font: 900 clamp(70px, 12vw, 160px)/.82 var(--cond); text-transform: uppercase; color: var(--head); text-shadow: .035em .035em 0 var(--gold); }
+    .err p { max-width: 52ch; }
+    .notes { list-style: none; margin: 20px 0 26px; padding: 0; border-top: 3px solid var(--ink); }
+    .notes li { display: grid; grid-template-columns: 130px 1fr; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+    .notes li b { font: 800 13px/1.6 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    /* the graded slab */
+    .slab { background: linear-gradient(160deg, rgba(255,255,255,.75), rgba(220,225,230,.45)); border: 2px solid rgba(26,25,22,.45); border-radius: 10px; padding: 14px; box-shadow: 10px 12px 0 rgba(26,25,22,.8), inset 0 0 0 6px rgba(255,255,255,.5); transform: rotate(-1.5deg); }
+    .grade { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; background: #c42b1c; color: #fff; padding: 10px 12px; border-radius: 4px; margin-bottom: 14px; }
+    .grade b { font: 900 16px/1.1 var(--cond); letter-spacing: .08em; text-transform: uppercase; display: block; }
+    .grade small { font: 700 11px/1.2 var(--cond); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+    .grade .g { font: 900 46px/1 var(--cond); text-align: center; border-left: 2px solid rgba(255,255,255,.5); padding-left: 12px; }
+    .grade .g small { display: block; font-size: 10px; }
+    .misprint { aspect-ratio: 5 / 7; background: #fff; color: #000; padding: 22px 20px; font-family: "Times New Roman", Times, serif; border: 1px solid #bbb; position: relative; overflow: hidden; }
+    .misprint h2 { font-size: 22px; margin: 0 0 12px; font-weight: bold; }
+    .misprint h3 { font-size: 30px; margin: 0; font-weight: bold; line-height: 1.15; }
+    .misprint .mis { position: absolute; left: 20px; right: -40px; bottom: 26px; transform: rotate(-4deg); font: 900 italic 30px/1 var(--cond); color: rgba(64, 32, 95, .85); text-shadow: 3px 2px 0 rgba(241, 181, 12, .9); text-transform: uppercase; }
+    .misprint .ink { position: absolute; right: 18px; top: 40%; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, rgba(241,181,12,.55), transparent 70%); }
+    @media (max-width: 860px) { .err { grid-template-columns: 1fr; } .slab { max-width: 380px; } }
+  </style>
+</head>
+
+<body data-egg="forgotten">
+  <div class="ticker"><div class="wrap"><span>Official Program · Collector's Corner</span><span>Rare · 1 of 1</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
+      <nav class="lineup" id="lineup" aria-label="Starting lineup">
+        <a href="/program/#card"><b>01</b>Rookie Card</a>
+        <a href="/program/#scouting"><b>02</b>Scouting</a>
+        <a href="/program/#tribute"><b>08</b>8 &amp; 24</a>
+        <a href="/program/#boxscores"><b>03</b>Box Scores</a>
+        <a href="/program/map.html"><b>04</b>Road Schedule</a>
+        <a href="/program/#tickets"><b>05</b>Tickets</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool hide-sm" data-terminal title="Press box (press `)">Press Box</button>
+        <button class="tool" data-theme-toggle aria-label="Toggle night game">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="lineup">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap err">
+    <div>
+      <p class="label" style="margin:0 0 8px;color:var(--red)">Collector's corner · Card #0</p>
+      <h1>The Error Card</h1>
+      <p>Every great set has one. Before this program went to print, this URL held the very first draft of an About page. It was promptly forgotten, never corrected, and has now been graded and sealed exactly as it was found.</p>
+      <ul class="notes">
+        <li><b>Set</b><span>AM '25 · Card #0</span></li>
+        <li><b>Variation</b><span>Uncorrected. HTML only, zero CSS.</span></li>
+        <li><b>Population</b><span>1 known copy</span></li>
+        <li><b>Original</b><span><a href="/about.html">/about.html</a>, still on display in the v2 museum</span></li>
+      </ul>
+      <a class="btn" href="/program/#card">See the corrected card →</a>
+    </div>
+    <div class="slab" aria-label="Graded card slab">
+      <div class="grade">
+        <div><b>AM '25 #0 · About Page</b><small>Error · Uncorrected · Gem mint</small></div>
+        <div class="g">10<small>Gem mt</small></div>
+      </div>
+      <div class="misprint">
+        <h2>This is my about page test</h2>
+        <h3>I completely forgot about this...</h3>
+        <span class="ink" aria-hidden="true"></span>
+        <span class="mis" aria-hidden="true">Misprint</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="/program/program-skin.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

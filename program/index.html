@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Official Program · Aaron Moradi</title>
+  <meta name="description" content="The official program of Aaron Moradi: Los Angeles born, Syracuse '25, Assistant Chief of Staff at XYZ." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#40205f" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="preload" href="/program/fonts/sofia-xc-900.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/program/program.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=2" />
+  <!-- Press credentials: the key under Esc opens the press box. Misprints exist. -->
+</head>
+
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <div class="ticker"><div class="wrap"><span>Official Program · Vol. 25</span><span data-issue-date>—</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
+      <nav class="lineup" id="lineup" aria-label="Starting lineup">
+        <a href="/program/#card"><b>01</b>Rookie Card</a>
+        <a href="/program/#scouting"><b>02</b>Scouting</a>
+        <a href="/program/#tribute"><b>08</b>8 &amp; 24</a>
+        <a href="/program/#boxscores"><b>03</b>Box Scores</a>
+        <a href="/program/map.html"><b>04</b>Road Schedule</a>
+        <a href="/program/#tickets"><b>05</b>Tickets</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool hide-sm" data-terminal title="Press box (press `)">Press Box</button>
+        <button class="tool" data-theme-toggle aria-label="Toggle night game">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="lineup">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== COVER ===================== -->
+    <section class="cover">
+      <div class="wrap">
+        <div class="cover-top"><span>Official Program</span><span>Vol. 25 · No. 1</span><span data-issue-date>—</span><span class="price">$1.50</span></div>
+        <div class="cover-grid">
+          <div>
+            <p class="cover-kicker">Introducing · No. 24</p>
+            <h1>Aaron<br />Moradi</h1>
+            <span class="versus">Los Angeles vs. Everything</span>
+            <p class="cover-lede">Born and raised in Los Angeles. <strong>Syracuse University '25</strong>, B.S. Computer Science, <em>cum laude</em>. Now Assistant Chief of Staff at XYZ in Santa Monica. Every shift on the way here is in the stats.</p>
+            <ol class="inside" aria-label="Inside this issue">
+              <li><a href="#card"><span>The Rookie Card</span><span></span><span>Pg. 01</span></a></li>
+              <li><a href="#scouting"><span>Scouting Report</span><span></span><span>Pg. 02</span></a></li>
+              <li><a href="#boxscores"><span>Box Scores</span><span></span><span>Pg. 03</span></a></li>
+              <li><a href="#tribute"><span>8 &amp; 24: For Kobe</span><span></span><span>Pg. 08</span></a></li>
+              <li><a href="map.html"><span>Road Schedule</span><span></span><span>Pg. 04</span></a></li>
+            </ol>
+          </div>
+          <figure class="cover-photo" style="margin:0">
+            <span class="photo-stamp">Class of '25</span>
+            <div class="halftone"><img src="/assets/img/aaron-grad-900.jpg" width="900" height="1498" alt="Aaron in his cap and gown at Syracuse University" fetchpriority="high" /></div>
+            <figcaption class="caption">Fig. 1: The rookie on graduation day, Syracuse University, May 2025.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SCOREBOARD ===================== -->
+    <div class="scoreboard" aria-label="Scoreboard">
+      <div class="wrap">
+        <div class="cell"><small>LA Time</small><b data-la-clock>--:--</b></div>
+        <div class="cell"><small>Period</small><b data-la-state>GAME NIGHT</b></div>
+        <div class="cell"><small>Now Playing</small><b>XYZ · SM</b></div>
+        <div class="cell"><small>Attendance</small><b data-attendance>····</b></div>
+      </div>
+    </div>
+
+    <!-- ===================== ROOKIE CARD ===================== -->
+    <section class="page" id="card">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 01</span><h2>The Rookie Card</h2><span class="kicker">AM '25 · Set of one · Flip for stats</span></header>
+        <div class="card-spread">
+          <div class="reveal">
+            <div class="tcard-wrap">
+              <button class="tcard" id="rookieCard" aria-pressed="false" aria-label="Rookie card. Activate to flip between front and career stats.">
+                <span class="tface front">
+                  <span class="frame">
+                    <span class="halftone"><img src="/assets/img/aaron-otto-1200.jpg" alt="Aaron with Otto the Orange at graduation" loading="lazy" /></span>
+                    <span class="set">AM '25</span>
+                    <span class="rookie">Rookie</span>
+                  </span>
+                  <span class="plate">
+                    <span><span class="nm">Aaron Moradi</span><span class="pos">Asst. Chief of Staff · XYZ</span></span>
+                    <span class="no">24</span>
+                  </span>
+                </span>
+                <span class="tface back">
+                  <span class="hdr"><b>Aaron Moradi</b><span>No. 24</span></span>
+                  <span class="bio">Born and raised in Los Angeles. Graduated <em>cum laude</em> from Syracuse University with a B.S. in Computer Science (minor: Engineering &amp; CS Management). Signed with XYZ, Oct. 2025.</span>
+                  <table>
+                    <thead><tr><th>Yr</th><th>Team</th><th>Pos</th><th>Mos</th></tr></thead>
+                    <tbody id="careerRows"></tbody>
+                    <tfoot><tr class="total"><td colspan="3">Career · 5 teams</td><td id="careerTotal">—</td></tr></tfoot>
+                  </table>
+                  <span class="foot">* Active stint. Still counting.</span>
+                  <span class="dyk"><b>Did you know?</b>Aaron's first job was pulling espresso at Tea &amp; Coffee Exchange in Hollywood, summer 2019.</span>
+                </span>
+              </button>
+            </div>
+            <p class="flip-hint" id="flipHint">Tap the card to see the stats</p>
+          </div>
+
+          <div class="bio-col reveal">
+            <div class="draft">
+              <div class="pick">Selected Oct. 2025 by XYZ</div>
+              <dl>
+                <dt>Role</dt><dd>Assistant Chief of Staff</dd>
+                <dt>Team</dt><dd>XYZ, the .xyz domain registry · <a href="https://gen.xyz/a/138004" target="_blank" rel="noopener noreferrer">Get an .xyz domain</a></dd>
+                <dt>City</dt><dd>Santa Monica, Calif.</dd>
+                <dt>College</dt><dd>Syracuse University '25</dd>
+                <dt>Hometown</dt><dd>Los Angeles, Calif.</dd>
+                <dt>Number</dt><dd>24, in honor of Kobe</dd>
+              </dl>
+            </div>
+            <div style="margin-top:28px">
+              <p>I love improving people's lives by building things that matter and by supporting the people who need it. That's the job description I've been chasing since my first shift behind an espresso machine in Hollywood.</p>
+              <p>Outside of computer science, I'm playing or watching basketball, finding new music, or admiring art. I was born and raised in Los Angeles, but Syracuse, New York will always have a special place in my heart.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SCOUTING REPORT ===================== -->
+    <section class="page" id="scouting">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 02</span><h2>Scouting Report</h2><span class="kicker">Moradi, Aaron · HT: Los Angeles · College: Syracuse</span></header>
+        <div class="scout reveal">
+          <div>
+            <blockquote>"I pride myself on being professional, creative, determined, and personable."<cite>In his own words</cite></blockquote>
+            <p class="rule-label label">Tools</p>
+            <ul class="tools-list">
+              <li><b>1</b><span>Professional</span></li>
+              <li><b>2</b><span>Creative</span></li>
+              <li><b>3</b><span>Determined</span></li>
+              <li><b>4</b><span>Personable</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="rule-label label">Ratings · Languages</p>
+            <div class="rating"><span class="k">Python</span><span class="segs" data-v="85"></span><span class="v">85</span></div>
+            <div class="rating"><span class="k">C</span><span class="segs" data-v="85"></span><span class="v">85</span></div>
+            <div class="rating"><span class="k">HTML</span><span class="segs" data-v="60"></span><span class="v">60</span></div>
+            <div class="rating"><span class="k">Java</span><span class="segs" data-v="60"></span><span class="v">60</span></div>
+            <div class="rating"><span class="k">CSS</span><span class="segs" data-v="30"></span><span class="v">30</span></div>
+            <div class="rating"><span class="k">JavaScript</span><span class="segs" data-v="25"></span><span class="v">25</span></div>
+            <p class="bench"><b class="label">Deep bench:</b> Racket, Haskell.</p>
+          </div>
+          <div>
+            <p class="rule-label label">Accolades</p>
+            <ol class="accolades">
+              <li>B.S. Computer Science, <em>cum laude</em>, Syracuse University, May 2025</li>
+              <li>Minor, Engineering &amp; Computer Science Management</li>
+              <li>Inside LVMH certificate</li>
+              <li>ServSafe Food Handler</li>
+              <li>Adult First Aid / CPR / AED (Red Cross)</li>
+              <li>Employee Transportation Coordinator (GoSaMo TMO)</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BOX SCORES ===================== -->
+    <section class="page" id="boxscores">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 03</span><h2>Box Scores</h2><span class="kicker">Final scores from the project files</span></header>
+        <div class="boxes reveal">
+          <article class="box">
+            <div class="final"><span>Final</span><b>W</b></div>
+            <h3>Moradi builds his own site from scratch. Then does it again.</h3>
+            <div class="halftone"><img src="/assets/img/websitess-900.jpg" alt="Screenshot of the first version of aaronmoradi.com" loading="lazy" /></div>
+            <p><span class="dateline">Los Angeles.</span> Hand-built with no framework and no build step. The current lineup: a life map, a working press box terminal, a basketball court on the 404 page, and thirteen hidden cards.</p>
+            <table class="boxtable">
+              <tr><th>Stack</th><td>HTML · CSS · JavaScript</td></tr>
+              <tr><th>Tape</th><td><a href="https://aaronmoradi.com" target="_blank" rel="noopener">Live</a> · <a href="https://github.com/aaronmoradi/aaronmoradi.github.io" target="_blank" rel="noopener">GitHub</a></td></tr>
+            </table>
+          </article>
+          <article class="box">
+            <div class="final"><span>Final</span><b>W</b></div>
+            <h3>X vs. Bluesky: Moradi runs the numbers on the mood</h3>
+            <div class="halftone"><img src="/assets/img/DataMining.png" alt="Chart from the sentiment analysis project" loading="lazy" /></div>
+            <p><span class="dateline">Data desk.</span> A comparative sentiment analysis of X (Twitter) and Bluesky: how the conversation feels on each platform.</p>
+            <table class="boxtable">
+              <tr><th>Stack</th><td>Python · Data</td></tr>
+              <tr><th>Tape</th><td><a href="/assets/DataMiningPresentation.pdf" target="_blank" rel="noopener">Presentation</a> · <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank" rel="noopener">GitHub</a></td></tr>
+            </table>
+          </article>
+          <article class="box">
+            <div class="final"><span>Final</span><b>W</b></div>
+            <h3>Text in, binary out, text back: the compression game</h3>
+            <div class="halftone"><img src="/assets/img/SU.png" alt="Syracuse University logo" loading="lazy" /></div>
+            <p><span class="dateline">Team effort.</span> Takes in a text file, compresses it into binary digits, and decrypts it back into its original state.</p>
+            <table class="boxtable">
+              <tr><th>Stack</th><td>Python · Collaboration</td></tr>
+              <tr><th>Tape</th><td><a href="https://github.com/aaronmoradi/M013-Group12" target="_blank" rel="noopener">GitHub</a></td></tr>
+            </table>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 8 & 24 ===================== -->
+    <section class="tribute" id="tribute">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 08 · 24</span><h2>8 &amp; 24</h2><span class="kicker">For Kobe Bryant · 1978–2020</span></header>
+        <div class="jerseys reveal">
+          <figure style="margin:0">
+            <button class="jersey" data-jersey="8" aria-label="Number 8 jersey">
+              <svg viewBox="0 0 200 240" aria-hidden="true"><path d="M52 8c8 0 14 26 48 26S140 8 148 8l30 12c-9 28-10 50-2 72v140H24V92c8-22 7-44-2-72z" fill="#f1b50c" stroke="#40205f" stroke-width="6" stroke-linejoin="round"/><path d="M60 12c6 14 16 30 40 30s34-16 40-30" fill="none" stroke="#40205f" stroke-width="8"/><text x="100" y="168" text-anchor="middle" font-family="Graduate, serif" font-size="104" fill="#40205f" stroke="#fff" stroke-width="3" paint-order="stroke">8</text></svg>
+            </button>
+            <figcaption>No. 8 · 1996–2006</figcaption>
+          </figure>
+          <figure style="margin:0">
+            <button class="jersey" data-jersey="24" aria-label="Number 24 jersey">
+              <svg viewBox="0 0 200 240" aria-hidden="true"><path d="M52 8c8 0 14 26 48 26S140 8 148 8l30 12c-9 28-10 50-2 72v140H24V92c8-22 7-44-2-72z" fill="#40205f" stroke="#f1b50c" stroke-width="6" stroke-linejoin="round"/><path d="M60 12c6 14 16 30 40 30s34-16 40-30" fill="none" stroke="#f1b50c" stroke-width="8"/><text x="100" y="168" text-anchor="middle" font-family="Graduate, serif" font-size="96" fill="#f1b50c" stroke="#fff" stroke-width="3" paint-order="stroke">24</text></svg>
+            </button>
+            <figcaption>No. 24 · 2006–2016</figcaption>
+          </figure>
+        </div>
+        <div class="facts reveal">
+          <div class="fact"><b>20</b><span>Seasons</span><small>All of them in Los Angeles, 1996–2016</small></div>
+          <div class="fact"><b>5</b><span>Championships</span><small>2000, '01, '02, '09, '10</small></div>
+          <div class="fact"><b>18</b><span>All-Star selections</span><small>Plus the 2008 MVP</small></div>
+          <div class="fact"><b>2</b><span>Finals MVPs</span><small>2009 and 2010</small></div>
+          <div class="fact"><b>81</b><span>Points in one game</span><small>vs. Toronto, Jan. 22, 2006</small></div>
+          <div class="fact"><b>60</b><span>In his final game</span><small>vs. Utah, Apr. 13, 2016</small></div>
+          <div class="fact"><b>33,643</b><span>Career points</span><small>Every one of them in purple &amp; gold</small></div>
+          <div class="fact"><b>8+24</b><span>Both numbers retired</span><small>Dec. 18, 2017</small></div>
+        </div>
+        <p class="tribute-note reveal">Every kid in LA learned what hard work looks like by watching <b>No. 8 and No. 24</b>: the early-morning workouts, the shots after practice, never taking a night off. That's the standard this program is printed to.</p>
+      </div>
+    </section>
+
+    <!-- ===================== ROAD SCHEDULE ===================== -->
+    <section class="page" id="road">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 04</span><h2>Road Schedule</h2><span class="kicker">Six stops · two coasts · one season that hasn't ended</span></header>
+        <table class="sched reveal">
+          <thead><tr><th>Date</th><th>Stop</th><th style="text-align:right">Result</th></tr></thead>
+          <tbody>
+            <tr><td>Jul '19</td><td class="opp"><b>@ Hollywood</b> · Tea &amp; Coffee Exchange<small>Barista. The first shift.</small></td><td class="res w">W</td></tr>
+            <tr><td>May '22</td><td class="opp"><b>@ Westwood</b> · Diddy Riese Cookies<small>Food server.</small></td><td class="res w">W</td></tr>
+            <tr><td>Aug '22</td><td class="opp"><b>@ Syracuse</b> · Barnes Center at The Arch<small>Guest services, through May 2025.</small></td><td class="res w">W</td></tr>
+            <tr><td>Jun '24</td><td class="opp"><b>@ Calabasas</b> · PlanetArt<small>Data science analyst intern.</small></td><td class="res w">W</td></tr>
+            <tr><td>May '25</td><td class="opp"><b>@ Syracuse</b> · Syracuse University<small>B.S. Computer Science, cum laude.</small></td><td class="res w">W</td></tr>
+            <tr><td>Oct '25</td><td class="opp"><b>Home · Santa Monica</b> · XYZ<small>Assistant Chief of Staff. Month <span data-months-since="2025-10">—</span> and counting.</small></td><td class="res live">Live</td></tr>
+          </tbody>
+        </table>
+        <div class="sched-foot reveal">
+          <span class="label" style="color:var(--muted)">LA ↔ Syracuse: 2,332 miles, each way</span>
+          <a class="btn" href="map.html">See the road map →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROGRAM NOTES ===================== -->
+    <section class="page" id="notes">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 05</span><h2>Program Notes</h2><span class="kicker">Walk-up music · practice log · tonight's crowd</span></header>
+        <div class="notes3 reveal">
+          <div>
+            <h3>Walk-up Music</h3>
+            <p>Four tracks on repeat. Pick one.</p>
+            <div class="tracks" role="group" aria-label="Pick a track">
+              <button class="on" data-track="0dbTQYW3Ad1FTzIA9t90E8">01</button>
+              <button data-track="6HfOzLLjsaXsehIFEsrxTk">02</button>
+              <button data-track="3cjF2OFRmip8spwZYQRKxP">03</button>
+              <button data-track="0qZqbfudgogv0mFQOJ9TrB">04</button>
+            </div>
+            <iframe id="spotify-player" title="Spotify player" style="border:0;border-radius:0;display:block" src="https://open.spotify.com/embed/track/0dbTQYW3Ad1FTzIA9t90E8?utm_source=generator&amp;theme=0" width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
+          <div>
+            <h3>Practice Log</h3>
+            <p>Every square is a day in the gym (GitHub).</p>
+            <a href="https://github.com/aaronmoradi" target="_blank" rel="noopener"><img class="gh" src="https://ghchart.rshah.org/40205f/aaronmoradi" alt="Aaron's GitHub contribution chart" loading="lazy" /></a>
+          </div>
+          <div>
+            <h3>Attendance</h3>
+            <p>Fans through the turnstile, all-time.</p>
+            <div class="attend" data-attendance>····</div>
+            <p>You're one of them. Thanks for coming out.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TICKET OFFICE ===================== -->
+    <section class="page" id="tickets" style="border-bottom:0">
+      <div class="wrap">
+        <header class="run-head reveal"><span class="folio">Pg. 06</span><h2>Ticket Office</h2><span class="kicker">Will call · inquiries · front office</span></header>
+        <div class="ticket reveal">
+          <div class="stub">
+            <div class="admit">Admit<br />One</div>
+            <dl><dt>Sec</dt><dd>AM</dd><dt>Row</dt><dd>25</dd><dt>Seat</dt><dd>24</dd></dl>
+            <div class="barcode" aria-hidden="true"></div>
+          </div>
+          <div class="ticket-main">
+            <h3>Get in touch</h3>
+            <p>Write to <a href="mailto:aaronmoradi2@gmail.com">aaronmoradi2@gmail.com</a>, or fill out the will-call form.</p>
+            <form class="form" action="https://formspree.io/f/xdklynry" method="POST">
+              <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required /></div>
+              <div><label for="email">Email</label><input id="email" type="email" name="_replyto" autocomplete="email" required /></div>
+              <div class="full"><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+              <div class="full"><button class="btn" type="submit">Send it in →</button></div>
+            </form>
+            <div class="socials">
+              <a class="btn ghost" href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn ghost" href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a>
+              <a class="btn ghost" href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="backcover">
+    <div class="wrap">
+      <p class="big">See you<br />next game.</p>
+      <div class="row">
+        <nav aria-label="Footer"><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a><a href="/program/map.html">Road Schedule</a></nav>
+        <a class="egg-meter" href="/program/vault.html" data-egg-meter hidden></a>
+        <div class="team-btns"><button class="team-btn lakers" data-team="lakers">Go Lakers!</button><button class="team-btn dodgers" data-team="dodgers">Go Dodgers!</button></div>
+      </div>
+      <p class="fine">© <span data-year></span> Aaron Moradi. Printed in Los Angeles. This is a personal, fan-made design. It is not affiliated with, endorsed by, or sponsored by the Los Angeles Lakers, the Los Angeles Dodgers or the NBA, and team names are used for identification only. The 8 &amp; 24 page is offered with respect. <a href="/program/error-card.html">*Misprints exist.</a></p>
+    </div>
+  </footer>
+
+  <script src="/program/program-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/program/program.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Road Schedule · Official Program · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#40205f" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" />
+  <link rel="stylesheet" href="/program/program.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    body { overflow: hidden; }
+    .road { display: grid; grid-template-columns: 420px 1fr; height: calc(100vh - 95px); height: calc(100dvh - 95px); }
+    .road-side { overflow-y: auto; border-right: 3px solid var(--ink); padding: 22px var(--gut) 24px; display: flex; flex-direction: column; gap: 16px; }
+    .road-side h1 { margin: 0; font: 900 64px/.84 var(--cond); text-transform: uppercase; color: var(--head); }
+    .road-side .intro { margin: 0; font-size: 16px; color: var(--ink-2); }
+    .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--board); color: var(--led); border: 3px solid #000; }
+    .stat3 div { padding: 10px 12px; border-left: 2px solid #26231d; }
+    .stat3 div:first-child { border-left: 0; }
+    .stat3 small { display: block; font: 700 10px/1 var(--cond); letter-spacing: .18em; color: #8c8270; text-transform: uppercase; margin-bottom: 6px; }
+    .stat3 b { font: 900 24px/1 var(--dots); text-shadow: 0 0 8px rgba(255, 182, 39, .5); }
+    .acts { display: flex; gap: 10px; flex-wrap: wrap; }
+    .acts .btn { font-size: 14px; padding: 10px 14px 8px; }
+    .chapters { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--ink); }
+    .chapters li { border-bottom: 1px solid var(--line); }
+    .chapter {
+      width: 100%; display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; text-align: left;
+      background: none; border: 0; padding: 12px 6px; cursor: pointer; color: inherit; font: inherit;
+    }
+    .chapter:hover { background: var(--paper-2); }
+    .chapter.active { background: var(--ink); color: var(--paper); }
+    .chapter .g { font: 18px/1 var(--varsity); color: var(--head); }
+    .chapter.active .g { color: var(--gold); }
+    .chapter .t { display: block; font: 900 22px/1 var(--cond); text-transform: uppercase; }
+    .chapter .w { display: block; font: italic 14px/1.3 var(--serif); opacity: .75; margin-top: 3px; }
+    .chapter .r { font: 900 20px/1 var(--cond); color: var(--head); }
+    .chapter.active .r { color: var(--gold); }
+    .secret-hint { margin-top: auto; font: 800 12px/1.4 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    #map { height: 100%; width: 100%; background: var(--paper-2); z-index: 1; }
+    #map .leaflet-tile-pane { filter: grayscale(.6) sepia(.45) contrast(.95) brightness(1.02); transition: filter .4s; }
+    #map.dark-tiles .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(.5) sepia(.35) brightness(.85) contrast(.9); }
+    .pin {
+      width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--gold); color: var(--purple); border: 3px solid var(--purple);
+      font: 18px/1 var(--varsity); box-shadow: 3px 3px 0 var(--ink); transition: transform .2s;
+    }
+    .pin:hover, .pin.active { transform: scale(1.15); }
+    .pin.active { background: var(--purple); color: var(--gold); border-color: var(--gold); }
+    .pin.secret { width: 32px; height: 32px; font-size: 16px; background: var(--paper); border-style: dashed; }
+    .pin.me { background: #fff; border-color: var(--blue); font-size: 16px; }
+    .leaflet-div-icon { background: transparent; border: 0; }
+    .leaflet-popup-content-wrapper { border-radius: 0; background: var(--card); color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--purple); }
+    .leaflet-popup-tip { background: var(--ink); }
+    .leaflet-popup-content { margin: 14px 16px; font: 15px/1.45 var(--serif); }
+    .leaflet-popup-content h3 { margin: 2px 0 6px; font: 900 28px/.95 var(--cond); text-transform: uppercase; color: var(--head); }
+    .leaflet-popup-content p { margin: 0; }
+    .pop-when { font: 800 12px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+    .leaflet-bar a { border-radius: 0 !important; background: var(--paper); color: var(--ink); border-color: var(--ink); font-weight: 900; }
+    .leaflet-bar { border: 3px solid var(--ink) !important; border-radius: 0 !important; }
+    .leaflet-control-attribution { background: var(--paper) !important; color: var(--muted); font: 11px var(--serif); }
+    .leaflet-control-attribution a { color: var(--ink-2); }
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .road { grid-template-columns: 1fr; grid-template-rows: 60vh auto; height: auto; }
+      .road-side { order: 2; border-right: 0; border-top: 3px solid var(--ink); }
+      .road-side h1 { font-size: 52px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ticker"><div class="wrap"><span>Official Program · Road Schedule</span><span data-issue-date>—</span><span>Away games · 2019–present</span><span>Press box: press ` </span></div></div>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
+      <nav class="lineup" id="lineup" aria-label="Starting lineup">
+        <a href="/program/#card"><b>01</b>Rookie Card</a>
+        <a href="/program/#scouting"><b>02</b>Scouting</a>
+        <a href="/program/#tribute"><b>08</b>8 &amp; 24</a>
+        <a href="/program/#boxscores"><b>03</b>Box Scores</a>
+        <a href="/program/map.html" aria-current="page"><b>04</b>Road Schedule</a>
+        <a href="/program/#tickets"><b>05</b>Tickets</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool hide-sm" data-terminal title="Press box (press `)">Press Box</button>
+        <button class="tool" data-theme-toggle aria-label="Toggle night game">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="lineup">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="road">
+    <aside class="road-side">
+      <div>
+        <p class="label" style="margin:0 0 6px;color:var(--muted)">Pg. 04 · Season schedule</p>
+        <h1>Road<br />Schedule</h1>
+      </div>
+      <p class="intro">Every stop, in order. Tap a game, or let the broadcast tour call it for you.</p>
+      <div class="stat3">
+        <div><small>Games</small><b id="statPlaces">6</b></div>
+        <div><small>LA ↔ SYR mi</small><b id="statMiles">—</b></div>
+        <div><small>Record</small><b>6–0</b></div>
+      </div>
+      <div class="acts">
+        <button class="btn" id="tourBtn">▶ Take the tour</button>
+        <button class="btn ghost" id="overviewBtn">Full court</button>
+        <button class="btn ghost" id="meBtn" title="Uses your location once; never stored">📍 How far am I?</button>
+      </div>
+      <ol class="chapters" id="chapters"></ol>
+      <p class="secret-hint">Courtside seats don't show up on the schedule. You have to get close.</p>
+    </aside>
+    <div id="map" role="region" aria-label="Interactive road schedule map"></div>
+  </main>
+
+  <script src="/vendor/leaflet-1.9.4/leaflet.js"></script>
+  <script src="/program/program-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/map.js"></script>
+  <script>
+    (() => {
+      const d = new Date().toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+      document.querySelectorAll('[data-issue-date]').forEach((el) => { el.textContent = d.replace(/,/g, '').toUpperCase(); });
+    })();
+  </script>
+</body>
+</html>
