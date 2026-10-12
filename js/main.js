@@ -551,7 +551,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
 
     // mobile menu
     const menuBtn = $('#menuBtn');
-    const nav = $('.nav');
+    const nav = (menuBtn && document.getElementById(menuBtn.getAttribute('aria-controls'))) || $('.nav');
     if (menuBtn && nav) {
       menuBtn.addEventListener('click', () => {
         const open = nav.classList.toggle('open');

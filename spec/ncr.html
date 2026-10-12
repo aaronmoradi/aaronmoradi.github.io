@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NCR-404 · Nonconformance report · AM-001 · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f2f1ec" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/spec/spec.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .plot { position: relative; border: 2px solid var(--ink); }
+    #range { display: block; width: 100%; height: 460px; touch-action: none; cursor: crosshair; }
+    .read { position: absolute; left: 12px; top: 10px; font: 12px var(--mono); background: var(--paper); border: 1px solid var(--ink); padding: 6px 9px; pointer-events: none; }
+    .verdict { position: absolute; right: 12px; top: 10px; font: 800 26px/1 var(--sans); font-stretch: 62%; text-transform: uppercase; padding: 6px 10px; border: 3px solid currentColor; opacity: 0; transform: rotate(-4deg); transition: opacity .15s; pointer-events: none; }
+    .verdict.on { opacity: 1; }
+    .verdict.pass { color: var(--line-pa); } .verdict.fail { color: var(--red); }
+    .log-wrap { max-height: 260px; overflow-y: auto; border-bottom: 1px solid var(--ink); }
+    @media (max-width: 600px) { #range { height: 380px; } }
+  </style>
+</head>
+
+<body data-egg="lost">
+  <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+  <div class="gridlines" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <header class="doc-head">
+    <div class="wrap">
+      <div class="top">
+        <a class="docno logo" href="/spec/" aria-label="AM-001, Aaron Moradi, home"><span class="reg" aria-hidden="true"></span>AM-001 · Aaron Moradi</a>
+        <nav class="index" id="index" aria-label="Sections">
+          <a href="/spec/#s1"><b>1.0</b>Ident.</a>
+          <a href="/spec/#s2"><b>2.0</b>Assignment</a>
+          <a href="/spec/#s3"><b>3.0</b>Service</a>
+          <a href="/spec/#s4"><b>4.0</b>Projects</a>
+          <a href="/spec/#s5"><b>5.0</b>Measurements</a>
+          <a href="/spec/#s6"><b>6.0</b>Contact</a>
+          <a href="/spec/map.html"><b>SH.2</b>Route map</a>
+          <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+        </nav>
+        <div class="ctl">
+          <button id="gridBtn" aria-pressed="false" title="Show grid (G)">G</button>
+          <button data-terminal title="Console (press `)">TTY</button>
+          <button data-theme-toggle aria-label="Blueprint mode">☾</button>
+          <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="index">☰</button>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span>Local time LA</span><b data-la-time>--:--</b></div>
+        <div><span>Status</span><b data-status>AT XYZ, SANTA MONICA</b></div>
+        <div><span>Rev</span><b data-rev>2026.10</b></div>
+        <div><span>Sheet</span><b>NCR-404</b></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sec">
+      <div class="sec-no">404</div>
+      <div class="sec-title"><h2>Nonconformance report</h2><p>Requested sheet does not exist in the drawing set. While a disposition is pending, the ballistics range is open: drag back from the projectile, release to fire. Five consecutive passes are within tolerance.</p></div>
+      <div class="sec-body">
+        <table class="spec compact reveal" style="margin-bottom:24px">
+          <tbody>
+            <tr><th>NCR</th><td class="mono">404</td></tr>
+            <tr><th>Item</th><td class="mono" id="reqPath">—</td></tr>
+            <tr><th>Finding</th><td>Sheet not found in AM-001.</td></tr>
+            <tr><th>Disposition</th><td><a href="/spec/">Return to Sheet 1</a> · <a href="/spec/map.html">Sheet 2</a></td></tr>
+          </tbody>
+        </table>
+        <figure class="fig">
+          <div class="plot"><canvas id="range" aria-label="Ballistics range: drag back from the projectile and release to fire at the hoop"></canvas><div class="read" id="read">θ —° · v₀ — · streak 0</div><div class="verdict" id="verdict">Pass</div></div>
+          <figcaption><b>Fig. N.1</b> Ballistics range. Grid at 50 px. Last trajectory retained.</figcaption>
+        </figure>
+        <table class="spec compact" style="margin-top:24px"><thead><tr><th>Shot</th><th class="num">θ</th><th class="num">v₀</th><th class="num">Streak</th><th class="num">Result</th></tr></thead></table>
+        <div class="log-wrap"><table class="spec compact"><tbody id="log"><tr><td class="mono" style="color:var(--muted)">No shots logged.</td></tr></tbody></table></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Checked</span><strong>A. M.</strong></div>
+      <div><span>Rev</span><strong data-rev>2026.10</strong></div>
+      <div><span>Sheet</span><strong>NCR-404</strong></div>
+      <div><span>Title</span><strong>Nonconformance report</strong></div>
+    </div>
+    <div class="foot-row">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles</span>
+      <nav aria-label="Footer"><a href="/spec/">Sheet 1</a><a href="/spec/map.html">Sheet 2</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+      <a class="egg-meter" href="/spec/vault.html" data-egg-meter hidden></a>
+    </div>
+  </div>
+  <script src="/spec/spec-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/spec/spec.js"></script>
+  <script>
+  (() => {
+    document.getElementById('reqPath').textContent = location.pathname;
+    const cv = document.getElementById('range'), ctx = cv.getContext('2d');
+    const $ = (id) => document.getElementById(id);
+    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    const R = 12, G = 0.38, RIM = 64;
+    let W, H, hoop = {}, ball, drag = null, fly = false, t0 = 0, scored = false, trace = [], last = [], shots = 0, streak = 0, theta = 0, v0 = 0;
+    function resize() { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); place(true); reset(); }
+    function place(first) { hoop.x = W - Math.max(30, W * .06); hoop.y = first ? H * .38 : H * (.25 + Math.random() * .3); }
+    function reset() { const x = Math.max(60, W * (.1 + Math.random() * .2)); ball = { x, y: H - R - 30, vx: 0, vy: 0 }; fly = false; scored = false; trace = []; }
+    function bounce(p) { const dx = ball.x - p.x, dy = ball.y - p.y, d = Math.hypot(dx, dy); if (d < R + 4 && d > 0) { const nx = dx / d, ny = dy / d, k = ball.vx * nx + ball.vy * ny; if (k < 0) { ball.vx -= 1.75 * k * nx; ball.vy -= 1.75 * k * ny; } ball.x = p.x + nx * (R + 4); ball.y = p.y + ny * (R + 4); } }
+    function step() {
+      const py = ball.y; ball.vy += G; ball.x += ball.vx; ball.y += ball.vy; trace.push([ball.x, ball.y]);
+      bounce({ x: hoop.x - RIM, y: hoop.y }); bounce({ x: hoop.x - 2, y: hoop.y });
+      if (ball.x + R > hoop.x && ball.x < hoop.x + 8 && ball.y > hoop.y - 90 && ball.y < hoop.y + 14 && ball.vx > 0) { ball.x = hoop.x - R; ball.vx *= -.6; }
+      if (ball.y + R > H - 30) { ball.y = H - 30 - R; ball.vy *= -.55; ball.vx *= .8; }
+      if (ball.x - R < 0) { ball.x = R; ball.vx *= -.6; }
+      if (!scored && py < hoop.y && ball.y >= hoop.y && ball.x > hoop.x - RIM + R * .4 && ball.x < hoop.x - R * .4) { scored = true; }
+      if ((Math.abs(ball.vy) < .8 && ball.y + R >= H - 31 && Math.abs(ball.vx) < .4) || ball.x - R > W || performance.now() - t0 > 6000) finish();
+    }
+    function finish() {
+      shots++; streak = scored ? streak + 1 : 0; last = trace.slice();
+      const v = $('verdict'); v.textContent = scored ? 'Pass' : 'Fail'; v.className = 'verdict on ' + (scored ? 'pass' : 'fail'); clearTimeout(finish.t); finish.t = setTimeout(() => v.classList.remove('on'), 900);
+      const log = $('log'); if (shots === 1) log.innerHTML = '';
+      log.insertAdjacentHTML('afterbegin', `<tr><th>S.${String(shots).padStart(3, '0')}</th><td class="num">${theta.toFixed(1)}°</td><td class="num">${v0.toFixed(1)}</td><td class="num">${streak}</td><td class="num" style="color:${scored ? 'var(--line-pa)' : 'var(--red)'}">${scored ? 'PASS' : 'FAIL'}</td></tr>`);
+      if (streak === 5) { AM.findEgg('hoops'); AM.confetti('party', 120); }
+      if (scored) place(false); reset(); readout();
+    }
+    function vel() { const k = .13, mx = 22; let vx = (drag.sx - drag.x) * k, vy = (drag.sy - drag.y) * k; const m = Math.hypot(vx, vy); if (m > mx) { vx *= mx / m; vy *= mx / m; } return { vx, vy }; }
+    function readout() { $('read').textContent = `θ ${theta ? theta.toFixed(1) : '—'}° · v₀ ${v0 ? v0.toFixed(1) : '—'} · streak ${streak}`; }
+    function draw() {
+      const ink = css('--ink'), hair = css('--hair'), muted = css('--muted'), red = css('--red');
+      ctx.clearRect(0, 0, W, H); ctx.font = '10px "Fragment Mono", monospace';
+      ctx.strokeStyle = hair; ctx.lineWidth = 1; ctx.fillStyle = muted;
+      for (let x = 0; x < W; x += 50) { ctx.beginPath(); ctx.moveTo(x + .5, 0); ctx.lineTo(x + .5, H - 30); ctx.stroke(); if (x) ctx.fillText(x, x + 3, H - 18); }
+      for (let y = H - 30; y > 0; y -= 50) { ctx.beginPath(); ctx.moveTo(0, y + .5); ctx.lineTo(W, y + .5); ctx.stroke(); ctx.fillText(H - 30 - y, 3, y - 3); }
+      ctx.strokeStyle = ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, H - 30); ctx.lineTo(W, H - 30); ctx.stroke();
+      ctx.fillStyle = ink; ctx.fillRect(hoop.x, hoop.y - 90, 6, 104); ctx.fillRect(hoop.x + 6, hoop.y - 40, 3, H);
+      ctx.strokeStyle = red; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(hoop.x - RIM, hoop.y); ctx.lineTo(hoop.x, hoop.y); ctx.stroke();
+      ctx.lineWidth = 1; ctx.strokeStyle = muted; ctx.beginPath(); for (let i = 0; i <= 4; i++) { ctx.moveTo(hoop.x - RIM + RIM * i / 4, hoop.y); ctx.lineTo(hoop.x - RIM + RIM * .2 + RIM * .6 * i / 4, hoop.y + 40); } ctx.stroke();
+      const dots = (pts, c) => { ctx.fillStyle = c; pts.forEach(([x, y], i) => { if (i % 3 === 0) { ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 7); ctx.fill(); } }); };
+      dots(last, muted); dots(trace, ink);
+      if (drag) { const v = vel(); let x = ball.x, y = ball.y, vy = v.vy; ctx.setLineDash([4, 4]); ctx.strokeStyle = ink; ctx.beginPath(); ctx.moveTo(x, y); for (let i = 0; i < 40; i++) { vy += G; x += v.vx; y += vy; ctx.lineTo(x, y); } ctx.stroke(); ctx.setLineDash([]); }
+      ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(ball.x, ball.y, R, 0, 7); ctx.fill();
+      ctx.strokeStyle = css('--paper'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(ball.x - R, ball.y); ctx.lineTo(ball.x + R, ball.y); ctx.moveTo(ball.x, ball.y - R); ctx.lineTo(ball.x, ball.y + R); ctx.stroke();
+    }
+    const pt = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.addEventListener('pointerdown', (e) => { if (fly) return; const p = pt(e); drag = { sx: p.x, sy: p.y, x: p.x, y: p.y }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', (e) => { if (!drag) return; const p = pt(e); drag.x = p.x; drag.y = p.y; const v = vel(); theta = Math.atan2(-v.vy, v.vx) * 180 / Math.PI; v0 = Math.hypot(v.vx, v.vy); readout(); });
+    cv.addEventListener('pointerup', () => { if (!drag) return; const v = vel(); drag = null; if (Math.hypot(v.vx, v.vy) < 2) return; ball.vx = v.vx; ball.vy = v.vy; fly = true; t0 = performance.now(); });
+    addEventListener('resize', resize); resize();
+    let lt = performance.now(), acc = 0;
+    (function loop(now) { acc += Math.min(now - lt, 100); lt = now; while (acc >= 1000 / 60) { if (fly) step(); acc -= 1000 / 60; } draw(); requestAnimationFrame(loop); })(lt);
+  })();
+  </script>
+</body>
+</html>
