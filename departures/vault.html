@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lost & Found · Departures · Aaron Moradi</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/departures/departures.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .lf .row { display: grid; grid-template-columns: auto auto 1fr auto; gap: 14px; align-items: center; padding: 10px 0 8px; border-bottom: 1px solid #000; box-shadow: 0 1px 0 rgba(255,255,255,.03); }
+    .lf .cell { --cw: 17px; --ch: 26px; }
+    .lf .no .cell { color: var(--dim); }
+    .lf .hint { font: 600 13px/1.35 var(--mono); color: var(--dim); text-transform: uppercase; }
+    .lf .claimed .cell { color: var(--green); }
+    .lf .open .cell { color: var(--amber); }
+    .lf .flaps { --gap: 2px; }
+    .lf-sum { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 16px; font: 600 14px var(--mono); color: var(--dim); text-transform: uppercase; }
+    .lf-sum b { color: var(--sign); }
+    .lf .icon { font-size: 20px; width: 28px; text-align: center; }
+    @media (max-width: 760px) { .lf .row { grid-template-columns: auto 1fr auto; } .lf .no { display: none; } .lf .cell { --cw: 11px; --ch: 18px; } .lf .hint { grid-column: 1 / -1; } }
+  </style>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-dep" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM22.07 9.64c-.21-.8-1.04-1.28-1.84-1.06L14.92 10 8 3.57l-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 2.59 4.49L21 11.49c.81-.23 1.28-1.05 1.07-1.85z"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM9.68 13.27l4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.8-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.02L10.12 2v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43 5.31 1.43z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><path d="M4 3h7v18H4zm2 2v14h3V5zm7 6h5.17l-2.59-2.59L17 7l5 5-5 5-1.41-1.41L18.17 13H13z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path d="M19 15.18V7c0-2.21-1.79-4-4-4s-4 1.79-4 4v10c0 1.1-.9 2-2 2s-2-.9-2-2V8.82a3 3 0 1 0-2 0V17c0 2.21 1.79 4 4 4s4-1.79 4-4V7c0-1.1.9-2 2-2s2 .9 2 2v8.18a3 3 0 1 0 2 0z"/></symbol>
+    <symbol id="i-pass" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10.5 3.5h3V6h-3z"/></symbol>
+  </svg>
+</head>
+
+<body data-egg="vault">
+  <header class="topbar">
+    <div class="wrap in">
+      <a class="mark logo" href="/departures/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
+      <nav class="topnav" id="topnav" aria-label="Main">
+        <a href="/departures/#departures">Departures</a>
+        <a href="/departures/#info">Information</a>
+        <a href="/departures/#gates">Gates</a>
+        <a href="/departures/map.html">Route map</a>
+        <a href="/departures/#pass">Boarding pass</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
+        <button class="tbtn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      <div class="zone-head"><div class="pict"><svg aria-hidden="true"><use href="#i-bag"/></svg></div><div class="txt"><h2>Lost &amp; Found</h2><p>Thirteen items left on this site</p></div></div>
+      <p style="max-width:62ch;color:#c9c5bb;margin:0 0 22px">Thirteen things are hidden around this site. Each one you find is claimed here. Unclaimed items show a hint. Your claims are kept in this browser only.</p>
+      <div class="board lf">
+        <div class="lf-sum"><span>Claimed <b id="nClaimed">0</b> / 13</span><span id="rankLine">Status: new arrival</span></div>
+        <div id="lfRows"></div>
+      </div>
+      <p style="margin-top:18px"><button class="tbtn" id="resetBtn">Clear all claims</button></p>
+    </div>
+  </main>
+
+  <footer class="arrivals" style="padding-top:30px">
+    <div class="wrap">
+      <div class="foot-row">
+        <span>© <span data-year></span> Aaron Moradi</span>
+        <nav aria-label="Footer"><a href="/departures/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+        <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
+      </div>
+    </div>
+  </footer>
+  <script src="/departures/flap.js"></script>
+  <script src="/departures/departures-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  (() => {
+    const host = document.getElementById('lfRows'), narrow = matchMedia('(max-width: 760px)').matches;
+    const RANKS = [[0, 'new arrival'], [3, 'frequent flyer'], [6, 'silver status'], [9, 'gold status'], [12, 'platinum'], [13, 'lifetime first class']];
+    let rows = [];
+    function build() {
+      host.innerHTML = '';
+      rows = AM.EGGS.map((e, i) => {
+        const r = document.createElement('div'); r.className = 'row';
+        r.innerHTML = `<span class="no"></span><span class="icon"></span><span class="name"></span><span class="st"></span><span class="hint" style="grid-column:2 / -1"></span>`;
+        host.appendChild(r);
+        return { e, r, no: Flap.row(r.querySelector('.no'), 2), name: Flap.row(r.querySelector('.name'), narrow ? 16 : 22), st: Flap.row(r.querySelector('.st'), 9) };
+      });
+    }
+    function render() {
+      const f = AM.foundEggs(); let n = 0;
+      rows.forEach(({ e, r, no, name, st }, i) => {
+        const got = f.has(e.id); if (got) n++;
+        r.querySelector('.st').className = 'st ' + (got ? 'claimed' : 'open');
+        r.querySelector('.icon').textContent = got ? e.icon : '';
+        r.querySelector('.hint').textContent = got ? '' : e.hint;
+        no.set(String(i + 1).padStart(2, '0'));
+        name.set(got ? e.name : '? ? ? ? ?', { stagger: 14 });
+        st.set(got ? 'CLAIMED' : 'UNCLAIMED', { stagger: 14 });
+      });
+      document.getElementById('nClaimed').textContent = n;
+      document.getElementById('rankLine').textContent = 'Status: ' + RANKS.filter(([m]) => n >= m).pop()[1];
+    }
+    build(); render();
+    addEventListener('am:egg', render);
+    document.getElementById('resetBtn').addEventListener('click', () => { if (!confirm('Clear every claim?')) return; AM.resetEggs(); render(); });
+  })();
+  </script>
+</body>
+</html>
