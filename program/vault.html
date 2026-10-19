@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Binder · Official Program · Aaron Moradi</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#40205f" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/program/program.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .binder-head { padding: clamp(28px, 5vw, 56px) 0 24px; }
+    .binder-head h1 { margin: 0; font: 900 clamp(76px, 14vw, 180px)/.8 var(--cond); text-transform: uppercase; color: var(--head); text-shadow: .035em .035em 0 var(--gold); }
+    .binder-head p { max-width: 58ch; margin: 18px 0 0; }
+    .rank { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; margin-top: 26px; background: var(--board); color: var(--led); border: 4px solid #000; padding: 12px 16px; }
+    .rank small { display: block; font: 700 11px/1 var(--cond); letter-spacing: .2em; color: #8c8270; text-transform: uppercase; margin-bottom: 6px; }
+    .rank b { font: 900 clamp(24px, 3.4vw, 38px)/1 var(--dots); text-shadow: 0 0 8px rgba(255, 182, 39, .55); }
+    .meter { display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+    .meter i { height: 18px; background: #26231d; }
+    .meter i.on { background: var(--led); box-shadow: 0 0 8px rgba(255, 182, 39, .6); }
+    /* the binder page: 9-pocket sheets */
+    .sheet { margin: 30px 0; padding: 18px; background: rgba(255, 255, 255, .18); border: 3px solid var(--ink); position: relative; }
+    .sheet::before { content: ""; position: absolute; left: 50%; top: -3px; transform: translateX(-50%); width: 46%; height: 10px; background: repeating-linear-gradient(90deg, transparent 0 22px, var(--ink) 22px 34px); }
+    .pockets { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+    .pocket { position: relative; aspect-ratio: 5 / 7; padding: 7px; background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.08) 40%, rgba(255,255,255,.3) 60%, rgba(255,255,255,.05)); border: 1px solid rgba(26, 25, 22, .35); }
+    .tc { height: 100%; border-radius: 3px; display: flex; flex-direction: column; overflow: hidden; }
+    .tc.found { background: var(--gold); padding: 7px; box-shadow: 3px 3px 0 var(--ink); }
+    .tc.found .art { flex: 1; background: var(--purple); display: grid; place-items: center; font-size: 54px; position: relative; }
+    .tc.found .art::after { content: attr(data-n); position: absolute; left: 6px; top: 6px; font: 12px var(--varsity); color: var(--gold); }
+    .tc.found .nm { background: var(--purple); color: var(--gold); margin-top: 6px; padding: 7px 8px 5px; font: 900 18px/1 var(--cond); text-transform: uppercase; clip-path: polygon(0 0, 100% 0, 100% 100%, 5% 100%); }
+    .tc.found .when { font: 800 10px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--purple); padding: 6px 2px 0; }
+    .tc.back { background: var(--purple); color: var(--gold); padding: 12px; justify-content: space-between; border: 4px solid var(--gold); box-shadow: 3px 3px 0 var(--ink);
+      background-image: repeating-linear-gradient(45deg, rgba(241,181,12,.12) 0 6px, transparent 6px 12px); }
+    .tc.back .q { font: 32px/1 var(--varsity); text-align: center; margin-top: 8px; }
+    .tc.back p { margin: 0; background: var(--purple); font: italic 14px/1.35 var(--serif); color: #f6e3ae; padding: 6px; }
+    .tc.back small { font: 800 11px/1 var(--cond); letter-spacing: .16em; text-transform: uppercase; text-align: center; }
+    .hof { display: none; text-align: center; padding: 34px 20px; background: var(--purple); color: var(--gold); border: 6px double var(--gold); margin-bottom: 30px; }
+    .hof.on { display: block; }
+    .hof h2 { margin: 0; font: 900 clamp(48px, 8vw, 96px)/.85 var(--cond); text-transform: uppercase; }
+    .hof p { color: #f6e3ae; max-width: 50ch; margin: 12px auto 18px; }
+    .foot { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 50px; }
+  </style>
+</head>
+
+<body data-egg="vault">
+  <div class="ticker"><div class="wrap"><span>Official Program · Collector's Binder</span><span>Set of 13</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
+      <nav class="lineup" id="lineup" aria-label="Starting lineup">
+        <a href="/program/#card"><b>01</b>Rookie Card</a>
+        <a href="/program/#scouting"><b>02</b>Scouting</a>
+        <a href="/program/#tribute"><b>08</b>8 &amp; 24</a>
+        <a href="/program/#boxscores"><b>03</b>Box Scores</a>
+        <a href="/program/map.html"><b>04</b>Road Schedule</a>
+        <a href="/program/#tickets"><b>05</b>Tickets</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool hide-sm" data-terminal title="Press box (press `)">Press Box</button>
+        <button class="tool" data-theme-toggle aria-label="Toggle night game">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="lineup">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="binder-head">
+      <p class="label" style="margin:0 0 8px;color:var(--red)">Restricted · Trophy room</p>
+      <h1>The Binder</h1>
+      <p>So you found where I keep the collection. Every secret on this site is a card. The ones you've pulled sit face-up, and the rest stay face-down with a hint on the back. Your collection lives in this browser only.</p>
+      <div class="rank">
+        <div><small>Rank</small><b id="rank">Rookie</b></div>
+        <div class="meter" id="meter" aria-hidden="true"></div>
+        <div><small>Pulled</small><b id="count">0/13</b></div>
+      </div>
+    </section>
+
+    <div class="hof" id="hof">
+      <h2>Hall of Fame</h2>
+      <p>You pulled the complete set. All thirteen. That's real dedication, so send a note to the ticket office and tell me which card was the hardest to find.</p>
+      <a class="btn" href="/program/#tickets" style="background:var(--gold);color:var(--purple);border-color:var(--gold);box-shadow:4px 4px 0 #000">Tell me about it →</a>
+    </div>
+
+    <div class="sheet"><div class="pockets" id="pockets"></div></div>
+
+    <div class="foot">
+      <a class="btn" href="/program/">Back to the program →</a>
+      <button class="btn ghost" id="resetBtn">Start a new binder</button>
+    </div>
+  </main>
+
+  <script src="/program/program-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  (() => {
+    const RANKS = [[0, 'Rookie'], [3, 'Sixth Man'], [6, 'Starter'], [9, 'All-Star'], [12, 'MVP'], [13, 'Hall of Fame']];
+    function render() {
+      const found = AM.foundEggs();
+      const n = AM.EGGS.filter((e) => found.has(e.id)).length;
+      document.getElementById('pockets').innerHTML = AM.EGGS.map((e, i) => {
+        const no = String(i + 1).padStart(2, '0');
+        return `<div class="pocket">${found.has(e.id)
+          ? `<div class="tc found"><div class="art" data-n="No. ${no}">${e.icon}</div><div class="nm">${e.name}</div><div class="when">AM '25 · Card ${no} of 13</div></div>`
+          : `<div class="tc back"><div class="q">${no}</div><p>${e.hint}</p><small>Not yet pulled</small></div>`}</div>`;
+      }).join('');
+      document.getElementById('count').textContent = `${n}/${AM.EGGS.length}`;
+      document.getElementById('rank').textContent = RANKS.filter(([m]) => n >= m).pop()[1];
+      document.getElementById('meter').innerHTML = AM.EGGS.map((_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('');
+      document.getElementById('hof').classList.toggle('on', n === AM.EGGS.length);
+    }
+    render();
+    addEventListener('am:egg', render);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('Start a new binder? This clears every card you have pulled.')) return;
+      AM.resetEggs(); render(); AM.toast('Fresh binder. Happy hunting.');
+    });
+  })();
+  </script>
+</body>
+</html>

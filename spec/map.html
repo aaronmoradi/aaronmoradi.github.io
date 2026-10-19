@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sheet 2 · Route map · AM-001 · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f2f1ec" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" />
+  <link rel="stylesheet" href="/spec/spec.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .schem { width: 100%; height: auto; display: block; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+    .schem .ln { fill: none; stroke-width: 9; stroke-linecap: square; stroke-linejoin: miter; }
+    .schem .st { fill: var(--paper); stroke: var(--ink); stroke-width: 3; }
+    .schem .ix { fill: var(--paper); stroke: var(--ink); stroke-width: 4; }
+    .schem .now { fill: var(--ink); }
+    .schem text { fill: var(--ink); font-family: var(--sans); }
+    .schem .nm { font-size: 17px; font-weight: 800; font-stretch: 62%; text-transform: uppercase; letter-spacing: .03em; }
+    .schem .yr { font: 12px var(--mono); fill: var(--muted); }
+    .schem .dist { font: 13px var(--mono); fill: var(--muted); }
+    .schem g.stn { cursor: pointer; }
+    .schem g.stn:hover .st { fill: var(--ink); }
+    .geo { display: grid; grid-template-columns: 300px 1fr; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+    .geo aside { border-right: 1px solid var(--ink); padding: 12px 14px 14px 0; display: flex; flex-direction: column; gap: 12px; }
+    #map { height: 520px; width: 100%; background: var(--paper); }
+    #map .leaflet-tile-pane { filter: grayscale(1) contrast(1.05); }
+    #map.dark-tiles .leaflet-tile-pane { filter: grayscale(1) invert(1) contrast(.9) brightness(.85) sepia(.3) hue-rotate(180deg); }
+    .pin { width: 26px; height: 26px; display: grid; place-items: center; background: var(--paper); color: var(--ink); border: 2px solid var(--ink); font: 12px var(--mono); }
+    .pin.active { background: var(--ink); color: var(--paper); }
+    .pin.secret { border-style: dashed; border-color: var(--line-dod); font-size: 13px; }
+    .pin.me { border-color: var(--line-syr); }
+    .leaflet-div-icon { background: transparent; border: 0; }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip { border-radius: 0; background: var(--paper); color: var(--ink); box-shadow: none; border: 2px solid var(--ink); }
+    .leaflet-popup-content { margin: 12px 14px; font: 14px/1.45 var(--sans); }
+    .leaflet-popup-content h3 { margin: 0 0 4px; font: 800 22px/1 var(--sans); font-stretch: 62%; text-transform: uppercase; }
+    .leaflet-popup-content p { margin: 0; }
+    .pop-when { font: 11px var(--mono); color: var(--muted); text-transform: uppercase; }
+    .leaflet-bar { border: 2px solid var(--ink) !important; } .leaflet-bar a { background: var(--paper); color: var(--ink); }
+    .leaflet-control-attribution { background: var(--paper) !important; color: var(--muted); font: 10px var(--mono); }
+    .chapters { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+    .chapter { width: 100%; display: grid; grid-template-columns: 46px 1fr; gap: 0 8px; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--hair); padding: 8px 0; cursor: pointer; color: inherit; font: inherit; }
+    .chapter .k { grid-row: span 2; font: 12px var(--mono); color: var(--muted); }
+    .chapter .t { font: 800 17px/1.1 var(--sans); font-stretch: 62%; text-transform: uppercase; }
+    .chapter .w { font: 11px var(--mono); color: var(--muted); }
+    .chapter.active, .chapter:hover { background: var(--ink); color: var(--paper); }
+    .chapter.active .k, .chapter.active .w, .chapter:hover .k, .chapter:hover .w { color: var(--paper); }
+    .geo .ctl button { font-size: 11px; }
+    @media (max-width: 860px) { .geo { grid-template-columns: 1fr; } .geo aside { border-right: 0; } #map { height: 60vh; } }
+  </style>
+</head>
+
+<body>
+  <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+  <div class="gridlines" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <header class="doc-head">
+    <div class="wrap">
+      <div class="top">
+        <a class="docno logo" href="/spec/" aria-label="AM-001, Aaron Moradi, home"><span class="reg" aria-hidden="true"></span>AM-001 · Aaron Moradi</a>
+        <nav class="index" id="index" aria-label="Sections">
+          <a href="/spec/#s1"><b>1.0</b>Ident.</a>
+          <a href="/spec/#s2"><b>2.0</b>Assignment</a>
+          <a href="/spec/#s3"><b>3.0</b>Service</a>
+          <a href="/spec/#s4"><b>4.0</b>Projects</a>
+          <a href="/spec/#s5"><b>5.0</b>Measurements</a>
+          <a href="/spec/#s6"><b>6.0</b>Contact</a>
+          <a href="/spec/map.html" aria-current="page"><b>SH.2</b>Route map</a>
+          <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+        </nav>
+        <div class="ctl">
+          <button id="gridBtn" aria-pressed="false" title="Show grid (G)">G</button>
+          <button data-terminal title="Console (press `)">TTY</button>
+          <button data-theme-toggle aria-label="Blueprint mode">☾</button>
+          <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="index">☰</button>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span>Local time LA</span><b data-la-time>--:--</b></div>
+        <div><span>Status</span><b data-status>AT XYZ, SANTA MONICA</b></div>
+        <div><span>Rev</span><b data-rev>2026.10</b></div>
+        <div><span>Sheet</span><b>2 of 5</b></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sec">
+      <div class="sec-no">SH.2</div>
+      <div class="sec-title"><h2>Route map</h2><p>Every station on the record, as a schematic (Fig. 2.1) and to scale (Fig. 2.2). Leg distances are great-circle, computed from coordinates at page load.</p></div>
+      <div class="sec-body">
+        <figure class="fig reveal">
+          <svg class="schem" viewBox="0 0 1000 380" role="img" aria-label="Schematic transit-style diagram of Aaron's life: a Los Angeles line through Santa Monica, Westwood, Hollywood and Los Angeles; a branch to Calabasas; and a Syracuse line east to Barnes Center and Syracuse University.">
+            <path class="ln" d="M120 280 L580 280" stroke="var(--line-la)"/>
+            <path class="ln" d="M120 280 L120 200 L70 150" stroke="var(--line-pa)"/>
+            <path class="ln" d="M580 280 L680 180 L940 180" stroke="var(--line-syr)"/>
+            <text class="dist" x="700" y="166">2,332 mi</text>
+            <g class="stn" data-id="santamonica"><circle class="ix" cx="120" cy="280" r="15"/><circle class="now" cx="120" cy="280" r="6"/><text class="nm" x="92" y="322">Santa Monica</text><text class="yr" x="92" y="340">XYZ · 2025–now</text></g>
+            <g class="stn" data-id="calabasas"><circle class="st" cx="70" cy="150" r="10"/><text class="nm" x="90" y="146">Calabasas</text><text class="yr" x="90" y="163">PlanetArt · 2024</text></g>
+            <g class="stn" data-id="westwood"><circle class="st" cx="270" cy="280" r="10"/><text class="nm" x="244" y="322">Westwood</text><text class="yr" x="244" y="340">Diddy Riese · 2022</text></g>
+            <g class="stn" data-id="hollywood"><circle class="st" cx="420" cy="280" r="10"/><text class="nm" x="392" y="246">Hollywood</text><text class="yr" x="392" y="228">Tea &amp; Coffee · 2019</text></g>
+            <g class="stn" data-id="la"><circle class="ix" cx="580" cy="280" r="18"/><text class="nm" x="552" y="322">Los Angeles</text><text class="yr" x="552" y="340">Home · interchange</text></g>
+            <g class="stn" data-id="syracuse"><circle class="st" cx="810" cy="180" r="10"/><text class="nm" x="782" y="222">Barnes Center</text><text class="yr" x="782" y="240">Guest Services · 2022–25</text></g>
+            <g class="stn" data-id="syracuse"><circle class="ix" cx="940" cy="180" r="15"/><text class="nm" x="868" y="140">Syracuse Univ.</text><text class="yr" x="868" y="122">B.S. CS · 2025</text></g>
+          </svg>
+          <div class="legend"><span><span class="swatch" style="--c:var(--line-la)"></span>Los Angeles line</span><span><span class="swatch" style="--c:var(--line-syr)"></span>Syracuse line</span><span><span class="swatch" style="--c:var(--line-pa)"></span>PlanetArt branch</span><span>◎ interchange · ● current station</span></div>
+          <figcaption><b>Fig. 2.1</b> Schematic. Not to scale. Select a station to locate it in Fig. 2.2.</figcaption>
+        </figure>
+
+        <table class="spec compact reveal" style="margin:34px 0">
+          <thead><tr><th>Leg</th><th>From</th><th>To</th><th class="num">Miles</th></tr></thead>
+          <tbody id="legs"></tbody>
+          <tfoot><tr><th colspan="3" style="border-top:2px solid var(--ink)">Total, in order of service</th><td class="num" id="legTotal" style="border-top:2px solid var(--ink)">—</td></tr></tfoot>
+        </table>
+
+        <figure class="fig reveal" id="geo">
+          <div class="geo">
+            <aside>
+              <div class="ctl"><button id="tourBtn">▶ Tour</button><button id="overviewBtn">Extents</button><button id="meBtn" title="Uses your location once; never stored">Locate me</button></div>
+              <table class="spec compact"><tbody><tr><th>Stations</th><td class="num" id="statPlaces">6</td></tr><tr><th>LA ↔ SYR</th><td class="num"><span id="statMiles">—</span> mi</td></tr></tbody></table>
+              <ol class="chapters" id="chapters"></ol>
+              <p class="mono" style="font-size:11px;color:var(--muted);margin:auto 0 0">Two stations are omitted from the schematic. They resolve only at high zoom over downtown LA.</p>
+            </aside>
+            <div id="map" role="region" aria-label="Interactive map"></div>
+          </div>
+          <figcaption><b>Fig. 2.2</b> Geographic. OpenStreetMap contributors.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Checked</span><strong>A. M.</strong></div>
+      <div><span>Rev</span><strong data-rev>2026.10</strong></div>
+      <div><span>Sheet</span><strong>2 of 5</strong></div>
+      <div><span>Title</span><strong>Route map</strong></div>
+    </div>
+    <div class="foot-row">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles</span>
+      <nav aria-label="Footer"><a href="/spec/">Sheet 1</a><a href="/spec/map.html">Sheet 2</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+      <a class="egg-meter" href="/spec/vault.html" data-egg-meter hidden></a>
+    </div>
+  </div>
+  <script src="/vendor/leaflet-1.9.4/leaflet.js"></script>
+  <script src="/spec/spec-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/spec/spec.js"></script>
+  <script src="/js/map.js"></script>
+  <script>
+  (() => {
+    const P = { la: ['Los Angeles', 34.0522, -118.2437], hollywood: ['Hollywood', 34.0983, -118.3267], syracuse: ['Syracuse', 43.0377, -76.134], westwood: ['Westwood', 34.063, -118.4472], calabasas: ['Calabasas', 34.1446, -118.6448], santamonica: ['Santa Monica', 34.0195, -118.4912] };
+    const order = ['la', 'hollywood', 'syracuse', 'westwood', 'calabasas', 'santamonica'];
+    const rad = (d) => d * Math.PI / 180;
+    const mi = (a, b) => { const h = Math.sin(rad(b[1] - a[1]) / 2) ** 2 + Math.cos(rad(a[1])) * Math.cos(rad(b[1])) * Math.sin(rad(b[2] - a[2]) / 2) ** 2; return 2 * 3958.8 * Math.asin(Math.sqrt(h)); };
+    let total = 0;
+    document.getElementById('legs').innerHTML = order.slice(1).map((k, i) => {
+      const a = P[order[i]], b = P[k], d = mi(a, b); total += d;
+      return `<tr><th>L.${i + 1}</th><td>${a[0]}</td><td>${b[0]}</td><td class="num">${Math.round(d).toLocaleString()}</td></tr>`;
+    }).join('');
+    document.getElementById('legTotal').textContent = Math.round(total).toLocaleString();
+    // schematic stations jump to the same chapter in the geographic view
+    document.querySelectorAll('.schem g.stn').forEach((g) => g.addEventListener('click', () => {
+      document.getElementById('geo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => document.querySelector(`.chapter[data-id="${g.dataset.id}"]`)?.click(), 450);
+    }));
+  })();
+  </script>
+</body>
+</html>

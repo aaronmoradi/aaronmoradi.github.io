@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flight cancelled · Departures · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/departures/departures.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .cx .cell { --cw: clamp(16px, 4.2vw, 46px); --ch: clamp(26px, 6.4vw, 70px); }
+    .cx .flaps { --gap: clamp(2px, .4vw, 4px); }
+    .cx .red .cell { color: #ff5a45; }
+    .cx .line { margin: 0 0 10px; }
+  </style>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-dep" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM22.07 9.64c-.21-.8-1.04-1.28-1.84-1.06L14.92 10 8 3.57l-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 2.59 4.49L21 11.49c.81-.23 1.28-1.05 1.07-1.85z"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM9.68 13.27l4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.8-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.02L10.12 2v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43 5.31 1.43z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><path d="M4 3h7v18H4zm2 2v14h3V5zm7 6h5.17l-2.59-2.59L17 7l5 5-5 5-1.41-1.41L18.17 13H13z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path d="M19 15.18V7c0-2.21-1.79-4-4-4s-4 1.79-4 4v10c0 1.1-.9 2-2 2s-2-.9-2-2V8.82a3 3 0 1 0-2 0V17c0 2.21 1.79 4 4 4s4-1.79 4-4V7c0-1.1.9-2 2-2s2 .9 2 2v8.18a3 3 0 1 0 2 0z"/></symbol>
+    <symbol id="i-pass" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10.5 3.5h3V6h-3z"/></symbol>
+  </svg>
+</head>
+
+<body data-egg="lost">
+  <header class="topbar">
+    <div class="wrap in">
+      <a class="mark logo" href="/departures/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
+      <nav class="topnav" id="topnav" aria-label="Main">
+        <a href="/departures/#departures">Departures</a>
+        <a href="/departures/#info">Information</a>
+        <a href="/departures/#gates">Gates</a>
+        <a href="/departures/map.html">Route map</a>
+        <a href="/departures/#pass">Boarding pass</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
+        <button class="tbtn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      <div class="board cx">
+        <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-dep"/></svg>Departures · Error 404</span><span>Gate —</span></div>
+        <div class="line" id="cx1"></div>
+        <div class="line red" id="cx2"></div>
+        <div class="board-foot"><span id="cxPath"></span><span>We apologize for the inconvenience</span></div>
+      </div>
+      <p style="max-width:60ch;color:#c9c5bb;margin:24px 0 18px">The flight you were trying to board isn't on the schedule. Here are your rebooking options:</p>
+      <ul class="signs"><li><a href="/departures/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/404.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
+    </div>
+  </main>
+
+  <footer class="arrivals" style="padding-top:30px">
+    <div class="wrap">
+      <div class="foot-row">
+        <span>© <span data-year></span> Aaron Moradi</span>
+        <nav aria-label="Footer"><a href="/departures/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+        <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
+      </div>
+    </div>
+  </footer>
+  <script src="/departures/flap.js"></script>
+  <script src="/departures/departures-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  (() => {
+    document.getElementById('cxPath').textContent = 'Requested: ' + location.pathname;
+    const a = Flap.row(document.getElementById('cx1'), 14), b = Flap.row(document.getElementById('cx2'), 14);
+    a.set('FLIGHT AM 404', { stagger: 40 }).then(() => b.set('CANCELLED', { stagger: 40 }));
+  })();
+  </script>
+</body>
+</html>

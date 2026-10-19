@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Versions · Rev. · Aaron Moradi</title>
+  <meta name="description" content="" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#eaf0e1" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;else if(+new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hourCycle:'h23'})<4)document.documentElement.dataset.theme='dark';if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/rev/rev.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .compare { position: relative; border: 2px solid var(--rule); aspect-ratio: 16 / 10; overflow: hidden; background: #fff; --x: 50%; }
+    .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .compare .top { clip-path: inset(0 calc(100% - var(--x)) 0 0); }
+    .compare .handle { position: absolute; top: 0; bottom: 0; left: var(--x); width: 2px; background: var(--red); transform: translateX(-1px); pointer-events: none; }
+    .compare .lab { position: absolute; top: 10px; font: 700 12px var(--mono); background: var(--rule); color: var(--pad); padding: 4px 8px; }
+    .compare .lab.l { left: 10px; } .compare .lab.r { right: 10px; }
+    .slider { width: 100%; margin: 12px 0 30px; accent-color: var(--red); }
+    .eras { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+    .era { border: 2px solid var(--rule); background: var(--pad); padding: 14px 16px; }
+    .era h3 { margin: 0 0 4px; font: 30px/1 var(--serif); font-weight: 400; }
+    .era .when { font: 12.5px var(--mono); color: var(--muted); }
+    .era p { margin: 10px 0 0; }
+    .era ul { margin: 8px 0 0; padding-left: 18px; }
+  </style>
+</head>
+
+<body>
+  <header class="bar">
+    <div class="wrap in">
+      <a class="sig logo" href="/rev/" aria-label="Aaron Moradi, home">A. Moradi</a>
+      <nav class="nav" id="nav" aria-label="Sheets">
+        <a href="/rev/">Title sheet</a>
+        <a href="/rev/log.html">Log</a>
+        <a href="/rev/versions.html" aria-current="page">Versions</a>
+        <a href="/rev/map.html">Field survey</a>
+        <a href="/rev/#contact">Contact</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" data-terminal title="Teletype (press `)">TTY</button>
+        <button class="tool" data-theme-toggle aria-label="After hours (blueprint)">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sheet" style="border-bottom:0">
+      <div class="sheet-head"><h2>The archive</h2><span class="no">Nothing gets deleted</span></div>
+      <div class="compare" id="compare">
+        <img src="/rev/img/v2.jpg" alt="Screenshot of version 2" />
+        <img class="top" src="/rev/img/v1.jpg" alt="Screenshot of version 1" />
+        <span class="handle"></span><span class="lab l">v1</span><span class="lab r">v2</span>
+      </div>
+      <input class="slider" id="cmpRange" type="range" min="0" max="100" value="50" aria-label="Drag to compare version 1 and version 2" />
+      <div class="eras">
+        <article class="era"><h3>v0</h3><div class="when">Sep 6, 2025, 1:35am · 60f8306</div><p>A test About page with two lines on it. Forgotten almost immediately.</p><p><a href="/rev/exhibit0.html">Exhibit 0 →</a></p></article>
+        <article class="era"><h3>v1</h3><div class="when">Sep 6, 2025 → Oct 9, 2026 · <span data-count-between="2025-09-06..2026-10-09T08:36">—</span> commits</div><p>Written commit by commit: typing header, live LA clock, Spotify buttons, Lakers &amp; Dodgers confetti, a private workout page.</p></article>
+        <article class="era"><h3>v2</h3><div class="when">Oct 9, 2026 → now · live at <a href="/">aaronmoradi.com</a></div><p>A ground-up rebuild with a life map, a terminal and 13 easter eggs, made with Claude. It worked, and it looked like it was made with Claude.</p></article>
+        <article class="era"><h3>v3?</h3><div class="when">Design studies, in progress</div><p>Four directions, each built out in full:</p><ul><li><a href="/program/">Official Program</a></li><li><a href="/shoebox/">The Shoebox</a></li><li><a href="/spec/">AM-001 Spec</a></li><li><a href="/rev/">Rev. (this one)</a></li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Rev</span><strong data-rev>—</strong></div>
+      <div><span>Sheet</span><strong>3 of 6</strong></div>
+      <div><span>LA time</span><strong data-la-time>—</strong></div>
+      <div><span>Title</span><strong>The archive</strong></div>
+    </div>
+    <div class="foot">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles · log built <span data-built>—</span></span>
+      <nav aria-label="Footer"><a href="/rev/log.html">Log</a><a href="/rev/versions.html">Versions</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <a class="egg-meter" href="/rev/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn" data-team="lakers">Go Lakers!</button><button class="team-btn" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </div>
+  <script src="/rev/rev-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/rev/rev.js"></script>
+</body>
+</html>

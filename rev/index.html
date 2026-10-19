@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rev. · Aaron Moradi's build log</title>
+  <meta name="description" content="Aaron Moradi's site as a build log: every commit kept, timestamps and all." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#eaf0e1" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;else if(+new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hourCycle:'h23'})<4)document.documentElement.dataset.theme='dark';if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/rev/rev.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style></style>
+</head>
+
+<body>
+  <header class="bar">
+    <div class="wrap in">
+      <a class="sig logo" href="/rev/" aria-label="Aaron Moradi, home">A. Moradi</a>
+      <nav class="nav" id="nav" aria-label="Sheets">
+        <a href="/rev/" aria-current="page">Title sheet</a>
+        <a href="/rev/log.html">Log</a>
+        <a href="/rev/versions.html">Versions</a>
+        <a href="/rev/map.html">Field survey</a>
+        <a href="/rev/#contact">Contact</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" data-terminal title="Teletype (press `)">TTY</button>
+        <button class="tool" data-theme-toggle aria-label="After hours (blueprint)">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="about">
+      <p class="rev">Rev. <span data-rev>206</span> · the build log of</p>
+      <h1>Aaron Moradi</h1>
+      <p class="edit-line"><s class="edit">I am a hard worker.</s><span class="ins">here are the receipts ↓</span></p>
+      <p class="bio">Born and raised in Los Angeles. Syracuse University '25, B.S. Computer Science, <em>cum laude</em>. Assistant Chief of Staff at XYZ in Santa Monica since October 2025. This site is my notebook: every revision is kept, timestamps and all.</p>
+      <div class="stats">
+        <div><b data-mine>—</b><span>commits to this site by me</span></div>
+        <div><b data-late>—</b><span>of them between midnight and 4am PT</span></div>
+        <div><b data-best-count>—</b><span>commits in the longest sitting</span></div>
+        <div><b data-sessions>—</b><span>separate sittings since Sep 2025</span></div>
+      </div>
+    </section>
+
+    <section class="sheet">
+      <div class="sheet-head"><h2>When this site gets built</h2><span class="no">Fig. 1 · commits by hour, Pacific</span></div>
+      <div class="two">
+        <div class="reveal">
+          <p class="lead">Each bar is an hour of the day. The red ones are midnight to 4am, which is when <span class="hl">almost half</span> of this site was written.</p>
+          <p>First commit: <span class="mono" data-first-when>—</span>, <span class="mono" data-first-msg>—</span>.</p>
+          <p>Longest sitting: <b data-best-count>—</b> commits, <span class="mono" data-best-when>—</span>. The messages tell the story: "4", "7", "11"… "idk anymore", "wtf", "go back!", "lets hope", "reload?!".</p>
+          <p class="pencil">↳ <span data-private>—</span> commits to a private page are left out of every count here.</p>
+          <a class="btn" href="/rev/log.html">Read the full log →</a>
+        </div>
+        <svg class="ring reveal" id="ring" viewBox="0 0 440 440" role="img" aria-label="Ring chart of commits by hour of day"></svg>
+      </div>
+    </section>
+
+    <section class="sheet" id="timesheet">
+      <div class="sheet-head"><h2>Timesheet</h2><span class="no">Sheet 1 · every shift on record</span></div>
+      <table class="timesheet reveal">
+        <thead><tr><th>Period</th><th>Employer</th><th>Role</th><th>City</th></tr></thead>
+        <tbody>
+          <tr><td>Oct 2025 – <span class="punch">IN · mo. <span data-since="2025-10">—</span></span></td><td>XYZ</td><td>Assistant Chief of Staff</td><td>Santa Monica, CA</td></tr>
+          <tr><td>May 2025</td><td>Syracuse University</td><td>B.S. Computer Science, <em>cum laude</em>; minor in Engineering &amp; CS Management</td><td>Syracuse, NY</td></tr>
+          <tr><td>Jun – Aug 2024</td><td>PlanetArt</td><td>Data Science Analyst Intern</td><td>Calabasas, CA</td></tr>
+          <tr><td>Aug 2022 – May 2025</td><td>Barnes Center at The Arch</td><td>Guest Services</td><td>Syracuse, NY</td></tr>
+          <tr><td>May – Jun 2022</td><td>Diddy Riese Cookies</td><td>Food Server</td><td>Los Angeles, CA</td></tr>
+          <tr><td>Jul – Aug 2019</td><td>Tea &amp; Coffee Exchange</td><td>Barista</td><td>Hollywood, CA</td></tr>
+        </tbody>
+      </table>
+      <p class="pencil" style="margin-top:12px">Certifications: Inside LVMH · ServSafe Food Handler · Adult First Aid/CPR/AED (Red Cross) · Employee Transportation Coordinator (GoSaMo TMO)</p>
+    </section>
+
+    <section class="sheet" id="cases">
+      <div class="sheet-head"><h2>Case files</h2><span class="no">Sheet 1 · projects, dead ends included</span></div>
+      <article class="case reveal">
+        <header><h3>aaronmoradi.com</h3><span>HTML · CSS · JavaScript · <a href="https://github.com/aaronmoradi/aaronmoradi.github.io" target="_blank" rel="noopener">source</a></span></header>
+        <div class="body">
+          <b>Goal</b><div>A personal site from a blank file, kept up to date.</div>
+          <b>Attempts</b><div><ol>
+            <li>Sep 6, 2025, 12:46am: <span class="mono">Initial Site</span>. A typing header, an LA clock, Lakers &amp; Dodgers confetti buttons.</li>
+            <li><s>A project card for the MLG website</s>: <span class="mono">"no more MLG website card, looks too similar lol"</span>.</li>
+            <li>Oct 2026: v2, rebuilt with a life map, a terminal and 13 easter eggs. <span class="pencil">Retired: it read as AI-made.</span></li>
+            <li>The map's tile service started demanding an API key. Switched to OpenStreetMap.</li>
+            <li>The favicon had a fake checkerboard baked into its pixels. Cut the smiley out properly.</li>
+            <li>v3: four design studies in parallel. This notebook is one of them.</li>
+          </ol></div>
+          <b>Result</b><div><a href="https://aaronmoradi.com" target="_blank" rel="noopener">aaronmoradi.com</a>. <span data-mine>—</span> commits by me so far.</div>
+        </div>
+      </article>
+      <article class="case reveal">
+        <header><h3>X vs. Bluesky</h3><span>Python · Data · <a href="https://github.com/TownsendSP/Comparative_Sentiment_Analysis" target="_blank" rel="noopener">source</a></span></header>
+        <div class="body">
+          <b>Goal</b><div>Compare how the conversation feels on X (Twitter) and on Bluesky.</div>
+          <b>Result</b><div>A comparative sentiment analysis. <a href="/assets/DataMiningPresentation.pdf" target="_blank" rel="noopener">Presentation (PDF)</a>.</div>
+        </div>
+      </article>
+      <article class="case reveal">
+        <header><h3>Compress &amp; encrypt</h3><span>Python · team project · <a href="https://github.com/aaronmoradi/M013-Group12" target="_blank" rel="noopener">source</a></span></header>
+        <div class="body">
+          <b>Goal</b><div>Take in a text file, compress it into binary digits, and get the original back.</div>
+          <b>Result</b><div>Compression plus decryption back to the original state, built as a team.</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="sheet">
+      <div class="sheet-head"><h2>Versions</h2><span class="no">Sheet 3 · the archive</span></div>
+      <div class="two">
+        <p class="lead reveal">Nothing gets deleted. v0 was two lines. v1 was written over <span class="mono" data-count-between="2025-09-06..2026-10-09T08:36">—</span> commits. v2 is what's live right now. The archive keeps them all side by side.</p>
+        <a class="reveal" href="/rev/versions.html" style="display:block;border:2px solid var(--rule)"><img src="/rev/img/v1.jpg" alt="Screenshot of version 1 of aaronmoradi.com" loading="lazy" /></a>
+      </div>
+    </section>
+
+    <section class="sheet" id="contact" style="border-bottom:0">
+      <div class="sheet-head"><h2>Leave a note</h2><span class="no">aaronmoradi2@gmail.com</span></div>
+      <form class="note-form reveal" action="https://formspree.io/f/xdklynry" method="POST">
+        <div><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /></div>
+        <div><label for="email">Email</label><input id="email" type="email" name="_replyto" autocomplete="email" required /></div>
+        <div class="full"><label for="message">Note</label><textarea id="message" name="message" required></textarea></div>
+        <div class="full"><button class="btn" type="submit">Commit message →</button> <a class="btn ghost" href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a> <a class="btn ghost" href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></div>
+      </form>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Rev</span><strong data-rev>—</strong></div>
+      <div><span>Sheet</span><strong>1 of 6</strong></div>
+      <div><span>LA time</span><strong data-la-time>—</strong></div>
+      <div><span>Title</span><strong>Title sheet</strong></div>
+    </div>
+    <div class="foot">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles · log built <span data-built>—</span></span>
+      <nav aria-label="Footer"><a href="/rev/log.html">Log</a><a href="/rev/versions.html">Versions</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <a class="egg-meter" href="/rev/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn" data-team="lakers">Go Lakers!</button><button class="team-btn" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </div>
+  <script src="/rev/rev-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/rev/rev.js"></script>
+</body>
+</html>

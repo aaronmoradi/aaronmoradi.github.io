@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rev. 0 · Superseded draft · AM-001 · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f2f1ec" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/spec/spec.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .draft { position: relative; max-width: 720px; margin: 10px 0 0; padding: 40px 34px 90px; border: 1px solid var(--ink); background: #fff; color: #000; overflow: hidden; }
+    .draft h2 { font: bold 24px "Times New Roman", serif; margin: 0 0 14px; }
+    .draft h1 { font: bold 32px "Times New Roman", serif; margin: 0; }
+    .band { position: absolute; left: -60px; right: -60px; top: 58%; transform: rotate(-12deg); background: var(--red); color: #fff; text-align: center; font: 800 32px/1 var(--sans); font-stretch: 62%; letter-spacing: .3em; padding: 10px 0 8px; opacity: .88; }
+    .red-layer { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+    .red-layer path, .red-layer ellipse { fill: none; stroke: var(--red); stroke-width: 2.5; stroke-linecap: round; }
+    .red-layer text { fill: var(--red); font: 13px var(--mono); }
+    .red-layer .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: ink 1s ease forwards; animation-delay: var(--d); }
+    .red-layer text.draw { opacity: 0; animation: fadein .4s ease forwards; animation-delay: var(--d); }
+    @keyframes ink { to { stroke-dashoffset: 0; } }
+    @keyframes fadein { to { opacity: 1; } }
+  </style>
+</head>
+
+<body data-egg="forgotten">
+  <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+  <div class="gridlines" aria-hidden="true"><div class="wrap"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <header class="doc-head">
+    <div class="wrap">
+      <div class="top">
+        <a class="docno logo" href="/spec/" aria-label="AM-001, Aaron Moradi, home"><span class="reg" aria-hidden="true"></span>AM-001 · Aaron Moradi</a>
+        <nav class="index" id="index" aria-label="Sections">
+          <a href="/spec/#s1"><b>1.0</b>Ident.</a>
+          <a href="/spec/#s2"><b>2.0</b>Assignment</a>
+          <a href="/spec/#s3"><b>3.0</b>Service</a>
+          <a href="/spec/#s4"><b>4.0</b>Projects</a>
+          <a href="/spec/#s5"><b>5.0</b>Measurements</a>
+          <a href="/spec/#s6"><b>6.0</b>Contact</a>
+          <a href="/spec/map.html"><b>SH.2</b>Route map</a>
+          <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+        </nav>
+        <div class="ctl">
+          <button id="gridBtn" aria-pressed="false" title="Show grid (G)">G</button>
+          <button data-terminal title="Console (press `)">TTY</button>
+          <button data-theme-toggle aria-label="Blueprint mode">☾</button>
+          <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="index">☰</button>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span>Local time LA</span><b data-la-time>--:--</b></div>
+        <div><span>Status</span><b data-status>AT XYZ, SANTA MONICA</b></div>
+        <div><span>Rev</span><b data-rev>2026.10</b></div>
+        <div><span>Sheet</span><b>Rev. 0</b></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sec">
+      <div class="sec-no">R.0</div>
+      <div class="sec-title"><h2>Superseded draft</h2><p>about.html, first committed 2025-09-06 01:35 PT (60f8306, message "Updatesw="). Retained for the record with redlines. Original still served at <a href="/about.html">/about.html</a>.</p></div>
+      <div class="sec-body">
+        <figure class="fig">
+          <div class="draft" id="draft">
+            <h2 id="l1">This is my about page test</h2>
+            <h1 id="l2">I completely forgot about this...</h1>
+            <div class="band">Superseded</div>
+            <svg class="red-layer" id="red" aria-hidden="true"></svg>
+          </div>
+          <figcaption><b>Fig. R.1</b> Rev. 0 with redlines. Superseded by Rev. 2026.10, <a href="/spec/">Sheet 1</a>.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Checked</span><strong>A. M.</strong></div>
+      <div><span>Rev</span><strong data-rev>2026.10</strong></div>
+      <div><span>Sheet</span><strong>Rev. 0</strong></div>
+      <div><span>Title</span><strong>Superseded draft</strong></div>
+    </div>
+    <div class="foot-row">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles</span>
+      <nav aria-label="Footer"><a href="/spec/">Sheet 1</a><a href="/spec/map.html">Sheet 2</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+      <a class="egg-meter" href="/spec/vault.html" data-egg-meter hidden></a>
+    </div>
+  </div>
+  <script src="/spec/spec-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/spec/spec.js"></script>
+  <script>
+  (() => {
+    // redlines are placed against the real text boxes so they land on the words at any width
+    const draft = document.getElementById('draft'), svg = document.getElementById('red');
+    function draw() {
+      const b = draft.getBoundingClientRect(), r1 = document.getElementById('l1').getBoundingClientRect(), r2 = document.getElementById('l2').getBoundingClientRect();
+      const L = (r) => ({ x: r.left - b.left, y: r.top - b.top, w: r.width, h: r.height });
+      const a = L(r1), c = L(r2);
+      // measure the actual text width, not the block width
+      const tw = (el) => { const rg = document.createRange(); rg.selectNodeContents(el); return rg.getBoundingClientRect().width; };
+      const w1 = tw(document.getElementById('l1')), w2 = tw(document.getElementById('l2'));
+      svg.setAttribute('viewBox', `0 0 ${b.width} ${b.height}`);
+      svg.innerHTML = `
+        <path class="draw" style="--len:${w1 + 20};--d:.2s" d="M${a.x - 6} ${a.y + a.h / 2 + 2} L${a.x + w1 + 8} ${a.y + a.h / 2 - 2}"/>
+        <text class="draw" style="--d:.9s" x="${Math.min(a.x + w1 + 16, b.width - 190)}" y="${a.y + a.h / 2 + 4}">← "test"? see Sheet 1</text>
+        <ellipse class="draw" style="--len:420;--d:1.2s" cx="${c.x + w2 * 0.44}" cy="${c.y + c.h / 2}" rx="${w2 * 0.17}" ry="${c.h / 1.5}"/>
+        <path class="draw" style="--len:140;--d:1.9s" d="M${c.x + w2 * 0.44} ${c.y + c.h + 10} q 10 40 60 46"/>
+        <text class="draw" style="--d:2.3s" x="${c.x + w2 * 0.44 + 66}" y="${c.y + c.h + 60}">remembered. rewritten as §1.0–6.0</text>`;
+    }
+    draw(); addEventListener('resize', draw); document.fonts?.ready.then(draw);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Air Ball · Official Program · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#40205f" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/program/program.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .airball { padding: clamp(28px, 5vw, 56px) 0 60px; }
+    .airball h1 { margin: 0; font: 900 clamp(80px, 16vw, 200px)/.8 var(--cond); text-transform: uppercase; color: var(--head); text-shadow: .035em .035em 0 var(--gold); }
+    .airball .sub { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: end; border-bottom: 3px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; }
+    .airball .sub p { margin: 0; max-width: 56ch; }
+    .board { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--board); color: var(--led); border: 4px solid #000; border-bottom: 0; }
+    .board div { padding: 10px 14px; border-left: 2px solid #26231d; text-align: center; }
+    .board div:first-child { border-left: 0; }
+    .board small { display: block; font: 700 11px/1 var(--cond); letter-spacing: .2em; color: #8c8270; text-transform: uppercase; margin-bottom: 6px; }
+    .board b { font: 900 clamp(26px, 4vw, 44px)/1 var(--dots); text-shadow: 0 0 10px rgba(255, 182, 39, .6); }
+    .board .clock b { color: #ff5a45; text-shadow: 0 0 10px rgba(255, 90, 69, .6); }
+    .board.fire { animation: fire .5s steps(2) 6; }
+    @keyframes fire { 50% { background: #3a0f08; } }
+    .court { position: relative; border: 4px solid #000; background: #c98d4f; }
+    #hoops { display: block; width: 100%; height: 460px; touch-action: none; cursor: grab; }
+    #hoops:active { cursor: grabbing; }
+    .shout { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; font: 900 clamp(48px, 10vw, 110px)/1 var(--cond); text-transform: uppercase; color: var(--gold); -webkit-text-stroke: 3px var(--purple); opacity: 0; transform: scale(.7) rotate(-4deg); transition: opacity .2s, transform .35s cubic-bezier(.2, 1.5, .4, 1); }
+    .shout.on { opacity: 1; transform: scale(1) rotate(-4deg); }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    @media (max-width: 600px) { #hoops { height: 400px; } .board { grid-template-columns: 1fr 1fr; } .board div:nth-child(3) { border-left: 0; } .board div:nth-child(n+3) { border-top: 2px solid #26231d; } }
+  </style>
+</head>
+
+<body data-egg="lost">
+  <div class="ticker"><div class="wrap"><span>Official Program · Error 404</span><span>Out of bounds</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
+      <nav class="lineup" id="lineup" aria-label="Starting lineup">
+        <a href="/program/#card"><b>01</b>Rookie Card</a>
+        <a href="/program/#scouting"><b>02</b>Scouting</a>
+        <a href="/program/#tribute"><b>08</b>8 &amp; 24</a>
+        <a href="/program/#boxscores"><b>03</b>Box Scores</a>
+        <a href="/program/map.html"><b>04</b>Road Schedule</a>
+        <a href="/program/#tickets"><b>05</b>Tickets</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener"><b>PDF</b>Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool hide-sm" data-terminal title="Press box (press `)">Press Box</button>
+        <button class="tool" data-theme-toggle aria-label="Toggle night game">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="lineup">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="airball">
+    <div class="wrap">
+      <p class="label" style="margin:0 0 8px;color:var(--red)">Error 404 · Out of bounds</p>
+      <h1>Air Ball.</h1>
+      <div class="sub">
+        <p>That page isn't on the schedule. The court's open, though. Drag back from the ball, aim, and let it fly. Beat the 24-second shot clock, and hit five straight to catch fire.</p>
+        <span class="label" style="color:var(--muted)">Possession: you</span>
+      </div>
+
+      <div class="board" id="board">
+        <div><small>Points</small><b id="score">0</b></div>
+        <div><small>Streak</small><b id="streak">0</b></div>
+        <div class="clock"><small>Shot clock</small><b id="clock">24</b></div>
+        <div><small>Best</small><b id="best">0</b></div>
+      </div>
+      <div class="court">
+        <canvas id="hoops" aria-label="Basketball mini-game: drag back from the ball and release to shoot"></canvas>
+        <div class="shout" id="shout">Swish!</div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/program/">Back to the program →</a>
+        <a class="btn ghost" href="/program/map.html">Road schedule</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/program/program-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+  (() => {
+    const cv = document.getElementById('hoops'), ctx = cv.getContext('2d');
+    const $ = (id) => document.getElementById(id);
+    const R = 15, G = 0.38, RIM_W = 64, RIM_R = 4, SHOT_CLOCK = 24;
+    let W = 0, H = 0, hoop = { x: 0, y: 0 }, ball, drag = null, inFlight = false, shotTime = 0, scored = false;
+    let score = 0, streak = 0, best = Number(AM.store.get('am_hoops_best', 0)) || 0, clock = SHOT_CLOCK, clockAt = performance.now();
+    $('best').textContent = best;
+
+    function resize() {
+      const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      placeHoop(true); resetBall();
+    }
+    function placeHoop(first) { hoop.x = W - Math.max(30, W * 0.06); hoop.y = first ? H * 0.38 : H * (0.25 + Math.random() * 0.3); }
+    function resetBall() {
+      const x = Math.max(60, W * (0.1 + Math.random() * 0.2));
+      ball = { x, y: H - R - 34, vx: 0, vy: 0, spin: 0 };
+      inFlight = false; scored = false; clock = SHOT_CLOCK; clockAt = performance.now();
+    }
+    const rimFront = () => ({ x: hoop.x - RIM_W, y: hoop.y });
+    function bounce(p) {
+      const dx = ball.x - p.x, dy = ball.y - p.y, d = Math.hypot(dx, dy);
+      if (d < R + RIM_R && d > 0) {
+        const nx = dx / d, ny = dy / d, dot = ball.vx * nx + ball.vy * ny;
+        if (dot < 0) { ball.vx -= 1.75 * dot * nx; ball.vy -= 1.75 * dot * ny; }
+        ball.x = p.x + nx * (R + RIM_R); ball.y = p.y + ny * (R + RIM_R);
+      }
+    }
+    function physics() {
+      const prevY = ball.y;
+      ball.vy += G; ball.x += ball.vx; ball.y += ball.vy; ball.spin += ball.vx * 0.05;
+      bounce(rimFront()); bounce({ x: hoop.x - 2, y: hoop.y });
+      if (ball.x + R > hoop.x && ball.x < hoop.x + 10 && ball.y > hoop.y - 90 && ball.y < hoop.y + 14 && ball.vx > 0) { ball.x = hoop.x - R; ball.vx *= -0.6; }
+      if (ball.y + R > H - 30) { ball.y = H - 30 - R; ball.vy *= -0.55; ball.vx *= 0.8; }
+      if (ball.x - R < 0) { ball.x = R; ball.vx *= -0.6; }
+      const f = rimFront();
+      if (!scored && prevY < hoop.y && ball.y >= hoop.y && ball.x > f.x + R * 0.4 && ball.x < hoop.x - R * 0.4) { scored = true; onScore(); }
+      const done = (Math.abs(ball.vy) < 0.8 && ball.y + R >= H - 31 && Math.abs(ball.vx) < 0.4) || ball.x - R > W || performance.now() - shotTime > 6000;
+      if (done) endShot();
+    }
+    function shout(t) { $('shout').textContent = t; $('shout').classList.add('on'); clearTimeout(shout.t); shout.t = setTimeout(() => $('shout').classList.remove('on'), 900); }
+    function onScore() {
+      score += 2; streak++;
+      $('score').textContent = score; $('streak').textContent = streak;
+      if (streak > best) { best = streak; AM.store.set('am_hoops_best', best); $('best').textContent = best; }
+      if (streak === 5) {
+        shout('On fire!'); $('board').classList.remove('fire'); void $('board').offsetWidth; $('board').classList.add('fire');
+        AM.findEgg('hoops'); AM.confetti('lakers', 220);
+      } else { shout(['Swish!', 'Buckets!', 'Count it!', 'Splash!', 'On fire!'][Math.min(streak - 1, 4)]); AM.confetti('lakers', 24); }
+    }
+    function endShot() {
+      if (!scored) { if (streak > 0) shout('Brick.'); streak = 0; $('streak').textContent = 0; } else placeHoop(false);
+      resetBall();
+    }
+    function predict(vx, vy) { const pts = []; let x = ball.x, y = ball.y; for (let i = 0; i < 26; i++) { vy += G; x += vx; y += vy; if (i % 2) pts.push([x, y]); } return pts; }
+    function shotVel() {
+      const dx = drag.sx - drag.x, dy = drag.sy - drag.y, k = 0.13, max = 22;
+      let vx = dx * k, vy = dy * k; const m = Math.hypot(vx, vy);
+      if (m > max) { vx *= max / m; vy *= max / m; }
+      return { vx, vy };
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // arena wall
+      ctx.fillStyle = '#1d1430'; ctx.fillRect(0, 0, W, H - 30);
+      ctx.fillStyle = 'rgba(241,181,12,.08)';
+      for (let x = 0; x < W; x += 26) for (let y = 14; y < H * 0.55; y += 22) { ctx.beginPath(); ctx.arc(x + (y % 44 ? 13 : 0), y, 3, 0, 7); ctx.fill(); }
+      ctx.fillStyle = 'rgba(241,181,12,.85)'; ctx.font = '900 13px "Sofia XC", sans-serif';
+      ctx.fillText('AIR BALL ARENA · LOS ANGELES', 18, H - 44);
+      // hardwood
+      for (let x = 0, i = 0; x < W; x += 34, i++) { ctx.fillStyle = i % 2 ? '#c98d4f' : '#bf8446'; ctx.fillRect(x, H - 30, 34, 30); }
+      ctx.fillStyle = '#40205f'; ctx.fillRect(0, H - 30, W, 4);
+      // key + arc
+      ctx.strokeStyle = 'rgba(241,181,12,.5)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(hoop.x, H - 30, W * 0.5, Math.PI, Math.PI * 1.5); ctx.stroke();
+      // stanchion + board
+      ctx.fillStyle = '#5c5a55'; ctx.fillRect(hoop.x + 8, hoop.y - 40, 7, H);
+      ctx.fillStyle = '#f6efdf'; ctx.fillRect(hoop.x, hoop.y - 90, 9, 104);
+      ctx.fillStyle = '#c42b1c'; ctx.fillRect(hoop.x, hoop.y - 40, 9, 30);
+      // net
+      const f = rimFront();
+      ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 1.2; ctx.beginPath();
+      for (let i = 0; i <= 4; i++) { ctx.moveTo(f.x + (RIM_W * i) / 4, hoop.y); ctx.lineTo(f.x + RIM_W * 0.2 + (RIM_W * 0.6 * i) / 4, hoop.y + 42); }
+      ctx.moveTo(f.x + 6, hoop.y + 14); ctx.lineTo(hoop.x - 6, hoop.y + 14); ctx.moveTo(f.x + 10, hoop.y + 28); ctx.lineTo(hoop.x - 10, hoop.y + 28);
+      ctx.stroke();
+      // aim dots
+      if (drag) { const v = shotVel(); ctx.fillStyle = '#f1b50c'; predict(v.vx, v.vy).forEach(([x, y], i) => { ctx.globalAlpha = 1 - i / 14; ctx.beginPath(); ctx.arc(x, y, 3, 0, 7); ctx.fill(); }); ctx.globalAlpha = 1; }
+      // ball
+      ctx.save(); ctx.translate(ball.x, ball.y); ctx.rotate(ball.spin);
+      ctx.fillStyle = '#e8641c'; ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
+      ctx.strokeStyle = '#1a0d06'; ctx.lineWidth = 1.5; ctx.beginPath();
+      ctx.moveTo(-R, 0); ctx.lineTo(R, 0); ctx.moveTo(0, -R); ctx.lineTo(0, R);
+      ctx.moveTo(-R * .7, -R * .7); ctx.quadraticCurveTo(0, 0, -R * .7, R * .7); ctx.moveTo(R * .7, -R * .7); ctx.quadraticCurveTo(0, 0, R * .7, R * .7);
+      ctx.stroke(); ctx.restore();
+      // rim
+      ctx.strokeStyle = '#ff5a1f'; ctx.lineWidth = RIM_R * 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(f.x, hoop.y); ctx.lineTo(hoop.x, hoop.y); ctx.stroke();
+      if (!inFlight && !drag && score === 0) { ctx.fillStyle = '#f1b50c'; ctx.font = '800 14px "Sofia XC", sans-serif'; ctx.fillText('← DRAG BACK, RELEASE TO SHOOT', ball.x + R + 10, ball.y + 5); }
+    }
+
+    const pt = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.addEventListener('pointerdown', (e) => { if (inFlight) return; const p = pt(e); drag = { sx: p.x, sy: p.y, x: p.x, y: p.y }; cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', (e) => { if (drag) { const p = pt(e); drag.x = p.x; drag.y = p.y; } });
+    cv.addEventListener('pointerup', () => {
+      if (!drag) return; const v = shotVel(); drag = null;
+      if (Math.hypot(v.vx, v.vy) < 2) return;
+      ball.vx = v.vx; ball.vy = v.vy; inFlight = true; shotTime = performance.now();
+    });
+
+    let last = performance.now(), acc = 0;
+    function loop(now) {
+      acc += Math.min(now - last, 100); last = now;
+      while (acc >= 1000 / 60) { if (inFlight) physics(); acc -= 1000 / 60; }
+      // shot clock runs while you hold the ball
+      if (!inFlight) {
+        clock = Math.max(0, SHOT_CLOCK - Math.floor((now - clockAt) / 1000));
+        if (clock === 0) { shout('Violation!'); streak = 0; $('streak').textContent = 0; clockAt = now; }
+      }
+      $('clock').textContent = String(clock).padStart(2, '0');
+      draw(); requestAnimationFrame(loop);
+    }
+    addEventListener('resize', resize);
+    resize(); requestAnimationFrame(loop);
+  })();
+  </script>
+</body>
+</html>

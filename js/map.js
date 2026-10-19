@@ -27,6 +27,9 @@
   ];
   const SECRET_ZOOM = 14;
 
+  // Optional per-design skin (see /program/program-skin.js): pin and sidebar markup.
+  const MSKIN = window.AM_MAP_SKIN || {};
+
   /* ---------- helpers ---------- */
   const toRad = (d) => (d * Math.PI) / 180;
   function miles([lat1, lon1], [lat2, lon2]) {
@@ -45,7 +48,7 @@
   }
   const accent = () => getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#f2541b';
   const popup = (p) => `<div class="pop-when">${esc(p.when || 'Secret spot')}</div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>`;
-  const icon = (emoji, cls = '') => L.divIcon({ className: '', html: `<div class="pin ${cls}">${emoji}</div>`, iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -20] });
+  const icon = (emoji, cls = '', i = null) => L.divIcon({ className: '', html: `<div class="pin ${cls}">${MSKIN.pin ? MSKIN.pin(emoji, cls, i) : emoji}</div>`, iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -20] });
 
   /* ---------- map ---------- */
   const map = L.map('map', { zoomControl: true, worldCopyJump: true, minZoom: 3 }).setView([38.5, -97], 4);
@@ -76,8 +79,8 @@
   const route = L.polyline(arc(la, syr), { color: accent(), weight: 3, dashArray: '2 9', lineCap: 'round', opacity: 0.9 }).addTo(map);
 
   const markers = {};
-  PLACES.forEach((p) => {
-    markers[p.id] = L.marker(p.ll, { icon: icon(p.emoji), title: p.title, riseOnHover: true })
+  PLACES.forEach((p, i) => {
+    markers[p.id] = L.marker(p.ll, { icon: icon(p.emoji, '', i), title: p.title, riseOnHover: true })
       .addTo(map)
       .bindPopup(popup(p), { maxWidth: 260 })
       .on('click', () => setActive(p.id));
@@ -104,7 +107,7 @@
 
   /* ---------- sidebar ---------- */
   const list = $('#chapters');
-  list.innerHTML = PLACES.map((p, i) => `
+  list.innerHTML = PLACES.map((p, i) => MSKIN.chapter ? MSKIN.chapter(p, i, esc) : `
     <li><button class="chapter" data-id="${p.id}">
       <span class="em">${p.emoji}</span>
       <span><span class="w">${String(i + 1).padStart(2, '0')} · ${esc(p.when)}</span><br><span class="t">${esc(p.title)}</span></span>

@@ -38,6 +38,11 @@
   ];
   const EGG_KEY = 'am_eggs';
 
+  // Optional per-design skin, set before this script loads (see /program/program-skin.js).
+  // Egg ids and saved progress are shared; only names, copy and links change.
+  const SKIN = window.AM_SKIN || {};
+  if (SKIN.eggs) EGGS.forEach((e) => Object.assign(e, SKIN.eggs[e.id] || {}));
+
   function foundEggs() {
     try { return new Set(JSON.parse(store.get(EGG_KEY, '[]'))); } catch { return new Set(); }
   }
@@ -49,9 +54,10 @@
     if (found.has(id)) return false;
     found.add(id);
     store.set(EGG_KEY, JSON.stringify([...found]));
+    store.set(EGG_KEY + '_dates', JSON.stringify({ ...foundDates(), [id]: new Date().toISOString() }));
     updateEggMeters();
     if (!quiet) {
-      toast(`${egg.icon} Easter egg found: <b>${esc(egg.name)}</b> &nbsp;(${found.size}/${EGGS.length})`);
+      toast(SKIN.toastEgg ? SKIN.toastEgg(egg, found.size, EGGS.length) : `${egg.icon} Easter egg found: <b>${esc(egg.name)}</b> &nbsp;(${found.size}/${EGGS.length})`);
       confetti('party', 60);
     }
     if (found.size === EGGS.length) {
@@ -64,8 +70,13 @@
     return true;
   }
 
+  function foundDates() {
+    try { return JSON.parse(store.get(EGG_KEY + '_dates', '{}')) || {}; } catch { return {}; }
+  }
+
   function resetEggs() {
     store.del(EGG_KEY);
+    store.del(EGG_KEY + '_dates');
     updateEggMeters();
   }
 
@@ -104,6 +115,7 @@
     dodgers: ['#005a9c', '#ffffff', '#ef3e42'],
     orange: ['#f76900', '#ff9a3c', '#ffffff', '#000e54'],
     party: ['#f2541b', '#5b2bd6', '#fdb927', '#1658c7', '#28c840'],
+    ...(SKIN.palettes || {}),
   };
 
   function confetti(kind = 'party', n = 120) {
@@ -292,7 +304,10 @@
     '~': '/', home: '/', '/': '/', map: '/map.html', atlas: '/map.html',
     vault: '/vault.html', '.vault': '/vault.html',
     about: '/#about', projects: '/#projects', work: '/#projects', experience: '/#path', path: '/#path', contact: '/#contact',
+    play: '/404.html',
+    ...(SKIN.places || {}),
   };
+  const PROMPT = SKIN.prompt || 'guest@am:~$';
 
   const T = { built: false, el: null, out: null, input: null, backdrop: null, history: [], hIdx: 0 };
 
@@ -305,9 +320,9 @@
     T.el.setAttribute('role', 'dialog');
     T.el.setAttribute('aria-label', 'Terminal');
     T.el.innerHTML = `
-      <div class="term-bar"><i title="close"></i><i title="minimize"></i><i title="zoom"></i><span>guest@aaronmoradi.com — zsh</span></div>
+      <div class="term-bar"><i title="close"></i><i title="minimize"></i><i title="zoom"></i><span>${SKIN.termTitle || 'guest@aaronmoradi.com — zsh'}</span></div>
       <div class="term-out" aria-live="polite"></div>
-      <form class="term-in" autocomplete="off"><label for="term-input">guest@am:~$</label><input id="term-input" spellcheck="false" autocapitalize="off" autocomplete="off"></form>`;
+      <form class="term-in" autocomplete="off"><label for="term-input">${PROMPT}</label><input id="term-input" spellcheck="false" autocapitalize="off" autocomplete="off"></form>`;
     document.body.append(T.backdrop, T.el);
     T.out = $('.term-out', T.el);
     T.input = $('input', T.el);
@@ -332,7 +347,7 @@
       }
     });
     T.built = true;
-    print(`<span class="c-accent">
+    print(SKIN.banner || `<span class="c-accent">
    ___    __  ___
   / _ |  /  |/  /   aaronmoradi.com
  / __ | / /|_/ /    v2.0 — rebuilt from scratch
@@ -462,7 +477,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
     matrix: { desc: 'wake up, neo', run() { closeTerminal(); matrix(); } },
     gravity: { desc: 'turn gravity on', run() { closeTerminal(); setTimeout(gravity, 200); } },
     roll: { desc: 'do a barrel roll', run() { barrelRoll(); } },
-    play: { desc: 'shoot some hoops', run() { go('/404.html'); } },
+    play: { desc: 'shoot some hoops', run() { go(PLACES.play); } },
     eggs: {
       desc: 'easter egg progress',
       run() {
@@ -482,6 +497,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
       run(args) {
         findEgg('sudo');
         if (args.join(' ') === 'make me a sandwich') return print('Okay. 🥪');
+        if (SKIN.sudo) return print(SKIN.sudo);
         print(`[sudo] password for guest: ********
 <span class="c-err">guest is not in the sudoers file. This incident will be reported.</span>
 <span class="c-dim">(to Aaron. He'll think it's funny.)</span>`);
@@ -489,7 +505,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
     },
     make: { hidden: true, run(args) { print(args.join(' ') === 'me a sandwich' ? 'What? Make it yourself.' : `make: *** No rule to make target '${esc(args.join(' ') || '')}'.`); } },
     rm: { hidden: true, run() { print('rm: absolutely not. I just rebuilt this whole thing.', 'c-err'); } },
-    vault: { hidden: true, run() { go('/vault.html'); } },
+    vault: { hidden: true, run() { go(PLACES.vault); } },
     hello: { hidden: true, run() { print('hi! 👋'); } },
     hi: { hidden: true, run() { print('hello! 👋'); } },
     coffee: { hidden: true, run() { print('☕ Former barista at Tea & Coffee Exchange, Hollywood. Brewing… done. Here you go.'); } },
@@ -505,10 +521,13 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
   COMMANDS.man = { hidden: true, run: COMMANDS.help.run };
   COMMANDS.dir = { hidden: true, run: COMMANDS.ls.run };
   COMMANDS.cls = { hidden: true, run: COMMANDS.clear.run };
+  Object.entries(SKIN.commands || {}).forEach(([name, c]) => {
+    COMMANDS[name] = { desc: c.desc, hidden: c.hidden, run: (args) => c.run(args, { print, go, esc, confetti, closeTerminal }) };
+  });
 
   function run(line) {
     const raw = line.trim();
-    print(`<span class="c-ok">guest@am:~$</span> ${esc(raw)}`);
+    print(`<span class="c-ok">${PROMPT}</span> ${esc(raw)}`);
     if (!raw) return;
     T.history.push(raw);
     T.hIdx = T.history.length;
@@ -532,7 +551,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
 
     // mobile menu
     const menuBtn = $('#menuBtn');
-    const nav = $('.nav');
+    const nav = (menuBtn && document.getElementById(menuBtn.getAttribute('aria-controls'))) || $('.nav');
     if (menuBtn && nav) {
       menuBtn.addEventListener('click', () => {
         const open = nav.classList.toggle('open');
@@ -549,7 +568,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
     // logo: 5 fast clicks = barrel roll
     let clicks = [];
     $$('.logo').forEach((logo) => logo.addEventListener('click', (e) => {
-      const onHome = location.pathname === '/' || location.pathname.endsWith('/index.html');
+      const onHome = (SKIN.homePaths || ['/', '/index.html']).includes(location.pathname);
       if (onHome) { e.preventDefault(); scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); }
       const now = Date.now();
       clicks = clicks.filter((t) => now - t < 2000).concat(now);
@@ -605,7 +624,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
   window.aaron.hello = window.aaron.hi;
 
   // Public API for page-specific scripts (map, vault, hoops)
-  window.AM = { EGGS, foundEggs, findEgg, resetEggs, confetti, toast, isDark, openTerminal, store };
+  window.AM = { EGGS, foundEggs, foundDates, findEgg, resetEggs, confetti, toast, isDark, openTerminal, store, skin: SKIN };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
   else wire();

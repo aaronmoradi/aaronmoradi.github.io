@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exhibit 0 · Rev. · Aaron Moradi</title>
+  <meta name="description" content="" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#eaf0e1" />
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;else if(+new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',hourCycle:'h23'})<4)document.documentElement.dataset.theme='dark';if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/rev/rev.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .exhibit { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .meta { border: 2px solid var(--rule); background: var(--pad); }
+    .meta div { display: grid; grid-template-columns: 120px 1fr; border-bottom: 1px solid var(--grid-major); }
+    .meta div:last-child { border-bottom: 0; }
+    .meta b { padding: 8px 12px; font: 700 12px var(--mono); text-transform: uppercase; color: var(--muted); border-right: 1px solid var(--grid-major); }
+    .meta span { padding: 8px 12px; font: 14px var(--mono); }
+    .page0 { background: #fff; color: #000; border: 1px solid #999; padding: 22px 24px; box-shadow: 8px 8px 0 var(--rule); transform: rotate(-1deg); }
+    .page0 h2 { font: bold 22px "Times New Roman", serif; margin: 0 0 10px; }
+    .page0 h1 { font: bold 30px "Times New Roman", serif; margin: 0; }
+    @media (max-width: 760px) { .exhibit { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body data-egg="forgotten">
+  <header class="bar">
+    <div class="wrap in">
+      <a class="sig logo" href="/rev/" aria-label="Aaron Moradi, home">A. Moradi</a>
+      <nav class="nav" id="nav" aria-label="Sheets">
+        <a href="/rev/">Title sheet</a>
+        <a href="/rev/log.html">Log</a>
+        <a href="/rev/versions.html">Versions</a>
+        <a href="/rev/map.html">Field survey</a>
+        <a href="/rev/#contact">Contact</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" data-terminal title="Teletype (press `)">TTY</button>
+        <button class="tool" data-theme-toggle aria-label="After hours (blueprint)">☾</button>
+        <button class="tool menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sheet" style="border-bottom:0">
+      <div class="sheet-head"><h2>Exhibit 0</h2><span class="no">The first About page</span></div>
+      <div class="exhibit">
+        <div>
+          <div class="meta">
+            <div><b>File</b><span><a href="/about.html">about.html</a></span></div>
+            <div><b>Commit</b><span><a href="https://github.com/aaronmoradi/aaronmoradi.github.io/commit/60f8306" target="_blank" rel="noopener">60f8306</a></span></div>
+            <div><b>When</b><span>Sat, Sep 6, 2025, 1:35am PT</span></div>
+            <div><b>Message</b><span>"Updatesw="</span></div>
+            <div><b>Touched again</b><span>963c42a "About", Sep 18, 2025</span></div>
+            <div><b>Status</b><span class="red">forgotten, then preserved</span></div>
+          </div>
+          <p class="pencil" style="margin-top:16px">↳ less than an hour after the first commit, there was already an About page. It just never got finished. The real one is on the <a href="/rev/#about">title sheet</a>.</p>
+        </div>
+        <div class="page0"><h2>This is my about page test</h2><h1>I completely forgot about this...</h1></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <div class="titleblock">
+      <div><span>Drawn by</span><strong>A. Moradi</strong></div>
+      <div><span>Rev</span><strong data-rev>—</strong></div>
+      <div><span>Sheet</span><strong>6 of 6</strong></div>
+      <div><span>LA time</span><strong data-la-time>—</strong></div>
+      <div><span>Title</span><strong>Exhibit 0</strong></div>
+    </div>
+    <div class="foot">
+      <span>© <span data-year></span> Aaron Moradi · Los Angeles · log built <span data-built>—</span></span>
+      <nav aria-label="Footer"><a href="/rev/log.html">Log</a><a href="/rev/versions.html">Versions</a><a href="https://github.com/aaronmoradi" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/aaronmoradi/" target="_blank" rel="noopener">LinkedIn</a></nav>
+      <a class="egg-meter" href="/rev/vault.html" data-egg-meter hidden></a>
+      <div class="team-btns"><button class="team-btn" data-team="lakers">Go Lakers!</button><button class="team-btn" data-team="dodgers">Go Dodgers!</button></div>
+    </div>
+  </div>
+  <script src="/rev/rev-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/rev/rev.js"></script>
+</body>
+</html>
