@@ -2,7 +2,7 @@
 """Generate the Departures (/departures/) sub-pages from one shared header/footer.
 Run from the repo root: python3 tools/departures_pages.py"""
 
-ICONS = open("departures/index.html").read().split('<svg width="0" height="0"', 1)[1].split("</svg>", 1)[0]
+ICONS = open("index.html").read().split('<svg width="0" height="0"', 1)[1].split("</svg>", 1)[0]
 ICONS = '<svg width="0" height="0"' + ICONS + "</svg>"
 
 HEAD = """<!doctype html>
@@ -23,13 +23,13 @@ HEAD = """<!doctype html>
 <body{body_attr}>
   <header class="topbar">
     <div class="wrap in">
-      <a class="mark logo" href="/departures/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
+      <a class="mark logo" href="/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
       <nav class="topnav" id="topnav" aria-label="Main">
-        <a href="/departures/#departures">Departures</a>
-        <a href="/departures/#info">Information</a>
-        <a href="/departures/#gates">Gates</a>
+        <a href="/#departures">Departures</a>
+        <a href="/#info">Information</a>
+        <a href="/#gates">Gates</a>
         <a href="/departures/map.html"{map_cur}>Route map</a>
-        <a href="/departures/#pass">Boarding pass</a>
+        <a href="/#pass">Boarding pass</a>
         <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
       </nav>
       <div class="tools">
@@ -45,7 +45,7 @@ FOOT = """
     <div class="wrap">
       <div class="foot-row">
         <span>© <span data-year></span> Aaron Moradi</span>
-        <nav aria-label="Footer"><a href="/departures/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
         <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
       </div>
     </div>
@@ -66,7 +66,7 @@ def page(path, *, title, body, style="", robots="noindex", body_attr="", extra_h
 ZONE = """<div class="zone-head"><div class="pict"><svg aria-hidden="true"><use href="#{icon}"/></svg></div><div class="txt"><h2>{h}</h2><p>{p}</p></div></div>"""
 
 # ------------------------------------------------------------------ route map
-page("departures/map.html", title="Route map", map_cur=' aria-current="page"',
+page("departures/map.html", title="Route map", robots="index, follow", map_cur=' aria-current="page"',
   extra_head='<link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.css" />\n  ',
   style="""
     .rm { display: grid; grid-template-columns: 330px 1fr; background: var(--housing); border: 1px solid #000; }
@@ -198,7 +198,7 @@ page("departures/cancelled.html", title="Flight cancelled", body_attr=' data-egg
         <div class="board-foot"><span id="cxPath"></span><span>We apologize for the inconvenience</span></div>
       </div>
       <p style="max-width:60ch;color:#c9c5bb;margin:24px 0 18px">The flight you were trying to board isn't on the schedule. Here are your rebooking options:</p>
-      <ul class="signs"><li><a href="/departures/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/404.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
+      <ul class="signs"><li><a href="/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/404.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
     </div>
   </main>
 """,
@@ -234,8 +234,8 @@ page("departures/luggage.html", title="Unclaimed baggage", body_attr=' data-egg=
       <div class="claim">
         <div>
           <p>This bag has been going around the carousel since the very first night this site existed. Inside: the first draft of an About page, two lines long, never finished.</p>
-          <p>It's been tagged and kept exactly as it was found. The real About section is at <a href="/departures/#info" style="color:var(--sign)">Information</a>, and the original file still lives at <a href="/about.html" style="color:var(--sign)">/about.html</a>.</p>
-          <ul class="signs" style="margin-top:20px"><li><a href="/departures/#info"><svg aria-hidden="true"><use href="#i-info"/></svg>Information desk</a></li></ul>
+          <p>It's been tagged and kept exactly as it was found. The real About section is at <a href="/#info" style="color:var(--sign)">Information</a>, and the original file still lives at <a href="/about.html" style="color:var(--sign)">/about.html</a>.</p>
+          <ul class="signs" style="margin-top:20px"><li><a href="/#info"><svg aria-hidden="true"><use href="#i-info"/></svg>Information desk</a></li></ul>
         </div>
         <div class="tag">
           <div class="band"><span>Unclaimed</span><span>AM 0</span></div>
