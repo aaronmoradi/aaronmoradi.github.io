@@ -117,7 +117,7 @@
     const lax = [px(-118.41), py(33.94)], syr = [px(-76.11), py(43.11)];
     const up = [(lax[0] + syr[0]) / 2, Math.min(lax[1], syr[1]) - 120], down = [(lax[0] + syr[0]) / 2, Math.min(lax[1], syr[1]) - 40];
     svg.innerHTML = `
-      <g fill="#3a3a3e">${dots}</g>
+      <g fill="#2e2760">${dots}</g>
       <path id="legOut" d="M${lax} Q${up} ${syr}" fill="none" stroke="var(--sign)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
       <path id="legBack" d="M${syr} Q${down} ${lax}" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round" opacity=".7"/>
       <g font-family="Overpass, sans-serif" font-weight="900" font-size="20" fill="var(--glyph)">
