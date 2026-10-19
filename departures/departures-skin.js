@@ -2,7 +2,7 @@
    Load BEFORE main.js. Egg ids are unchanged, so progress carries across designs. */
 (() => {
   'use strict';
-  const P = '/departures/';
+  const P = '/departures/', H = '/';
 
   // The departures list. Desktop shows city + carrier; phones show carrier only.
   window.DEP_FLIGHTS = [
@@ -15,7 +15,7 @@
   ];
 
   window.AM_SKIN = {
-    homePaths: [P, P + 'index.html'],
+    homePaths: ['/', '/index.html'],
     termTitle: 'GATE AGENT · AM 2332',
     prompt: 'gate-agent>',
     banner: `<span class="c-accent">GATE AGENT CONSOLE · FLIGHT AM 2332 · LAX ⇄ SYR</span>
@@ -24,12 +24,12 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
     sudo: `<span class="c-err">PLEASE STEP ASIDE FOR ADDITIONAL SCREENING.</span>
 <span class="c-dim">guest is not in the sudoers file. TSA has been notified (it hasn't).</span>`,
     places: {
-      '~': P, home: P, '/': P, departures: P,
+      '~': H, home: H, '/': H, departures: H,
       map: P + 'map.html', route: P + 'map.html', atlas: P + 'map.html',
       vault: P + 'vault.html', '.vault': P + 'vault.html', 'lost-and-found': P + 'vault.html', lostandfound: P + 'vault.html',
-      about: P + '#info', info: P + '#info', projects: P + '#gates', gates: P + '#gates', work: P + '#gates',
-      experience: P + '#departures', path: P + '#departures', board: P + '#departures', contact: P + '#pass', pass: P + '#pass',
-      play: '/404.html', cancelled: P + 'cancelled.html', luggage: P + 'luggage.html', v2: '/',
+      about: H + '#info', info: H + '#info', projects: H + '#gates', gates: H + '#gates', work: H + '#gates',
+      experience: H + '#departures', path: H + '#departures', board: H + '#departures', contact: H + '#pass', pass: H + '#pass',
+      play: '/404.html', cancelled: P + 'cancelled.html', luggage: P + 'luggage.html', v2: '/v2/',
     },
     palettes: { party: ['#ffcd00', '#ffb000', '#f2eee3', '#111111', '#36d07a'] },
     eggs: {
