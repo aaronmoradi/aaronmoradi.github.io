@@ -10,24 +10,23 @@
 @font-face { font-family: "Overpass Mono"; src: url("fonts/overpass-mono-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
-  /* LAX at dusk: midnight indigo, sunset coral, hot pink, sodium gold, Pacific sand */
-  --night: #0d0b26;
-  --housing: #161334;
-  --flap: #241e4c;
-  --flap-2: #1c1742;
-  --glyph: #fff1e3;
-  --dim: #9b93c4;
-  --amber: #ffb547;
-  --green: #5ef0b0;
-  --sign: #ff6a3d;          /* sunset coral wayfinding */
-  --sign-ink: #160f2e;
-  --pink: #ff4f8b;
-  --violet: #a970ff;
-  --concrete: #f6eadc;      /* Pacific sand */
-  --concrete-2: #e8d6c3;
-  --ink: #1a1433;
-  --muted: #6e5f86;
-  --accent: #ff6a3d;        /* map.js route colour */
+  /* Lounge: graphite flaps, warm-white signage, champagne type, one cobalt accent */
+  --night: #0b0c0e;
+  --housing: #131518;
+  --flap: #1d2024;
+  --flap-2: #181a1e;
+  --glyph: #f3f2ee;
+  --dim: #8b9099;
+  --amber: #d9bd85;         /* champagne */
+  --green: #45d09a;
+  --sign: #f3f2ee;          /* warm-white wayfinding */
+  --sign-ink: #0f1113;
+  --blue: #3d7dff;
+  --concrete: #f4f3ef;
+  --concrete-2: #e7e5df;
+  --ink: #121417;
+  --muted: #5f6570;
+  --accent: #3d7dff;        /* map.js route colour */
   --sans: "Overpass", "Highway Gothic", "Helvetica Neue", Arial, sans-serif;
   --mono: "Overpass Mono", ui-monospace, Menlo, monospace;
   --max: 1240px;
@@ -36,7 +35,7 @@
   color-scheme: dark;
 }
 /* Showtime (Konami): purple & gold livery */
-:root.showtime { --night: #2a1047; --housing: #3a175f; --flap: #4a1f78; --flap-2: #42196c; --glyph: #fdb927; --amber: #ffffff; --sign: #fdb927; --concrete: #efe3c4; --accent: #fdb927; }
+:root.showtime { --night: #2a1047; --housing: #3a175f; --flap: #4a1f78; --flap-2: #42196c; --glyph: #fdb927; --amber: #ffffff; --sign: #fdb927; --concrete: #efe3c4; --accent: #fdb927; --blue: #fdb927; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -303,38 +302,33 @@ a { color: inherit; }
 
 
 /* ==========================================================================
-   Dusk layer: the sky behind the board, palm line, LAX-pylon tag, sunset type
+   Lounge layer: quiet graphite surfaces, hairline borders, a single cobalt accent
    ========================================================================== */
-.hero {
-  position: relative; padding-bottom: clamp(70px, 10vw, 130px);
-  background: linear-gradient(180deg, #0d0b26 0%, #1a1348 30%, #3b1f6b 52%, #7a2f7c 68%, #d1466c 84%, #ff7a45 100%);
-}
-.hero::before { /* a few stars in the upper sky */
-  content: ""; position: absolute; inset: 0 0 45% 0; pointer-events: none; opacity: .7;
-  background-image:
-    radial-gradient(1.2px 1.2px at 12% 18%, #fff, transparent), radial-gradient(1px 1px at 27% 8%, #fff, transparent),
-    radial-gradient(1.4px 1.4px at 44% 22%, #fff, transparent), radial-gradient(1px 1px at 61% 12%, #fff, transparent),
-    radial-gradient(1.2px 1.2px at 78% 26%, #fff, transparent), radial-gradient(1px 1px at 90% 9%, #fff, transparent),
-    radial-gradient(1px 1px at 6% 40%, #fff, transparent), radial-gradient(1px 1px at 70% 40%, #fff, transparent);
-}
-.hero::after { /* palm-lined horizon */
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: clamp(90px, 13vw, 170px); pointer-events: none;
-  background: url("palms.svg") repeat-x bottom left / auto 100%;
-}
-.hero .wrap { position: relative; z-index: 1; }
-.hero .board { background: rgba(22, 19, 52, .92); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
-.mark span.code { animation: pylon 14s linear infinite; }
-@keyframes pylon { 0%, 100% { background: #ff6a3d; } 25% { background: #ff4f8b; } 50% { background: #a970ff; } 75% { background: #4fa8ff; } }
-.signs a.alt { background: var(--sign-ink); color: var(--sign); box-shadow: inset 0 0 0 2px var(--sign); }
-.zone-head .txt { background: var(--sign); }
-.dark-zone { background: radial-gradient(120% 70% at 50% 0%, #1a1446 0%, var(--night) 60%); }
-.arrivals { background: linear-gradient(180deg, var(--night) 0%, #24134a 55%, #4a1d5e 100%); }
-.arrivals .welcome span { background: linear-gradient(90deg, #ffb547, #ff6a3d 40%, #ff4f8b 75%, #a970ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.gate { background: var(--sign-ink); }
-.gate .board-line { border-top-color: #2e2759; }
-.topbar { background: rgba(13, 11, 38, .9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom-color: #231d4d; }
-.topnav a { border-color: #2a2457; }
-.tbtn { border-color: #2a2457; }
-.pass-band { background: var(--sign-ink); color: var(--sign); }
-.toast { background: var(--sign); }
-@media (prefers-reduced-motion: reduce) { .mark span.code { animation: none; } }
+.hero { background: radial-gradient(90% 60% at 50% 0%, #17191d 0%, var(--night) 70%); }
+.hero .board { box-shadow: 0 40px 90px rgba(0, 0, 0, .55), 0 0 0 1px #1f2226; }
+.mark span.code { background: var(--blue); color: #fff; }
+.signs a.alt { background: transparent; color: var(--sign); box-shadow: inset 0 0 0 1px #3a3e45; }
+.signs a.alt:hover { background: var(--sign); color: var(--sign-ink); box-shadow: none; }
+.zone-head .pict svg { fill: var(--blue); }
+.dark-zone { background: var(--night); }
+.gate { background: #111316; box-shadow: 0 0 0 1px #1f2226; }
+.gate .board-line { border-top-color: #24272c; }
+.gate a, .term-out a, .arrivals .welcome span { color: var(--blue); }
+.topbar { background: rgba(11, 12, 14, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom-color: #1c1f23; }
+.topnav a, .tbtn { border-color: #262a2f; }
+.pass-band { background: var(--sign-ink); color: var(--glyph); }
+.pass-band b, .pass-band strong { color: var(--amber); }
+.live-dot { box-shadow: 0 0 8px rgba(69, 208, 154, .6); }
+::selection { background: var(--blue); color: #fff; }
+:focus-visible { outline-color: var(--blue); }
+.signs { position: relative; z-index: 2; margin-top: 14px; gap: 8px; }
+.signs a { background: #15171a; color: var(--glyph); box-shadow: inset 0 0 0 1px #2a2e34; transition: background .2s, color .2s, box-shadow .2s; }
+.signs a svg { color: var(--blue); }
+.signs a:hover, .signs li:first-child a { background: var(--sign); color: var(--sign-ink); box-shadow: none; }
+.signs a:hover svg, .signs li:first-child a svg { color: inherit; }
+.topbar { background: var(--night); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.concourse .zone-head .pict { background: var(--blue); }
+.concourse .zone-head .pict svg { fill: #fff; }
+.concourse .zone-head .txt { background: var(--ink); color: var(--glyph); }
+.board-btn { background: var(--ink); color: #fff; transition: background .2s; }
+.board-btn:hover { background: var(--blue); color: #fff; }
