@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Los Angeles edition: Metro Rail.
+   Helvetica on charcoal station totems, lettered line bullets in the Metro
+   line colours (B, D, E, A, K, C, G), Metro orange as the one accent.
+   Each departure rides the line that actually serves it where one exists:
+   Hollywood on the B, Westwood on the D (extension), Santa Monica on the E,
+   the Valley on the G.
+   ========================================================================== */
+
+html.la {
+  --night: #121212;
+  --housing: #1a1a1a;
+  --flap: #242424;
+  --flap-2: #1e1e1e;
+  --glyph: #ffffff;
+  --dim: #a0a0a0;
+  --amber: #fdb913;          /* E Line gold */
+  --green: #58a738;          /* C Line green */
+  --sign: #ffffff;
+  --sign-ink: #1a1a1a;
+  --blue: #e16710;           /* Metro orange */
+  --concrete: #f2f0ec;
+  --concrete-2: #e0ddd6;
+  --ink: #161616;
+  --muted: #5f5f5f;
+  --accent: #e16710;
+  --sans: "Helvetica Neue", Helvetica, "Nimbus Sans", Arial, sans-serif;
+  --bullet-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html.la .mark span.code { background: var(--blue); color: #fff; border-radius: 6px; padding: 6px 8px 5px; font: 700 15px/1 var(--sans); letter-spacing: .02em; }
+html.la .mark { text-transform: none; font-weight: 700; letter-spacing: -.01em; font-size: 19px; }
+
+html.la .board { border: 1px solid #2c2c2c; border-top: 6px solid var(--blue); }
+html.la .board::before, html.la .board::after { top: 14px; }
+html.la .board-head .title { text-transform: none; letter-spacing: .01em; font-weight: 700; }
+html.la .board-head svg { fill: var(--blue); }
+html.la .live-dot { background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+
+/* bullets */
+html.la .signs li:nth-child(1) a { --b: #e3131b; --bt: "B"; }
+html.la .signs li:nth-child(2) a { --b: #a05da5; --bt: "D"; }
+html.la .signs li:nth-child(3) a { --b: #fdb913; --bt: "E"; --bi: #111; }
+html.la .signs li:nth-child(4) a { --b: #0072bc; --bt: "A"; }
+html.la .signs li:nth-child(5) a { --b: #e470ab; --bt: "K"; }
+html.la .signs li:nth-child(6) a { --b: #58a738; --bt: "C"; }
+html.la #route .signs li a { --b: #0072bc; --bt: "A"; --bi: #fff; }
+html.la #departures .zone-head { --b: #e3131b; --bt: "B"; }
+html.la #info .zone-head { --b: #a05da5; --bt: "D"; }
+html.la #gates .zone-head { --b: #fdb913; --bt: "E"; --bi: #111; }
+html.la #route .zone-head { --b: #0072bc; --bt: "A"; }
+html.la #pass-zone .zone-head { --b: #e470ab; --bt: "K"; }
+html.la .dep-row:nth-child(1) { --b: #e3131b; --bt: "B"; }              /* Hollywood/Highland */
+html.la .dep-row:nth-child(2) { --b: #a05da5; --bt: "D"; }              /* D Line extension to Westwood */
+html.la .dep-row:nth-child(3) { --b: #0072bc; --bt: "A"; }
+html.la .dep-row:nth-child(4) { --b: #f8a31a; --bt: "G"; --bi: #111; } /* San Fernando Valley */
+html.la .dep-row:nth-child(5) { --b: #e470ab; --bt: "K"; }
+html.la .dep-row:nth-child(6) { --b: #fdb913; --bt: "E"; --bi: #111; } /* Downtown Santa Monica */
+
+/* station totems: charcoal, white Helvetica, bullet first */
+html.la .signs a, html.la .signs li:first-child a { background: #2b2b2b; color: #fff; box-shadow: none; border-radius: 4px; font-weight: 700; letter-spacing: -.005em; }
+html.la .signs a:hover, html.la .signs li:first-child a:hover { background: #3a3a3a; color: #fff; }
+html.la .zone-head { width: fit-content; background: #2b2b2b; border-top: 6px solid var(--blue); border-radius: 6px; overflow: hidden; }
+html.la .zone-head .pict, html.la .zone-head .txt { background: transparent; color: #fff; }
+html.la .zone-head h2 { font-weight: 700; letter-spacing: -.02em; }
+html.la .zone-head p { font-weight: 400; text-transform: none; letter-spacing: .01em; color: #cfcfcf; }
+
+html.la .info .lede strong { font-weight: 700; }
+html.la .gate { background: #1a1a1a; border-radius: 6px; overflow: hidden; }
+html.la .gate .gno { background: #2b2b2b; color: #fff; }
+html.la .gate a { color: #fff; }
+html.la .photo-sign figcaption { background: #2b2b2b; color: #fff; }
+html.la .pass-band { background: #2b2b2b; }
+html.la .board-btn { background: var(--blue); border-radius: 4px; }
+html.la .board-btn:hover { background: #111; }
+
+html.la .arrivals .welcome { font-weight: 700; letter-spacing: -.03em; }
+html.la .arrivals .welcome span { color: var(--blue); }

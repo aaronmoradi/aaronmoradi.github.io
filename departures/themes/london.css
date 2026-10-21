@@ -1,0 +1,112 @@
+/* ==========================================================================
+   London edition: the Underground.
+   Railway (Greg Fleming's OFL revival of Johnston's 1916 Underground type),
+   amber dot-matrix platform indicators (Doto), roundels, line colours,
+   white station tiling and the platform edge.
+   ========================================================================== */
+
+@font-face { font-family: "Railway"; src: url("fonts/Railway.ttf") format("truetype"); font-weight: 400; font-display: swap; unicode-range: U+0000-218F, U+2200-FFFF; } /* its arrows are ornamental; use the fallback for those */
+@font-face { font-family: "Doto"; src: url("fonts/doto-latin-900-normal.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+
+html.london {
+  --night: #070708;
+  --housing: #050505;
+  --flap: #0c0c0c;
+  --flap-2: #090909;
+  --glyph: #f4f4f2;
+  --dim: #8d8d8d;
+  --amber: #ffb000;          /* indicator LED */
+  --green: #ffb000;
+  --sign: #0019a8;           /* Underground blue */
+  --sign-ink: #ffffff;
+  --blue: #0019a8;
+  --red: #dc241f;            /* roundel red */
+  --concrete: #f4f2ec;
+  --concrete-2: #e2ded3;
+  --ink: #111111;
+  --muted: #5d5d5d;
+  --accent: #dc241f;
+  --sans: "Railway", "Johnston", "Gill Sans", "Gill Sans MT", "Helvetica Neue", Arial, sans-serif;
+  font-synthesis: none;
+}
+html.london body { letter-spacing: .01em; }
+html.london h1, html.london h2, html.london h3, html.london strong, html.london b { font-weight: 400; }
+
+/* topbar: mini roundel behind the AM bar */
+html.london .mark { position: relative; padding-left: 4px; font-weight: 400; letter-spacing: .06em; }
+html.london .mark::before { content: ""; position: absolute; left: 3px; top: 50%; width: 38px; height: 38px; margin-top: -19px; border: 7px solid var(--red); border-radius: 50%; box-sizing: border-box; }
+html.london .mark span.code { position: relative; z-index: 1; background: var(--blue); color: #fff; padding: 4px 6px 2px; margin-left: -4px; font-size: 14px; }
+html.london .topnav a, html.london .tbtn { font-weight: 400; letter-spacing: .05em; }
+
+/* the indicator: black housing, amber dot-matrix */
+html.london .board { background: #000; border: 8px solid #161616; box-shadow: 0 0 0 1px #2a2a2a, 0 30px 70px rgba(0, 0, 0, .6); }
+html.london .board::before, html.london .board::after { display: none; }
+html.london .cell { font-family: "Doto", var(--mono); font-weight: 900; color: var(--amber); text-shadow: 0 0 6px rgba(255, 176, 0, .45); box-shadow: none; }
+html.london .cell::after { background: #000; box-shadow: none; opacity: .6; }
+html.london .dim .cell { color: #9a6a00; text-shadow: none; }
+html.london .board-head .title, html.london .board-head { font-weight: 400; color: var(--amber); }
+html.london .board-head svg { fill: var(--amber); }
+html.london .board-foot { font-family: "Doto", var(--mono); font-weight: 900; color: #b98000; border-top-color: #1a1a1a; }
+html.london .board-foot button { color: var(--amber); border-bottom-color: #6b4a00; }
+html.london .dep-labels { font-weight: 400; color: #b98000; }
+html.london .live-dot { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+
+/* line colours down the left of each departure */
+html.london .dep-labels { padding-left: 20px; }
+html.london .dep-row { padding-left: 20px; position: relative; }
+html.london .dep-row::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 8px; width: 7px; background: var(--b); }
+html.london .dep-row:nth-child(1) { --b: #b36305; } /* Bakerloo */
+html.london .dep-row:nth-child(2) { --b: #e32017; } /* Central */
+html.london .dep-row:nth-child(3) { --b: #003688; } /* Piccadilly */
+html.london .dep-row:nth-child(4) { --b: #00782a; } /* District */
+html.london .dep-row:nth-child(5) { --b: #a0a5a9; } /* Jubilee */
+html.london .dep-row:nth-child(6) { --b: #6950a1; } /* Elizabeth */
+
+/* wayfinding: Underground-blue signs, white Johnston */
+html.london .signs a { background: var(--blue); color: #fff; box-shadow: none; font-weight: 400; letter-spacing: .02em; }
+html.london .signs a svg { color: #fff; }
+html.london .signs a:hover { background: var(--red); color: #fff; }
+html.london .signs li:first-child a { background: #fff; color: var(--blue); }
+html.london .signs li:first-child a svg { color: var(--blue); }
+html.london .signs li:first-child a:hover { background: var(--red); color: #fff; }
+html.london .signs li:first-child a:hover svg { color: #fff; }
+
+/* section heads are roundels: a red ring with the name on the blue bar */
+html.london .zone-head { display: inline-grid; grid-template-areas: "r"; place-items: center; }
+html.london .zone-head > * { grid-area: r; }
+html.london .zone-head .pict {
+  width: clamp(124px, 15vw, 184px); aspect-ratio: 1; border-radius: 50%; background: transparent;
+  border: clamp(20px, 2.6vw, 31px) solid var(--red);
+}
+html.london .zone-head .pict svg, html.london .zone-head .pict::before { display: none; }
+html.london .zone-head .txt { position: relative; z-index: 1; min-width: clamp(170px, 21vw, 250px); align-items: center; text-align: center; background: var(--blue); color: #fff; padding: 9px clamp(18px, 2.4vw, 30px) 7px; }
+html.london .zone-head h2 { font-weight: 400; font-size: clamp(26px, 3.8vw, 48px); letter-spacing: .01em; line-height: 1.05; }
+html.london .zone-head p { font-weight: 400; font-size: clamp(11px, 1.1vw, 13px); letter-spacing: .12em; opacity: .85; }
+
+/* station tiling on the light sections */
+html.london .concourse {
+  background-color: var(--concrete);
+  background-image: linear-gradient(#e8e4d9 1px, transparent 1px), linear-gradient(90deg, #e8e4d9 1px, transparent 1px);
+  background-size: 64px 32px;
+}
+html.london .info .lede strong { font-weight: 400; color: var(--blue); }
+html.london .facts b, html.london .gate .gno, html.london .pass-band, html.london .board-btn { font-weight: 400; }
+
+html.london .dark-zone { background: var(--night); }
+html.london .gate { background: #0d0d0e; }
+html.london .gate .gno { background: var(--blue); color: #fff; }
+html.london .gate a { color: #fff; }
+html.london .pass-band { background: var(--blue); color: #fff; }
+html.london .board-btn { background: var(--red); }
+html.london .board-btn:hover { background: var(--blue); }
+html.london .photo-sign figcaption { background: var(--blue); color: #fff; }
+
+/* the platform edge */
+html.london .arrivals { position: relative; padding-top: clamp(80px, 9vw, 110px); }
+html.london .arrivals::before {
+  content: "MIND THE GAP"; position: absolute; left: 0; right: 0; top: 0; height: 46px; display: grid; place-items: center;
+  border-top: 8px solid #ffd300; background: #1c1c1c; color: #fff; font: 400 18px/1 var(--sans); letter-spacing: .5em;
+}
+html.london .arrivals .welcome { font-weight: 400; }
+html.london .arrivals .welcome span { color: var(--red); }
+html.london .egg-meter { color: var(--amber) !important; }

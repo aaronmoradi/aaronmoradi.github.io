@@ -1,0 +1,47 @@
+/* ==========================================================================
+   City editions of Departures (London, New York, Los Angeles).
+   Shared mechanics: line bullets on signs, section heads and board rows,
+   plus the edition switcher. Each city sheet sets the colours and letters
+   through --b (bullet colour), --bt (bullet text) and --bi (bullet ink).
+   ========================================================================== */
+
+/* line bullets: signs */
+.bullets .signs a svg { display: none; }
+.bullets .signs a::before {
+  content: var(--bt, ""); flex: none; display: grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%;
+  background: var(--b, var(--blue)); color: var(--bi, #fff); font: 700 .9em/1 var(--bullet-font, var(--sans)); letter-spacing: 0;
+}
+
+/* line bullets: section heads */
+.bullets .zone-head .pict svg { display: none; }
+.bullets .zone-head .pict::before {
+  content: var(--bt, ""); display: grid; place-items: center; width: 62%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--b, var(--blue)); color: var(--bi, #fff); font: 700 clamp(26px, 3.4vw, 40px)/1 var(--bullet-font, var(--sans));
+}
+
+/* line bullets: departures rows (desktop); a coloured edge on phones */
+.bullets .dep-labels, .bullets .dep-row { position: relative; padding-left: 46px; }
+.bullets .dep-row::before {
+  content: var(--bt, ""); position: absolute; left: 0; top: 10px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--b); color: var(--bi, #fff); font: 700 17px/1 var(--bullet-font, var(--sans));
+}
+@media (max-width: 760px) {
+  .bullets .dep-labels, .bullets .dep-row { padding-left: 10px; }
+  .bullets .dep-row::before { content: ""; top: 10px; bottom: 8px; width: 4px; height: auto; border-radius: 2px; }
+}
+
+/* edition switcher */
+.editions {
+  position: fixed; left: 50%; bottom: 14px; z-index: 9980; transform: translateX(-50%); display: flex; gap: 2px; padding: 4px;
+  background: rgba(10, 10, 12, .92); border: 1px solid rgba(255, 255, 255, .14); border-radius: 999px; box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+  font: 700 12px/1 "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase;
+}
+.editions a { padding: 9px 13px 8px; border-radius: 999px; color: #d9d9d9; text-decoration: none; white-space: nowrap; }
+.editions a:hover { color: #fff; background: rgba(255, 255, 255, .08); }
+.editions a[aria-current] { background: #fff; color: #111; }
+.arrivals { padding-bottom: 90px; }
+@media print { .editions { display: none; } }
+@media (max-width: 480px) {
+  .editions { max-width: calc(100% - 16px); bottom: 10px; font-size: 10.5px; letter-spacing: .03em; }
+  .editions a { padding: 8px 9px 7px; }
+}

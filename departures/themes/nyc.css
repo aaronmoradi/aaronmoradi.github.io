@@ -1,0 +1,87 @@
+/* ==========================================================================
+   New York edition: the Subway.
+   Helvetica, black station signs with the white rule, route bullets in the
+   MTA line colours, white tile walls with a mosaic band.
+   ========================================================================== */
+
+html.nyc {
+  --night: #0c0c0c;
+  --housing: #121212;
+  --flap: #1c1c1c;
+  --flap-2: #171717;
+  --glyph: #ffffff;
+  --dim: #9b9b9b;
+  --amber: #fccc0a;          /* N Q R W */
+  --green: #6cbe45;          /* G */
+  --sign: #ffffff;
+  --sign-ink: #111111;
+  --blue: #0039a6;           /* A C E / MTA */
+  --concrete: #f6f6f3;
+  --concrete-2: #e3e3df;
+  --ink: #111111;
+  --muted: #5e5e5e;
+  --accent: #0039a6;
+  --sans: "Helvetica Neue", Helvetica, "Nimbus Sans", Arial, sans-serif;
+  --bullet-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+html.nyc body { letter-spacing: -.005em; }
+
+/* topbar: the AM tag is an MTA-style disc */
+html.nyc .mark span.code { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border-radius: 50%; background: var(--blue); color: #fff; font: 700 14px/1 var(--sans); letter-spacing: 0; }
+html.nyc .mark { text-transform: none; font-weight: 700; letter-spacing: -.01em; font-size: 19px; }
+
+/* the countdown clock: Helvetica bold on black */
+html.nyc .cell { font-family: var(--sans); font-weight: 700; }
+html.nyc .board { border: 1px solid #262626; }
+html.nyc .board-head .title { letter-spacing: .02em; text-transform: none; font-weight: 700; }
+html.nyc .board-head svg { fill: #fff; }
+
+/* bullets */
+html.nyc .signs li:nth-child(1) a { --b: #0039a6; --bt: "A"; }
+html.nyc .signs li:nth-child(2) a { --b: #fccc0a; --bt: "Q"; --bi: #111; }
+html.nyc .signs li:nth-child(3) a { --b: #b933ad; --bt: "7"; }
+html.nyc .signs li:nth-child(4) a { --b: #a7a9ac; --bt: "L"; }
+html.nyc .signs li:nth-child(5) a { --b: #00933c; --bt: "4"; }
+html.nyc .signs li:nth-child(6) a { --b: #ff6319; --bt: "F"; }
+html.nyc #route .signs li a { --b: #a7a9ac; --bt: "L"; --bi: #fff; }
+html.nyc #departures .zone-head { --b: #ee352e; --bt: "1"; }
+html.nyc #info .zone-head { --b: #fccc0a; --bt: "Q"; --bi: #111; }
+html.nyc #gates .zone-head { --b: #b933ad; --bt: "7"; }
+html.nyc #route .zone-head { --b: #a7a9ac; --bt: "L"; }
+html.nyc #pass-zone .zone-head { --b: #00933c; --bt: "4"; }
+html.nyc .dep-row:nth-child(1) { --b: #ee352e; --bt: "1"; }
+html.nyc .dep-row:nth-child(2) { --b: #b933ad; --bt: "7"; }
+html.nyc .dep-row:nth-child(3) { --b: #6cbe45; --bt: "G"; }
+html.nyc .dep-row:nth-child(4) { --b: #ff6319; --bt: "F"; }
+html.nyc .dep-row:nth-child(5) { --b: #0039a6; --bt: "A"; }
+html.nyc .dep-row:nth-child(6) { --b: #fccc0a; --bt: "N"; --bi: #111; }
+
+/* station signs: black, white Helvetica, the thin white rule along the top */
+html.nyc .signs a, html.nyc .signs li:first-child a {
+  background: linear-gradient(#fff, #fff) 0 6px / 100% 2px no-repeat, #111;
+  color: #fff; box-shadow: inset 0 0 0 1px #2c2c2c; padding: 18px 18px 11px; font-weight: 700; letter-spacing: -.005em;
+}
+html.nyc .signs a:hover, html.nyc .signs li:first-child a:hover { background: linear-gradient(#fff, #fff) 0 6px / 100% 2px no-repeat, #262626; color: #fff; }
+html.nyc .zone-head { width: fit-content; background: linear-gradient(#fff, #fff) 0 9px / 100% 2px no-repeat, #111; padding-top: 14px; }
+html.nyc .zone-head .pict, html.nyc .zone-head .txt { background: transparent; color: #fff; }
+html.nyc .zone-head h2 { font-weight: 700; letter-spacing: -.02em; }
+html.nyc .zone-head p { font-weight: 400; letter-spacing: .02em; text-transform: none; color: #cfcfcf; }
+
+/* tile walls with a mosaic band */
+html.nyc .concourse {
+  position: relative; background-color: var(--concrete);
+  background-image: linear-gradient(#e6e6e1 1px, transparent 1px), linear-gradient(90deg, #e6e6e1 1px, transparent 1px);
+  background-size: 48px 24px;
+  border-top: 16px solid transparent;
+  border-image: repeating-linear-gradient(90deg, #7d2027 0 16px, #c9a24a 16px 32px, #2f5d50 32px 48px, #c9a24a 48px 64px) 16;
+}
+html.nyc .info .lede strong { font-weight: 700; }
+html.nyc .gate { background: #111; }
+html.nyc .gate .gno { background: linear-gradient(#fff, #fff) 0 6px / 100% 2px no-repeat, #111; color: #fff; padding-top: 18px; border-bottom: 1px solid #2c2c2c; }
+html.nyc .gate a { color: #fff; }
+html.nyc .photo-sign figcaption { background: #111; color: #fff; }
+html.nyc .board-btn { background: #111; }
+html.nyc .board-btn:hover { background: var(--blue); }
+
+html.nyc .arrivals .welcome { font-weight: 700; letter-spacing: -.03em; }
+html.nyc .arrivals .welcome span { color: var(--amber); }
