@@ -16,7 +16,7 @@
     .rank { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; margin-top: 26px; background: var(--board); color: var(--led); border: 4px solid #000; padding: 12px 16px; }
     .rank small { display: block; font: 700 11px/1 var(--cond); letter-spacing: .2em; color: #8c8270; text-transform: uppercase; margin-bottom: 6px; }
     .rank b { font: 900 clamp(24px, 3.4vw, 38px)/1 var(--dots); text-shadow: 0 0 8px rgba(255, 182, 39, .55); }
-    .meter { display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+    .meter { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
     .meter i { height: 18px; background: #26231d; }
     .meter i.on { background: var(--led); box-shadow: 0 0 8px rgba(255, 182, 39, .6); }
     /* the binder page: 9-pocket sheets */
@@ -44,7 +44,7 @@
 </head>
 
 <body data-egg="vault">
-  <div class="ticker"><div class="wrap"><span>Official Program · Collector's Binder</span><span>Set of 13</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
+  <div class="ticker"><div class="wrap"><span>Official Program · Collector's Binder</span><span>Complete set</span><span>Los Angeles, Calif.</span><span>Press box: press ` </span></div></div>
   <header class="masthead">
     <div class="wrap">
       <a class="monogram logo" href="/program/" aria-label="Aaron Moradi, home">AM</a>
@@ -79,7 +79,7 @@
 
     <div class="hof" id="hof">
       <h2>Hall of Fame</h2>
-      <p>You pulled the complete set. All thirteen. That's real dedication, so send a note to the ticket office and tell me which card was the hardest to find.</p>
+      <p>You pulled the complete set. Every card. That's real dedication, so send a note to the ticket office and tell me which card was the hardest to find.</p>
       <a class="btn" href="/program/#tickets" style="background:var(--gold);color:var(--purple);border-color:var(--gold);box-shadow:4px 4px 0 #000">Tell me about it →</a>
     </div>
 
@@ -95,14 +95,14 @@
   <script src="/js/main.js"></script>
   <script>
   (() => {
-    const RANKS = [[0, 'Rookie'], [3, 'Sixth Man'], [6, 'Starter'], [9, 'All-Star'], [12, 'MVP'], [13, 'Hall of Fame']];
+    const RANKS = [[0, 'Rookie'], [3, 'Sixth Man'], [6, 'Starter'], [9, 'All-Star'], [AM.EGGS.length - 1, 'MVP'], [AM.EGGS.length, 'Hall of Fame']];
     function render() {
       const found = AM.foundEggs();
       const n = AM.EGGS.filter((e) => found.has(e.id)).length;
       document.getElementById('pockets').innerHTML = AM.EGGS.map((e, i) => {
         const no = String(i + 1).padStart(2, '0');
         return `<div class="pocket">${found.has(e.id)
-          ? `<div class="tc found"><div class="art" data-n="No. ${no}">${e.icon}</div><div class="nm">${e.name}</div><div class="when">AM '25 · Card ${no} of 13</div></div>`
+          ? `<div class="tc found"><div class="art" data-n="No. ${no}">${e.icon}</div><div class="nm">${e.name}</div><div class="when">AM '25 · Card ${no} of ${AM.EGGS.length}</div></div>`
           : `<div class="tc back"><div class="q">${no}</div><p>${e.hint}</p><small>Not yet pulled</small></div>`}</div>`;
       }).join('');
       document.getElementById('count').textContent = `${n}/${AM.EGGS.length}`;

@@ -303,9 +303,9 @@ page("spec/vault.html", title="Appendix E · Inspection checklist", sheet="App. 
   <main class="wrap">
     <section class="sec">
       <div class="sec-no">E</div>
-      <div class="sec-title"><h2>Appendix E · Inspection checklist</h2><p>Thirteen items are concealed across AM-001. Items pass inspection when found. Records are kept in this browser only.</p></div>
+      <div class="sec-title"><h2>Appendix E · Inspection checklist</h2><p>Items are concealed across AM-001. Items pass inspection when found. Records are kept in this browser only.</p></div>
       <div class="sec-body">
-        <div class="summary"><div><b id="nDone">0</b><span>Items passed</span></div><div><b id="nOpen">13</b><span>Items open</span></div><div><b id="pct">0%</b><span>Inspection complete</span></div></div>
+        <div class="summary"><div><b id="nDone">0</b><span>Items passed</span></div><div><b id="nOpen">—</b><span>Items open</span></div><div><b id="pct">0%</b><span>Inspection complete</span></div></div>
         <table class="spec compact chk">
           <thead><tr><th>ID</th><th>Item</th><th>Status</th><th class="num">First found</th></tr></thead>
           <tbody id="rows"></tbody>

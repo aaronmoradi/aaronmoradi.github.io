@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flapdle · Departures · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/departures/departures.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
+  <style>
+    .fd { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: clamp(18px, 3vw, 34px); align-items: start; }
+    .fd-board .board-head { margin-bottom: 14px; }
+    .fd-grid { display: grid; gap: 8px; justify-content: center; margin: 4px 0 18px; }
+    .fd-row { --gap: 6px; border-radius: 4px; }
+    .fd-row .cell { --cw: clamp(42px, 9.5vw, 64px); --ch: clamp(50px, 12vw, 84px); transition: box-shadow .2s; }
+    .fd-row.active .cell { box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 2px 3px rgba(0, 0, 0, .6); }
+    .fd .cell.hit .h, .fd .cell.hit .leaf { background: #1f7d50; }
+    .fd .cell.near .h, .fd .cell.near .leaf { background: #a5770f; }
+    .fd .cell.miss .h, .fd .cell.miss .leaf { background: #111215; }
+    .fd .cell.miss { color: #5f646d; }
+    .fd-status { display: flex; justify-content: center; min-height: 30px; }
+    .fd-status .cell { --cw: clamp(11px, 2.4vw, 17px); --ch: clamp(18px, 3.8vw, 26px); color: var(--amber); }
+    .fd-status .flaps { --gap: 2px; }
+    .fd-keys { margin-top: 16px; display: grid; gap: 7px; user-select: none; }
+    .fd-krow { display: flex; justify-content: center; gap: 6px; }
+    .fd-krow button { flex: 1; max-width: 46px; height: 54px; border: 0; border-radius: 5px; background: #2b2e34; color: #fff; font: 700 16px/1 var(--sans); cursor: pointer; padding: 0; touch-action: manipulation; }
+    .fd-krow button.wide { max-width: 72px; flex: 1.6; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .fd-krow button:hover { filter: brightness(1.2); }
+    .fd-krow button.hit { background: #1f7d50; } .fd-krow button.near { background: #a5770f; } .fd-krow button.miss { background: #141518; color: #5f646d; }
+    .fd-side { display: grid; gap: 14px; }
+    .fd-nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; }
+    .fd-nums b { display: block; font: 800 26px/1 var(--sans); }
+    .fd-nums span { font: 600 10px/1.3 var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+    .fd-bar { display: grid; grid-template-columns: 14px 1fr; gap: 8px; align-items: center; font: 600 12px var(--mono); margin: 4px 0; }
+    .fd-bar i { display: block; font-style: normal; text-align: right; padding: 3px 6px 2px; background: #2b2e34; min-width: 22px; }
+    .fd-bar.me i { background: #1f7d50; }
+    .fd-side h3 { margin: 0 0 8px; font: 700 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .fd-next { font: 600 22px var(--mono); }
+    .fd-side .tbtn { width: 100%; height: 40px; }
+    .fd-how { font-size: 14px; color: #b9bcc2; line-height: 1.5; }
+    .fd-how i { display: inline-block; width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; }
+    .game-note { margin-top: 22px; font-size: 14px; color: var(--dim); }
+    .game-note a { color: var(--glyph); }
+    @media (max-width: 860px) { .fd { grid-template-columns: 1fr; } }
+  </style>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-dep" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM22.07 9.64c-.21-.8-1.04-1.28-1.84-1.06L14.92 10 8 3.57l-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 2.59 4.49L21 11.49c.81-.23 1.28-1.05 1.07-1.85z"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM9.68 13.27l4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.8-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.02L10.12 2v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43 5.31 1.43z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><path d="M4 3h7v18H4zm2 2v14h3V5zm7 6h5.17l-2.59-2.59L17 7l5 5-5 5-1.41-1.41L18.17 13H13z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path d="M19 15.18V7c0-2.21-1.79-4-4-4s-4 1.79-4 4v10c0 1.1-.9 2-2 2s-2-.9-2-2V8.82a3 3 0 1 0-2 0V17c0 2.21 1.79 4 4 4s4-1.79 4-4V7c0-1.1.9-2 2-2s2 .9 2 2v8.18a3 3 0 1 0 2 0z"/></symbol>
+    <symbol id="i-pass" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10.5 3.5h3V6h-3z"/></symbol>
+  </svg>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap in">
+      <a class="mark logo" href="/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
+      <nav class="topnav" id="topnav" aria-label="Main">
+        <a href="/#departures">Departures</a>
+        <a href="/#info">Information</a>
+        <a href="/#gates">Gates</a>
+        <a href="/departures/map.html">Route map</a>
+        <a href="/#pass">Boarding pass</a>
+        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+      <div class="tools">
+        <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
+        <button class="tbtn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      <div class="zone-head"><div class="pict"><svg aria-hidden="true"><use href="#i-dep"/></svg></div><div class="txt"><h2>Flapdle</h2><p>One word a day · six tries</p></div></div>
+      <div class="fd">
+        <div>
+          <div class="board fd-board">
+            <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-dep"/></svg><span id="fdNo">No. 1</span></span><span>Five letters</span></div>
+            <div class="fd-grid" id="fdGrid" role="group" aria-label="Guesses"></div>
+            <div class="fd-status" id="fdStatus" aria-live="polite"></div>
+          </div>
+          <div class="fd-keys" id="fdKeys" aria-label="Keyboard"></div>
+        </div>
+        <aside class="fd-side">
+          <div class="board">
+            <h3>Your record</h3>
+            <div class="fd-nums"><div><b id="fdPlayed">0</b><span>Played</span></div><div><b id="fdWin">0</b><span>Win %</span></div><div><b id="fdStreak">0</b><span>Streak</span></div><div><b id="fdBest">0</b><span>Best</span></div></div>
+            <h3 style="margin-top:16px">Guesses</h3>
+            <div id="fdDist"></div>
+          </div>
+          <div class="board">
+            <h3>Next word in</h3>
+            <div class="fd-next" id="fdNext">--:--:--</div>
+            <div style="display:grid;gap:6px;margin-top:12px"><button class="tbtn" id="fdShare" hidden>Copy result</button><button class="tbtn" id="fdModeBtn">Practice round</button></div>
+          </div>
+          <p class="fd-how"><i style="background:#1f7d50"></i>right letter, right slot · <i style="background:#a5770f"></i>in the word, wrong slot · <i style="background:#2b2e34"></i>not in it. A new word every midnight, LA time.</p>
+        </aside>
+      </div>
+      <p class="game-note">Type on your keyboard or tap the keys. Scores stay in this browser. <a href="/">Back to Departures</a></p>
+    </div>
+  </main>
+
+  <footer class="arrivals" style="padding-top:30px">
+    <div class="wrap">
+      <div class="foot-row">
+        <span>© <span data-year></span> Aaron Moradi</span>
+        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+        <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
+      </div>
+    </div>
+  </footer>
+  <script src="/departures/flap.js"></script>
+  <script src="/departures/departures-skin.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/departures/games/flapdle-words.js"></script>
+  <script src="/departures/games/flapdle.js"></script>
+</body>
+</html>

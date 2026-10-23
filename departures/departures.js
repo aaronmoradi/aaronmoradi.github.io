@@ -23,6 +23,11 @@
     };
     tick();
     setInterval(tick, 5000);
+    // the clock takes word requests (Flapdle)
+    const desk = clockHost.closest('.clock');
+    desk.classList.add('secret');
+    desk.title = 'Word of the day';
+    desk.addEventListener('click', () => { location.href = '/departures/flapdle.html'; });
   }
 
   /* ---------- hero: name, title, rotating ticker ---------- */
@@ -124,9 +129,13 @@
         <rect x="${lax[0] - 7}" y="${lax[1] - 7}" width="14" height="14" fill="var(--sign)"/><text x="${lax[0] - 18}" y="${lax[1] + 32}">LAX</text>
         <rect x="${syr[0] - 7}" y="${syr[1] - 7}" width="14" height="14" fill="var(--sign)"/><text x="${syr[0] - 18}" y="${syr[1] + 32}">SYR</text>
       </g>
-      <g id="plane"><path d="M-12 -2 L4 -2 L12 0 L4 2 L-12 2 Z M-2 -2 L-8 -11 L-4 -11 L4 -2 Z M-2 2 L-8 11 L-4 11 L4 2 Z M-12 -2 L-15 -6 L-12 -6 L-8 -2 Z M-12 2 L-15 6 L-12 6 L-8 2 Z" fill="var(--glyph)"/>
+      <g id="plane" class="secret" tabindex="0" role="link" aria-label="Tower: an air traffic control game"><title>Take over the tower</title><circle r="24" fill="transparent"/><path d="M-12 -2 L4 -2 L12 0 L4 2 L-12 2 Z M-2 -2 L-8 -11 L-4 -11 L4 -2 Z M-2 2 L-8 11 L-4 11 L4 2 Z M-12 -2 L-15 -6 L-12 -6 L-8 -2 Z M-12 2 L-15 6 L-12 6 L-8 2 Z" fill="var(--glyph)"/>
         <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1;0;0" keyTimes="0;.45;.5;.95;1" calcMode="linear"><mpath href="#legOut"/></animateMotion></g>`;
-    if (Flap.reduce) $('#plane', svg).remove();
+    const plane = $('#plane', svg);
+    const tower = () => { location.href = '/departures/tower.html'; };
+    plane.addEventListener('click', tower);
+    plane.addEventListener('keydown', (e) => { if (e.key === 'Enter') tower(); });
+    if (Flap.reduce) { plane.querySelector('animateMotion').remove(); plane.setAttribute('transform', `translate(${lax}) rotate(-25)`); }
   }
 
   /* ---------- boarding pass: seat 24A egg, date, tear on submit ---------- */
@@ -139,6 +148,16 @@
       seat.animate([{ transform: 'scale(1.15)' }, { transform: 'none' }], { duration: 180 });
       if (n === 8) { AM.findEgg('mamba'); AM.confetti('lakers', 90); }
       if (n === 24) { AM.confetti('lakers', 220); AM.toast('<span><b>Now boarding</b> seats 8 and 24. Mamba forever.</span>'); }
+    });
+  }
+  // scanning the barcode opens Carry-on
+  const bars = $('#passStub .barcode');
+  if (bars) {
+    bars.classList.add('secret');
+    bars.title = 'Scan';
+    bars.addEventListener('click', () => {
+      bars.animate([{ boxShadow: '0 0 0 0 rgba(255,60,60,0)', filter: 'none' }, { boxShadow: 'inset 0 -32px 0 -30px #ff3b30', filter: 'brightness(1.4)' }, { boxShadow: 'inset 0 32px 0 -30px #ff3b30', filter: 'none' }], { duration: 520 })
+        .finished.then(() => { location.href = '/departures/carry-on.html'; });
     });
   }
   const form = $('#passForm');

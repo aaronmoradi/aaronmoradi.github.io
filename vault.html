@@ -90,7 +90,7 @@
   <script src="/js/main.js"></script>
   <script>
   (() => {
-    const RANKS = [[0, 'Rookie'], [3, 'Sixth man'], [6, 'Starter'], [9, 'All-Star'], [12, 'MVP'], [13, 'Hall of Famer']];
+    const RANKS = [[0, 'Rookie'], [3, 'Sixth man'], [6, 'Starter'], [9, 'All-Star'], [AM.EGGS.length - 1, 'MVP'], [AM.EGGS.length, 'Hall of Famer']];
     function render() {
       const found = AM.foundEggs();
       const n = AM.EGGS.filter((e) => found.has(e.id)).length;

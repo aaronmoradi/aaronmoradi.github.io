@@ -35,6 +35,9 @@
     { id: 'console',   icon: '🛠️', name: 'View-source energy',   hint: 'Open the developer console and say hi.' },
     { id: 'nightowl',  icon: '🦉', name: 'Night owl',            hint: 'Visit while Los Angeles is asleep (12–5am PT).' },
     { id: 'vault',     icon: '🗝️', name: 'Vault dweller',        hint: "You're here, aren't you?" },
+    { id: 'flapdle',   icon: '🔤', name: 'Word of the day',      hint: 'Ask the terminal about the arcade. Then solve a word.' },
+    { id: 'tower',     icon: '🛬', name: 'Cleared to land',      hint: 'Ask the terminal about the arcade. Land 10 in one go.' },
+    { id: 'carryon',   icon: '🧳', name: 'Fits in the overhead', hint: 'Ask the terminal about the arcade. Pack six bags.' },
   ];
   const EGG_KEY = 'am_eggs';
 
@@ -512,6 +515,19 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
     cookie: { hidden: true, run() { print('🍪 Former Diddy Riese employee. The ice cream sandwich is the move.'); } },
     otto: { hidden: true, run() { closeTerminal(); ottoPop(); } },
     kobe: { hidden: true, run() { confetti('lakers', 80); print('💜💛 Mamba forever.'); } },
+    arcade: {
+      hidden: true,
+      run() {
+        print(`<span class="c-accent">THE ARCADE</span> <span class="c-dim">(three games, all on the Departures board)</span>
+  <a href="/departures/flapdle.html">flapdle</a>   a five-letter word a day, on split flaps
+  <a href="/departures/tower.html">tower</a>     air traffic control at LAX
+  <a href="/departures/carry-on.html">carry-on</a>  pack the bag, zip it, board
+<span class="c-dim">Type a name to play.</span>`);
+      },
+    },
+    flapdle: { hidden: true, run() { go('/departures/flapdle.html'); } },
+    tower: { hidden: true, run() { go('/departures/tower.html'); } },
+    'carry-on': { hidden: true, run() { go('/departures/carry-on.html'); } },
     xyzzy: { hidden: true, run() { print('Nothing happens.'); } },
     vim: { hidden: true, run() { print('You are now trapped in vim. Just kidding. Type :q (it won\'t help).'); } },
     ':q': { hidden: true, run() { print('See? Didn\'t help.'); } },
@@ -521,6 +537,10 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
   COMMANDS.man = { hidden: true, run: COMMANDS.help.run };
   COMMANDS.dir = { hidden: true, run: COMMANDS.ls.run };
   COMMANDS.cls = { hidden: true, run: COMMANDS.clear.run };
+  COMMANDS.games = { hidden: true, run: COMMANDS.arcade.run };
+  COMMANDS.wordle = { hidden: true, run: COMMANDS.flapdle.run };
+  COMMANDS.atc = { hidden: true, run: COMMANDS.tower.run };
+  COMMANDS.pack = { hidden: true, run: COMMANDS['carry-on'].run };
   Object.entries(SKIN.commands || {}).forEach(([name, c]) => {
     COMMANDS[name] = { desc: c.desc, hidden: c.hidden, run: (args) => c.run(args, { print, go, esc, confetti, closeTerminal }) };
   });
