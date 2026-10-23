@@ -55,10 +55,10 @@
 
   <main class="zone" style="padding-top:40px">
     <div class="wrap">
-      <div class="zone-head"><div class="pict"><svg aria-hidden="true"><use href="#i-bag"/></svg></div><div class="txt"><h2>Lost &amp; Found</h2><p>Thirteen items left on this site</p></div></div>
-      <p style="max-width:62ch;color:#c9c5bb;margin:0 0 22px">Thirteen things are hidden around this site. Each one you find is claimed here. Unclaimed items show a hint. Your claims are kept in this browser only.</p>
+      <div class="zone-head"><div class="pict"><svg aria-hidden="true"><use href="#i-bag"/></svg></div><div class="txt"><h2>Lost &amp; Found</h2><p>Items left behind on this site</p></div></div>
+      <p style="max-width:62ch;color:#c9c5bb;margin:0 0 22px">Things are hidden all around this site. Each one you find is claimed here. Unclaimed items show a hint. Your claims are kept in this browser only.</p>
       <div class="board lf">
-        <div class="lf-sum"><span>Claimed <b id="nClaimed">0</b> / 13</span><span id="rankLine">Status: new arrival</span></div>
+        <div class="lf-sum"><span>Claimed <b id="nClaimed">0</b> / <span id="nTotal">13</span></span><span id="rankLine">Status: new arrival</span></div>
         <div id="lfRows"></div>
       </div>
       <p style="margin-top:18px"><button class="tbtn" id="resetBtn">Clear all claims</button></p>
@@ -80,7 +80,9 @@
   <script>
   (() => {
     const host = document.getElementById('lfRows'), narrow = matchMedia('(max-width: 760px)').matches;
-    const RANKS = [[0, 'new arrival'], [3, 'frequent flyer'], [6, 'silver status'], [9, 'gold status'], [12, 'platinum'], [13, 'lifetime first class']];
+    const T = AM.EGGS.length;
+    document.getElementById('nTotal').textContent = T;
+    const RANKS = [[0, 'new arrival'], [3, 'frequent flyer'], [6, 'silver status'], [9, 'gold status'], [T - 1, 'platinum'], [T, 'lifetime first class']];
     let rows = [];
     function build() {
       host.innerHTML = '';

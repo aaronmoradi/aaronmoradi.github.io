@@ -80,10 +80,13 @@ window.Flap = (() => {
     host.replaceChildren(...cells);
     const api = {
       cells,
-      set(text, { stagger = 28, jitter = 60 } = {}) {
+      set(text, { stagger = 28, jitter = 60, instant = false } = {}) {
         const s = String(text).toUpperCase().padEnd(len).slice(0, len);
+        if (instant) { cells.forEach((c, i) => { c._target = norm(s[i]); paint(c, c._target); }); return Promise.resolve(); }
         return Promise.all(cells.map((c, i) => flipTo(c, s[i], i * stagger + Math.random() * jitter)));
       },
+      // flip one cell; resolves when that cell lands
+      cell(i, ch, delay = 0) { return flipTo(cells[i], String(ch).toUpperCase(), delay); },
     };
     if (initial) api.set(initial);
     return api;

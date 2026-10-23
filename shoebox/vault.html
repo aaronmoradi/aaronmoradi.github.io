@@ -62,7 +62,7 @@
           <span class="label-typed">private · do not peel</span>
           <h1>the sticker book</h1>
           <p>You found the back of the scrapbook, where I keep the stickers. Every secret on this site earns one. Empty spots have a hint penciled in. Your stickers stay in this browser only.</p>
-          <div class="progress"><span id="count">0 / 13</span><span class="bar" aria-hidden="true"><i id="bar"></i></span></div>
+          <div class="progress"><span id="count">0</span><span class="bar" aria-hidden="true"><i id="bar"></i></span></div>
         </div>
         <div class="slots" id="slots"></div>
         <div class="sb-foot"><a href="/shoebox/">← back to the scrapbook</a><button id="resetBtn">peel them all off</button></div>
@@ -98,7 +98,7 @@
         const a = document.getElementById('authentic');
         a.classList.add('on');
         setTimeout(() => a.classList.remove('on'), 3200);
-        AM.toast('all 13. <b>the complete book.</b> tell me which one was hardest!');
+        AM.toast('all of them. <b>the complete book.</b> tell me which one was hardest!');
       }
     }
     render();

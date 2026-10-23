@@ -332,3 +332,8 @@ a { color: inherit; }
 .concourse .zone-head .txt { background: var(--ink); color: var(--glyph); }
 .board-btn { background: var(--ink); color: #fff; transition: background .2s; }
 .board-btn:hover { background: var(--blue); color: #fff; }
+
+/* hidden doors to the arcade: no affordance beyond the cursor */
+.secret { cursor: pointer; }
+#plane.secret:focus-visible { outline: none; }
+#plane.secret:focus-visible path { stroke: var(--blue); stroke-width: 2; }

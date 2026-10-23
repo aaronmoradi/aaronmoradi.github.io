@@ -136,10 +136,10 @@ page("departures/vault.html", title="Lost & Found", robots="noindex, nofollow", 
   body="""
   <main class="zone" style="padding-top:40px">
     <div class="wrap">
-      """ + ZONE.format(icon="i-bag", h="Lost &amp; Found", p="Thirteen items left on this site") + """
-      <p style="max-width:62ch;color:#c9c5bb;margin:0 0 22px">Thirteen things are hidden around this site. Each one you find is claimed here. Unclaimed items show a hint. Your claims are kept in this browser only.</p>
+      """ + ZONE.format(icon="i-bag", h="Lost &amp; Found", p="Items left behind on this site") + """
+      <p style="max-width:62ch;color:#c9c5bb;margin:0 0 22px">Things are hidden all around this site. Each one you find is claimed here. Unclaimed items show a hint. Your claims are kept in this browser only.</p>
       <div class="board lf">
-        <div class="lf-sum"><span>Claimed <b id="nClaimed">0</b> / 13</span><span id="rankLine">Status: new arrival</span></div>
+        <div class="lf-sum"><span>Claimed <b id="nClaimed">0</b> / <span id="nTotal">13</span></span><span id="rankLine">Status: new arrival</span></div>
         <div id="lfRows"></div>
       </div>
       <p style="margin-top:18px"><button class="tbtn" id="resetBtn">Clear all claims</button></p>
@@ -149,7 +149,9 @@ page("departures/vault.html", title="Lost & Found", robots="noindex, nofollow", 
   after="""<script>
   (() => {
     const host = document.getElementById('lfRows'), narrow = matchMedia('(max-width: 760px)').matches;
-    const RANKS = [[0, 'new arrival'], [3, 'frequent flyer'], [6, 'silver status'], [9, 'gold status'], [12, 'platinum'], [13, 'lifetime first class']];
+    const T = AM.EGGS.length;
+    document.getElementById('nTotal').textContent = T;
+    const RANKS = [[0, 'new arrival'], [3, 'frequent flyer'], [6, 'silver status'], [9, 'gold status'], [T - 1, 'platinum'], [T, 'lifetime first class']];
     let rows = [];
     function build() {
       host.innerHTML = '';
@@ -247,3 +249,179 @@ page("departures/luggage.html", title="Unclaimed baggage", body_attr=' data-egg=
     </div>
   </main>
 """)
+
+# ------------------------------------------------------------------ games (hidden; see departures-skin.js)
+GAME_NOTE = """<p class="game-note">{note} Scores stay in this browser. <a href="/">Back to Departures</a></p>"""
+
+page("departures/flapdle.html", title="Flapdle",
+  style="""
+    .fd { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: clamp(18px, 3vw, 34px); align-items: start; }
+    .fd-board .board-head { margin-bottom: 14px; }
+    .fd-grid { display: grid; gap: 8px; justify-content: center; margin: 4px 0 18px; }
+    .fd-row { --gap: 6px; border-radius: 4px; }
+    .fd-row .cell { --cw: clamp(42px, 9.5vw, 64px); --ch: clamp(50px, 12vw, 84px); transition: box-shadow .2s; }
+    .fd-row.active .cell { box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 2px 3px rgba(0, 0, 0, .6); }
+    .fd .cell.hit .h, .fd .cell.hit .leaf { background: #1f7d50; }
+    .fd .cell.near .h, .fd .cell.near .leaf { background: #a5770f; }
+    .fd .cell.miss .h, .fd .cell.miss .leaf { background: #111215; }
+    .fd .cell.miss { color: #5f646d; }
+    .fd-status { display: flex; justify-content: center; min-height: 30px; }
+    .fd-status .cell { --cw: clamp(11px, 2.4vw, 17px); --ch: clamp(18px, 3.8vw, 26px); color: var(--amber); }
+    .fd-status .flaps { --gap: 2px; }
+    .fd-keys { margin-top: 16px; display: grid; gap: 7px; user-select: none; }
+    .fd-krow { display: flex; justify-content: center; gap: 6px; }
+    .fd-krow button { flex: 1; max-width: 46px; height: 54px; border: 0; border-radius: 5px; background: #2b2e34; color: #fff; font: 700 16px/1 var(--sans); cursor: pointer; padding: 0; touch-action: manipulation; }
+    .fd-krow button.wide { max-width: 72px; flex: 1.6; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .fd-krow button:hover { filter: brightness(1.2); }
+    .fd-krow button.hit { background: #1f7d50; } .fd-krow button.near { background: #a5770f; } .fd-krow button.miss { background: #141518; color: #5f646d; }
+    .fd-side { display: grid; gap: 14px; }
+    .fd-nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; }
+    .fd-nums b { display: block; font: 800 26px/1 var(--sans); }
+    .fd-nums span { font: 600 10px/1.3 var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+    .fd-bar { display: grid; grid-template-columns: 14px 1fr; gap: 8px; align-items: center; font: 600 12px var(--mono); margin: 4px 0; }
+    .fd-bar i { display: block; font-style: normal; text-align: right; padding: 3px 6px 2px; background: #2b2e34; min-width: 22px; }
+    .fd-bar.me i { background: #1f7d50; }
+    .fd-side h3 { margin: 0 0 8px; font: 700 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .fd-next { font: 600 22px var(--mono); }
+    .fd-side .tbtn { width: 100%; height: 40px; }
+    .fd-how { font-size: 14px; color: #b9bcc2; line-height: 1.5; }
+    .fd-how i { display: inline-block; width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; }
+    .game-note { margin-top: 22px; font-size: 14px; color: var(--dim); }
+    .game-note a { color: var(--glyph); }
+    @media (max-width: 860px) { .fd { grid-template-columns: 1fr; } }
+  """,
+  body="""
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      """ + ZONE.format(icon="i-dep", h="Flapdle", p="One word a day · six tries") + """
+      <div class="fd">
+        <div>
+          <div class="board fd-board">
+            <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-dep"/></svg><span id="fdNo">No. 1</span></span><span>Five letters</span></div>
+            <div class="fd-grid" id="fdGrid" role="group" aria-label="Guesses"></div>
+            <div class="fd-status" id="fdStatus" aria-live="polite"></div>
+          </div>
+          <div class="fd-keys" id="fdKeys" aria-label="Keyboard"></div>
+        </div>
+        <aside class="fd-side">
+          <div class="board">
+            <h3>Your record</h3>
+            <div class="fd-nums"><div><b id="fdPlayed">0</b><span>Played</span></div><div><b id="fdWin">0</b><span>Win %</span></div><div><b id="fdStreak">0</b><span>Streak</span></div><div><b id="fdBest">0</b><span>Best</span></div></div>
+            <h3 style="margin-top:16px">Guesses</h3>
+            <div id="fdDist"></div>
+          </div>
+          <div class="board">
+            <h3>Next word in</h3>
+            <div class="fd-next" id="fdNext">--:--:--</div>
+            <div style="display:grid;gap:6px;margin-top:12px"><button class="tbtn" id="fdShare" hidden>Copy result</button><button class="tbtn" id="fdModeBtn">Practice round</button></div>
+          </div>
+          <p class="fd-how"><i style="background:#1f7d50"></i>right letter, right slot · <i style="background:#a5770f"></i>in the word, wrong slot · <i style="background:#2b2e34"></i>not in it. A new word every midnight, LA time.</p>
+        </aside>
+      </div>
+      """ + GAME_NOTE.format(note="Type on your keyboard or tap the keys.") + """
+    </div>
+  </main>
+""",
+  after='<script src="/departures/games/flapdle-words.js"></script>\n  <script src="/departures/games/flapdle.js"></script>')
+
+page("departures/tower.html", title="Tower",
+  style="""
+    .tw .board-head { flex-wrap: wrap; }
+    .tw-hud { display: flex; gap: 18px; font: 600 13px var(--mono); color: var(--dim); letter-spacing: .08em; text-transform: uppercase; }
+    .tw-hud b { display: inline-block; color: var(--glyph); font-size: 18px; margin-left: 6px; }
+    .tw-wrap { position: relative; width: 100%; aspect-ratio: 1000 / 640; background: #0b0d10; border: 1px solid #000; }
+    .tw-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: crosshair; }
+    .tw-over { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(8, 9, 11, .8); text-align: center; }
+    .tw-over[hidden] { display: none; }
+    .tw-over h3 { margin: 0 0 10px; font: 900 clamp(28px, 5vw, 52px)/1 var(--sans); }
+    .tw-over p { margin: 0 auto 18px; max-width: 46ch; color: #c9ccd2; font-size: 16px; }
+    .tw-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; font: 600 13px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .05em; }
+    .tw-legend i { display: inline-block; width: 12px; height: 12px; margin-right: 7px; vertical-align: -1px; border-radius: 2px; }
+    .game-note { margin-top: 22px; font-size: 14px; color: var(--dim); }
+    .game-note a { color: var(--glyph); }
+  """,
+  body="""
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      """ + ZONE.format(icon="i-route", h="Tower", p="LAX approach control · your shift") + """
+      <div class="board tw">
+        <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-arr"/></svg>Arrivals · LAX</span><span class="tw-hud"><span>Landed<b id="twScore">0</b></span><span>Best<b id="twBest">0</b></span></span></div>
+        <div class="tw-wrap">
+          <canvas id="tw" role="img" aria-label="Radar screen with runways and incoming aircraft"></canvas>
+          <div class="tw-over" id="twOverlay">
+            <div>
+              <h3 id="twTitle">Tower</h3>
+              <p id="twMsg">Drag from an aircraft to draw its route. Bring each one to the end of its own runway. Keep them apart. Traffic builds the longer you last.</p>
+              <button class="board-btn" id="twBtn" type="button">Start your shift</button>
+            </div>
+          </div>
+        </div>
+        <div class="tw-legend"><span><i style="background:#ff8a2a"></i>Jets → orange runway</span><span><i style="background:#45b4ff"></i>Props → blue runway</span><span><i style="background:#7ad957"></i>Helicopters → pad</span><span><i style="background:#ff4a3d"></i>Red ring: too close</span></div>
+      </div>
+      """ + GAME_NOTE.format(note="Works with a mouse or a finger. Either end of a runway is fine.") + """
+    </div>
+  </main>
+""",
+  after='<script src="/departures/games/tower.js"></script>')
+
+page("departures/carry-on.html", title="Carry-on",
+  style="""
+    .co-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-bottom: 18px; }
+    .co-top .lv { font: 800 22px/1 var(--sans); } .co-top .lv small { display: block; margin-top: 6px; font: 600 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+    .co-top .ctl { display: flex; align-items: center; gap: 8px; }
+    .co-clock { font: 600 20px var(--mono); min-width: 64px; text-align: right; margin-right: 6px; }
+    .co-stage { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 44px); align-items: start; }
+    .co-bagwrap { position: relative; padding: 30px 0 22px; display: flex; justify-content: center; }
+    .co-bagwrap::before { content: ""; position: absolute; top: 0; left: 50%; width: 120px; height: 34px; margin-left: -60px; border: 7px solid #2c3036; border-bottom: 0; border-radius: 16px 16px 0 0; }
+    .co-bagwrap::after { content: ""; position: absolute; bottom: 0; left: 50%; width: 70%; margin-left: -35%; height: 14px; background: radial-gradient(circle 7px at 10% 50%, #2c3036 98%, transparent) , radial-gradient(circle 7px at 90% 50%, #2c3036 98%, transparent); }
+    .co-case { position: relative; border-radius: 10px; background-color: #15171b;
+      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: var(--c) var(--c); box-shadow: 0 0 0 7px #2c3036, 0 0 0 9px #000, 0 30px 60px rgba(0, 0, 0, .5); }
+    .co-case.zipped { animation: zip .8s ease; }
+    @keyframes zip { 30% { transform: scale(1.03); box-shadow: 0 0 0 7px var(--green), 0 0 0 9px #000, 0 30px 60px rgba(0,0,0,.5); } }
+    .co-piece { position: absolute; touch-action: none; cursor: grab; user-select: none; }
+    .co-piece.dragging { position: fixed; z-index: 9990; cursor: grabbing; filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .55)); }
+    .co-cell { position: absolute; box-sizing: border-box; background: var(--pc); display: grid; place-items: center; font-style: normal; line-height: 1; }
+    .co-cell.bt { border-top: 3px solid rgba(255, 255, 255, .35); } .co-cell.bl { border-left: 3px solid rgba(255, 255, 255, .22); }
+    .co-cell.bb { border-bottom: 3px solid rgba(0, 0, 0, .35); } .co-cell.br { border-right: 3px solid rgba(0, 0, 0, .28); }
+    .co-cell span { filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+    .co-ghost { position: absolute; z-index: 1; pointer-events: none; }
+    .co-ghost.ok { background: rgba(122, 217, 87, .22); box-shadow: inset 0 0 0 2px rgba(122, 217, 87, .7); }
+    .co-ghost.no { background: rgba(255, 74, 61, .2); box-shadow: inset 0 0 0 2px rgba(255, 74, 61, .6); }
+    .co-traywrap h3 { margin: 0 0 10px; font: 700 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+    .co-tray { display: flex; flex-wrap: wrap; gap: 16px; align-content: flex-start; align-items: flex-start; min-height: 140px; padding: 16px; background: #101114; border: 1px dashed #2c3036; }
+    .co-slot { position: relative; }
+    .co-left { font: 600 12px var(--mono); color: var(--dim); text-transform: uppercase; margin-top: 10px; }
+    .co-levels { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 26px; }
+    .co-levels button { width: 40px; height: 40px; border: 1px solid #2c3036; background: transparent; color: var(--glyph); font: 700 14px var(--mono); cursor: pointer; }
+    .co-levels button[aria-current] { background: var(--sign); color: var(--sign-ink); border-color: var(--sign); }
+    .co-levels button:disabled { opacity: .35; cursor: default; }
+    .co-win { position: fixed; z-index: 9970; left: 50%; bottom: 22px; transform: translateX(-50%); width: min(520px, calc(100% - 24px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 16px 18px; background: var(--sign); color: var(--sign-ink); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+    .co-win[hidden] { display: none; }
+    .co-win b { font: 900 22px/1 var(--sans); } .co-win span { flex: 1; font: 600 13px var(--mono); }
+    .co-win button { border: 0; padding: 11px 16px 9px; font: 800 14px var(--sans); cursor: pointer; background: var(--sign-ink); color: var(--sign); }
+    .game-note { margin-top: 22px; font-size: 14px; color: var(--dim); }
+    .game-note a { color: var(--glyph); }
+    @media (max-width: 860px) { .co-stage { grid-template-columns: 1fr; } }
+  """,
+  body="""
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      """ + ZONE.format(icon="i-bag", h="Carry-on", p="Pack it all · zip it · board") + """
+      <div class="co">
+        <div class="co-top">
+          <div class="lv"><span id="coLevel">Bag 1</span><small id="coSize"></small></div>
+          <div class="ctl"><span class="co-clock" id="coClock">0:00</span><button class="tbtn" id="coHint" type="button">Hint</button><button class="tbtn" id="coReset" type="button">Unpack</button></div>
+        </div>
+        <div class="co-stage">
+          <div class="co-bagwrap"><div class="co-case" id="coCase" aria-label="Suitcase"></div></div>
+          <div class="co-traywrap"><h3>Still on the bed</h3><div class="co-tray" id="coTray"></div><div class="co-left" id="coLeft"></div></div>
+        </div>
+        <div class="co-levels" id="coLevels" aria-label="Levels"></div>
+        <div class="co-win" id="coWin" hidden><b id="coWinTitle">Zipped.</b><span id="coWinMsg"></span><button id="coAgain" type="button">Again</button><button id="coNext" type="button">Next bag →</button></div>
+      </div>
+      """ + GAME_NOTE.format(note="Drag items into the bag. Tap one to turn it. Every bag has a perfect fit.") + """
+    </div>
+  </main>
+""",
+  after='<script src="/departures/games/carry-on.js"></script>')
