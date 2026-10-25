@@ -1,0 +1,7 @@
+*.xcodeproj/
+App/Info.plist
+App/Heartbeat.entitlements
+Widget/Info.plist
+Widget/HeartbeatWidget.entitlements
+xcuserdata/
+DerivedData/

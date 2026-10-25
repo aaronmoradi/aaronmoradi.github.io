@@ -1,0 +1,69 @@
+# XcodeGen spec. On a Mac: `brew install xcodegen && xcodegen` in this folder,
+# then open Heartbeat.xcodeproj.
+name: Heartbeat
+options:
+  bundleIdPrefix: com.aaronmoradi
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: ""          # paste your Apple team ID here (or pick it in Xcode)
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Heartbeat:
+    type: application
+    platform: iOS
+    sources: [App, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronmoradi.heartbeat
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Heartbeat
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        NSHealthShareUsageDescription: Heartbeat reads the heart rate your Apple Watch records so it can chart the last 12 hours.
+    entitlements:
+      path: App/Heartbeat.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+        com.apple.developer.healthkit.background-delivery: true
+        com.apple.security.application-groups: [group.com.aaronmoradi.heartbeat]
+    dependencies:
+      - target: HeartbeatWidget
+      - sdk: HealthKit.framework
+  HeartbeatWidget:
+    type: app-extension
+    platform: iOS
+    sources: [Widget, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronmoradi.heartbeat.widget
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Heartbeat
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSHealthShareUsageDescription: Heartbeat reads the heart rate your Apple Watch records so it can chart the last 12 hours.
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Widget/HeartbeatWidget.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+        com.apple.security.application-groups: [group.com.aaronmoradi.heartbeat]
+    dependencies:
+      - sdk: HealthKit.framework
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
