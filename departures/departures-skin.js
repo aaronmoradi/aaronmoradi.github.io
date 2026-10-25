@@ -27,7 +27,7 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
       '~': H, home: H, '/': H, departures: H,
       map: P + 'map.html', route: P + 'map.html', atlas: P + 'map.html',
       vault: P + 'vault.html', '.vault': P + 'vault.html', 'lost-and-found': P + 'vault.html', lostandfound: P + 'vault.html',
-      flapdle: P + 'flapdle.html', wordle: P + 'flapdle.html', tower: P + 'tower.html', atc: P + 'tower.html', 'carry-on': P + 'carry-on.html', carryon: P + 'carry-on.html', arcade: P + 'flapdle.html',
+      flapdle: P + 'flapdle.html', wordle: P + 'flapdle.html', tower: P + 'tower.html', atc: P + 'tower.html', 'carry-on': P + 'carry-on.html', carryon: P + 'carry-on.html', arcade: '/lounge/', lounge: '/lounge/', games: '/lounge/', upgrade: '/lounge/upgrade.html', courtside: '/lounge/courtside.html', turbulence: '/lounge/turbulence.html',
       about: H + '#info', info: H + '#info', projects: H + '#gates', gates: H + '#gates', work: H + '#gates',
       experience: H + '#departures', path: H + '#departures', board: H + '#departures', contact: H + '#pass', pass: H + '#pass',
       play: '/404.html', cancelled: P + 'cancelled.html', luggage: P + 'luggage.html', v2: '/v2/',
@@ -50,6 +50,7 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
       flapdle:   { icon: '🔤', name: 'Word on the board',    hint: 'The clock on the big board takes word requests. Solve one.' },
       tower:     { icon: '🗼', name: 'Cleared to land',      hint: 'Catch the plane flying the route. Then land 10 in one shift.' },
       carryon:   { icon: '💼', name: 'Fits in the overhead', hint: 'Scan the barcode on your boarding pass. Then pack six bags.' },
+      lounge:    { icon: '🛋️', name: 'Lounge access',        hint: 'Read the small print on your boarding pass stub.' },
     },
     toastEgg: (egg, n, total) => `<span>Attention passenger: you found <b>${egg.name}</b>. ${n} of ${total} items claimed at Lost &amp; Found.</span>`,
     commands: {

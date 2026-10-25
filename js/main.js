@@ -38,6 +38,7 @@
     { id: 'flapdle',   icon: '🔤', name: 'Word of the day',      hint: 'Ask the terminal about the arcade. Then solve a word.' },
     { id: 'tower',     icon: '🛬', name: 'Cleared to land',      hint: 'Ask the terminal about the arcade. Land 10 in one go.' },
     { id: 'carryon',   icon: '🧳', name: 'Fits in the overhead', hint: 'Ask the terminal about the arcade. Pack six bags.' },
+    { id: 'lounge',    icon: '🛋️', name: 'Lounge access',        hint: 'Frequent flyers know where the lounge is. Ask the terminal.' },
   ];
   const EGG_KEY = 'am_eggs';
 
@@ -518,13 +519,21 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
     arcade: {
       hidden: true,
       run() {
-        print(`<span class="c-accent">THE ARCADE</span> <span class="c-dim">(three games, all on the Departures board)</span>
-  <a href="/departures/flapdle.html">flapdle</a>   a five-letter word a day, on split flaps
-  <a href="/departures/tower.html">tower</a>     air traffic control at LAX
-  <a href="/departures/carry-on.html">carry-on</a>  pack the bag, zip it, board
-<span class="c-dim">Type a name to play.</span>`);
+        print(`<span class="c-accent">THE LOUNGE</span> <span class="c-dim">(members only, which now includes you)</span>
+  <a href="/lounge/">lounge</a>      the room itself, with every score on the board
+  <a href="/departures/flapdle.html">flapdle</a>     a five-letter word a day, on split flaps
+  <a href="/departures/tower.html">tower</a>       air traffic control at LAX
+  <a href="/departures/carry-on.html">carry-on</a>    pack the bag, zip it, board
+  <a href="/lounge/upgrade.html">upgrade</a>     merge the seats, economy to the Moon
+  <a href="/lounge/courtside.html">courtside</a>   a 24-second shootaround
+  <a href="/lounge/turbulence.html">turbulence</a>  the red-eye home, through a storm
+<span class="c-dim">Type a name to go.</span>`);
       },
     },
+    lounge: { hidden: true, run() { go('/lounge/'); } },
+    upgrade: { hidden: true, run() { go('/lounge/upgrade.html'); } },
+    courtside: { hidden: true, run() { go('/lounge/courtside.html'); } },
+    turbulence: { hidden: true, run() { go('/lounge/turbulence.html'); } },
     flapdle: { hidden: true, run() { go('/departures/flapdle.html'); } },
     tower: { hidden: true, run() { go('/departures/tower.html'); } },
     'carry-on': { hidden: true, run() { go('/departures/carry-on.html'); } },

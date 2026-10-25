@@ -1,0 +1,22 @@
+/* Shared bits for the Lounge and its games. */
+.lg-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 0 0 22px; font: 600 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); }
+.lg-nav a { color: var(--dim); text-decoration: none; border-bottom: 1px solid transparent; }
+.lg-nav a:hover { color: var(--glyph); }
+.lg-nav a[aria-current] { color: var(--amber); border-bottom-color: var(--amber); }
+.lg-nav .home { color: var(--glyph); margin-right: 6px; }
+.game-note { margin-top: 22px; font-size: 14px; color: var(--dim); }
+.game-note a { color: var(--glyph); }
+.game-over { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(8, 9, 11, .8); text-align: center; }
+.game-over[hidden] { display: none; }
+.game-over h3 { margin: 0 0 10px; font: 900 clamp(28px, 5vw, 52px)/1 var(--sans); }
+.game-over p { margin: 0 auto 18px; max-width: 46ch; color: #c9ccd2; font-size: 16px; }
+.game-hud { display: flex; gap: 18px; font: 600 13px var(--mono); color: var(--dim); letter-spacing: .08em; text-transform: uppercase; }
+.game-hud b { display: inline-block; color: var(--glyph); font-size: 18px; margin-left: 6px; }
+.rotate-tip { display: none; margin: 10px 0 0; font: 600 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+@media (max-width: 600px) {
+  .game-over { padding: 8px; }
+  .game-over h3 { font-size: 22px; margin-bottom: 6px; }
+  .game-over p { font-size: 12.5px; line-height: 1.35; margin-bottom: 10px; }
+  .game-over .board-btn { padding: 10px 16px 8px; font-size: 14px; }
+}
+@media (max-width: 600px) and (orientation: portrait) { .rotate-tip { display: block; } }
