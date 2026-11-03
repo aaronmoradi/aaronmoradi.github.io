@@ -38,7 +38,7 @@
     const span = (Y1 - Y0) * 12;
     const x = (mi) => L + (mi / span) * (W - L - R);
     const nowM = (now.getFullYear() - Y0) * 12 + now.getMonth() + now.getDate() / 31;
-    const rows = [...SERVICE, { id: 'M.1', role: 'B.S. Computer Science, cum laude', org: 'Syracuse University', loc: 'Syracuse, NY', from: '2025-05', milestone: true, line: 'syr' }];
+    const rows = [...SERVICE, { id: 'M.1', role: 'B.S. Computer Science, cum laude; minor in Engineering & Computer Science Management', org: 'Syracuse University', loc: 'Syracuse, NY', from: '2025-05', milestone: true, line: 'syr' }];
     const H = top + rows.length * rowH + 30;
     let s = `<g class="yr">`;
     for (let y = Y0; y <= Y1; y++) { const xx = x((y - Y0) * 12); s += `<line x1="${xx}" y1="${top - 10}" x2="${xx}" y2="${H - 24}"/>` + (y < Y1 ? `<text x="${xx + 4}" y="${top - 16}">${y}</text>` : ''); }

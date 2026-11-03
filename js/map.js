@@ -11,7 +11,7 @@
     { id: 'hollywood', title: 'Hollywood', when: 'Jul – Aug 2019', emoji: '☕', ll: [34.0983, -118.3267], z: 13,
       text: 'First job: barista at Tea & Coffee Exchange.' },
     { id: 'syracuse', title: 'Syracuse University', when: 'Class of 2025', emoji: '🍊', ll: [43.0377, -76.134], z: 14,
-      text: 'B.S. in Computer Science, cum laude, with a minor in Engineering & CS Management. Guest Services at the Barnes Center at The Arch from 2022 to 2025. Otto approved.' },
+      text: 'B.S. in Computer Science, cum laude, with a minor in Engineering & Computer Science Management. Guest Services at the Barnes Center at The Arch from 2022 to 2025. Otto approved.' },
     { id: 'westwood', title: 'Westwood', when: 'May – Jun 2022', emoji: '🍪', ll: [34.063, -118.4472], z: 15,
       text: 'A summer serving cookies and ice cream sandwiches at Diddy Riese.' },
     { id: 'calabasas', title: 'Calabasas', when: 'Jun – Aug 2024', emoji: '📊', ll: [34.1446, -118.6448], z: 12,

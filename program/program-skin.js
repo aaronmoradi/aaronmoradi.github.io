@@ -84,7 +84,8 @@ Type <span class="c-gold">help</span> for the stat sheet. Try <span class="c-gol
           t.print(`<span class="c-gold">  YR     TEAM                       CITY          MOS</span>
 ${rows.join('\n')}
 <span class="c-gold">  CAREER ${String(CAREER.length).padEnd(2)} teams${' '.repeat(29)}${String(total).padStart(3)}</span>
-<span class="c-dim">  + B.S. Computer Science, Syracuse University, May 2025 (cum laude)</span>`);
+<span class="c-dim">  + B.S. Computer Science, Syracuse University, May 2025 (cum laude)
+    minor: Engineering &amp; Computer Science Management</span>`);
         },
       },
       boxscore: {

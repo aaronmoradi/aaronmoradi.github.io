@@ -56,7 +56,7 @@ Type <span class="c-gold">help</span>, or try <span class="c-gold">git log</span
           } else if (sub === 'blame') {
             t.print(`<span class="c-gold">89725c6</span> (Aaron Moradi 2025-09-06 00:46) Born and raised in Los Angeles.
 <span class="c-gold">60f8306</span> (Aaron Moradi 2025-09-06 01:35) This is my about page test
-<span class="c-gold">-------</span> (Syracuse Univ. 2025-05)           B.S. Computer Science, cum laude
+<span class="c-gold">-------</span> (Syracuse Univ. 2025-05)           B.S. Computer Science, cum laude; minor in Engineering &amp; Computer Science Management
 <span class="c-gold">-------</span> (XYZ          2025-10)           Assistant Chief of Staff, Santa Monica
 <span class="c-dim">every line above is Aaron's. blame accordingly.</span>`);
           } else if (sub === 'revert') {

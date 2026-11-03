@@ -39,6 +39,7 @@
     const lines = [
       'NOW AT XYZ · SANTA MONICA',
       'B.S. COMPUTER SCIENCE · 2025',
+      'MINOR · ENG & CS MANAGEMENT',
       "SYRACUSE '25 · CUM LAUDE",
       'BORN AND RAISED IN LOS ANGELES',
       'PROFESSIONAL · CREATIVE',
