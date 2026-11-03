@@ -130,8 +130,8 @@
         <rect x="${syr[0] - 7}" y="${syr[1] - 7}" width="14" height="14" fill="var(--sign)"/><text x="${syr[0] - 18}" y="${syr[1] + 32}">SYR</text>
       </g>
       <g id="plane" class="secret" tabindex="0" role="link" aria-label="Tower: an air traffic control game"><title>Take over the tower</title><circle r="24" fill="transparent"/><path d="M-12 -2 L4 -2 L12 0 L4 2 L-12 2 Z M-2 -2 L-8 -11 L-4 -11 L4 -2 Z M-2 2 L-8 11 L-4 11 L4 2 Z M-12 -2 L-15 -6 L-12 -6 L-8 -2 Z M-12 2 L-15 6 L-12 6 L-8 2 Z" fill="var(--glyph)"/>
-        <animateMotion id="flyOut" dur="4.5s" begin="0s;flyBack.end" rotate="auto" keyPoints="0;1;1" keyTimes="0;.9;1" calcMode="linear"><mpath href="#legOut"/></animateMotion>
-        <animateMotion id="flyBack" dur="4.5s" begin="flyOut.end" rotate="auto" keyPoints="0;1;1" keyTimes="0;.9;1" calcMode="linear"><mpath href="#legBack"/></animateMotion></g>`;
+        <animateMotion id="flyOut" dur="4s" begin="0s;flyBack.end" rotate="auto" calcMode="linear"><mpath href="#legOut"/></animateMotion>
+        <animateMotion id="flyBack" dur="4s" begin="flyOut.end" rotate="auto" calcMode="linear"><mpath href="#legBack"/></animateMotion></g>`;
     const plane = $('#plane', svg);
     const tower = () => { location.href = '/departures/tower.html'; };
     plane.addEventListener('click', tower);
