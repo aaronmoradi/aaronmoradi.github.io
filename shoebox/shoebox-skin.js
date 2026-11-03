@@ -10,7 +10,7 @@
     { when: 'May – Jun 2022', place: 'Diddy Riese Cookies', city: 'Westwood, Los Angeles', role: 'Food Server' },
     { when: 'Aug 2022 – May 2025', place: 'Barnes Center at The Arch', city: 'Syracuse, NY', role: 'Guest Services' },
     { when: 'Jun – Aug 2024', place: 'PlanetArt', city: 'Calabasas, CA', role: 'Data Science Analyst Intern' },
-    { when: 'May 2025', place: 'Syracuse University', city: 'Syracuse, NY', role: 'B.S. Computer Science, cum laude' },
+    { when: 'May 2025', place: 'Syracuse University', city: 'Syracuse, NY', role: 'B.S. Computer Science, cum laude; minor in Engineering & Computer Science Management' },
     { when: 'Oct 2025 – now', place: 'XYZ', city: 'Santa Monica, CA', role: 'Assistant Chief of Staff' },
   ];
 

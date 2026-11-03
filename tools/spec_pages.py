@@ -140,7 +140,7 @@ page("spec/map.html", title="Sheet 2 · Route map", sheet="2 of 5", block_title=
             <g class="stn" data-id="hollywood"><circle class="st" cx="420" cy="280" r="10"/><text class="nm" x="392" y="246">Hollywood</text><text class="yr" x="392" y="228">Tea &amp; Coffee · 2019</text></g>
             <g class="stn" data-id="la"><circle class="ix" cx="580" cy="280" r="18"/><text class="nm" x="552" y="322">Los Angeles</text><text class="yr" x="552" y="340">Home · interchange</text></g>
             <g class="stn" data-id="syracuse"><circle class="st" cx="810" cy="180" r="10"/><text class="nm" x="782" y="222">Barnes Center</text><text class="yr" x="782" y="240">Guest Services · 2022–25</text></g>
-            <g class="stn" data-id="syracuse"><circle class="ix" cx="940" cy="180" r="15"/><text class="nm" x="868" y="140">Syracuse Univ.</text><text class="yr" x="868" y="122">B.S. CS · 2025</text></g>
+            <g class="stn" data-id="syracuse"><circle class="ix" cx="940" cy="180" r="15"/><text class="nm" x="990" y="140" text-anchor="end">Syracuse Univ.</text><text class="yr" x="990" y="122" text-anchor="end">Minor: Eng. &amp; CS Mgmt</text><text class="yr" x="990" y="104" text-anchor="end">B.S. CS · 2025</text></g>
           </svg>
           <div class="legend"><span><span class="swatch" style="--c:var(--line-la)"></span>Los Angeles line</span><span><span class="swatch" style="--c:var(--line-syr)"></span>Syracuse line</span><span><span class="swatch" style="--c:var(--line-pa)"></span>PlanetArt branch</span><span>◎ interchange · ● current station</span></div>
           <figcaption><b>Fig. 2.1</b> Schematic. Not to scale. Select a station to locate it in Fig. 2.2.</figcaption>

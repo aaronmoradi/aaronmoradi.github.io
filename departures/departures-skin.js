@@ -10,7 +10,7 @@
     { time: '2022', city: 'WESTWOOD', carrier: 'DIDDY RIESE', short: 'DIDDY RIESE', status: 'DEPARTED', via: 'FOOD SERVER  MAY-JUN 2022', viaS: 'FOOD SERVER' },
     { time: '2022', city: 'SYRACUSE NY', carrier: 'BARNES CENTER', short: 'BARNES CTR', status: 'DEPARTED', via: 'GUEST SERVICES  AUG 2022-MAY 2025', viaS: 'GUEST SERVICES' },
     { time: '2024', city: 'CALABASAS', carrier: 'PLANETART', short: 'PLANETART', status: 'DEPARTED', via: 'DATA SCIENCE ANALYST INTERN  JUN-AUG 2024', viaS: 'DATA SCIENCE INTERN' },
-    { time: '2025', city: 'SYRACUSE NY', carrier: 'SYRACUSE UNIV', short: 'SYRACUSE U.', status: 'LANDED', tone: 'green', via: "B.S. COMPUTER SCIENCE · CUM LAUDE  MAY 2025", viaS: 'B.S. COMP. SCI CUM LAUDE' },
+    { time: '2025', city: 'SYRACUSE NY', carrier: 'SYRACUSE UNIV', short: 'SYRACUSE U.', status: 'LANDED', tone: 'green', via: "B.S. CS · MINOR ENG & CS MGMT · CUM LAUDE", viaS: 'B.S. CS · ENG & CS MGMT' },
     { time: '2025', city: 'SANTA MONICA', carrier: 'XYZ', short: 'XYZ', status: 'ON TIME', tone: 'amber', now: true, via: 'ASSISTANT CHIEF OF STAFF  SINCE OCT 2025', viaS: 'ASSISTANT CHIEF OF STAFF' },
   ];
 

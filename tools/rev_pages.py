@@ -77,7 +77,7 @@ page("rev/index.html", cur="c_home", title="Rev. · Aaron Moradi's build log", d
       <p class="rev">Rev. <span data-rev>206</span> · the build log of</p>
       <h1>Aaron Moradi</h1>
       <p class="edit-line"><s class="edit">I am a hard worker.</s><span class="ins">here are the receipts ↓</span></p>
-      <p class="bio">Born and raised in Los Angeles. Syracuse University '25, B.S. Computer Science, <em>cum laude</em>. Assistant Chief of Staff at XYZ in Santa Monica since October 2025. This site is my notebook: every revision is kept, timestamps and all.</p>
+      <p class="bio">Born and raised in Los Angeles. Syracuse University '25, B.S. Computer Science, <em>cum laude</em>, minor in Engineering &amp; Computer Science Management. Assistant Chief of Staff at XYZ in Santa Monica since October 2025. This site is my notebook: every revision is kept, timestamps and all.</p>
       <div class="stats">
         <div><b data-mine>—</b><span>commits to this site by me</span></div>
         <div><b data-late>—</b><span>of them between midnight and 4am PT</span></div>
@@ -106,7 +106,7 @@ page("rev/index.html", cur="c_home", title="Rev. · Aaron Moradi's build log", d
         <thead><tr><th>Period</th><th>Employer</th><th>Role</th><th>City</th></tr></thead>
         <tbody>
           <tr><td>Oct 2025 – <span class="punch">IN · mo. <span data-since="2025-10">—</span></span></td><td>XYZ</td><td>Assistant Chief of Staff</td><td>Santa Monica, CA</td></tr>
-          <tr><td>May 2025</td><td>Syracuse University</td><td>B.S. Computer Science, <em>cum laude</em>; minor in Engineering &amp; CS Management</td><td>Syracuse, NY</td></tr>
+          <tr><td>May 2025</td><td>Syracuse University</td><td>B.S. Computer Science, <em>cum laude</em>; minor in Engineering &amp; Computer Science Management</td><td>Syracuse, NY</td></tr>
           <tr><td>Jun – Aug 2024</td><td>PlanetArt</td><td>Data Science Analyst Intern</td><td>Calabasas, CA</td></tr>
           <tr><td>Aug 2022 – May 2025</td><td>Barnes Center at The Arch</td><td>Guest Services</td><td>Syracuse, NY</td></tr>
           <tr><td>May – Jun 2022</td><td>Diddy Riese Cookies</td><td>Food Server</td><td>Los Angeles, CA</td></tr>

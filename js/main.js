@@ -413,7 +413,7 @@ Welcome, guest. Type <span class="c-gold">help</span> to see what you can do.
       desc: 'the short version',
       run() {
         print(`<span class="c-accent">Aaron Moradi</span>
-Born & raised in Los Angeles. Syracuse University '25 — B.S. Computer Science, cum laude.
+Born & raised in Los Angeles. Syracuse University '25 — B.S. Computer Science, cum laude; minor in Engineering & Computer Science Management.
 Assistant Chief of Staff at XYZ in Santa Monica.
 Off the clock: basketball, music, art. Purple & gold forever.`);
       },
