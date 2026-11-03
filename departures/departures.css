@@ -5,7 +5,8 @@
    Overpass Mono for the flaps. Black, concrete, signage yellow, amber.
    ========================================================================== */
 
-@font-face { font-family: "Overpass"; src: url("fonts/overpass.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; }
+/* Overpass draws the middle dot (U+00B7) with zero width, so "A · B" looks like "A ·B"; let the dot come from the fallback font */
+@font-face { font-family: "Overpass"; src: url("fonts/overpass.woff2") format("woff2-variations"); font-weight: 100 900; font-display: swap; unicode-range: U+0000-00B6, U+00B8-FFFF; }
 @font-face { font-family: "Overpass Mono"; src: url("fonts/overpass-mono-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Overpass Mono"; src: url("fonts/overpass-mono-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
