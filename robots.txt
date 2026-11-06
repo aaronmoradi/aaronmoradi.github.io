@@ -1,8 +1,10 @@
 User-agent: *
 Disallow: /vault.html
+Disallow: /departures/vault.html
+Disallow: /lounge/
 
 # Hey human. This file tells robots where not to go.
-# You're not a robot, though. So go ahead: /vault.html
+# You're not a robot, though. So go ahead: /departures/vault.html
 # (While you're at it, press ` on the homepage.)
 
 Sitemap: https://aaronmoradi.com/sitemap.xml

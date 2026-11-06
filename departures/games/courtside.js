@@ -71,7 +71,7 @@
     netK = 1;
     flash = { text: `${swish ? 'Swish! ' : ''}+${pts}${three ? ' · from deep' : ''}`, k: 1.2 };
     if (streak === 3) AM.toast('<span>Heating up.</span>', 1600);
-    if (streak === 5) { AM.toast('<span><b>On fire.</b> Double points until you miss.</span>', 2200); AM.confetti('lakers', 50); }
+    if (streak === 5) { AM.findEgg('hoops'); AM.toast('<span><b>On fire.</b> Double points until you miss.</span>', 2200); AM.confetti('lakers', 50); }
     if (score >= 24 && !store.get('ct_24')) { store.set('ct_24', '1'); AM.toast('<span>24 points. Mamba mentality.</span>'); AM.confetti('lakers', 90); }
     paintHud();
   }

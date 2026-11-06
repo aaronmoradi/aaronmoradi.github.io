@@ -3,226 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>404 · Air ball</title>
+  <title>Flight cancelled · Departures · Aaron Moradi</title>
   <meta name="robots" content="noindex" />
-  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('am_theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}catch(e){}</script>
+  <link rel="stylesheet" href="/departures/departures.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=2" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png?v=2" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=2" />
   <style>
-    .court { position: relative; width: min(760px, 100%); margin: 8px auto 20px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
-    #hoops { display: block; width: 100%; height: 440px; touch-action: none; cursor: grab; }
-    #hoops:active { cursor: grabbing; }
-    .hud { position: absolute; left: 16px; top: 14px; display: flex; gap: 8px; font: 500 12px var(--font-mono); pointer-events: none; }
-    .hud span { background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; }
-    .hud b { color: var(--accent); }
-    .shout { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; font-family: var(--font-display); font-size: clamp(48px, 9vw, 90px); color: var(--accent); opacity: 0; transform: scale(.8); transition: opacity .25s, transform .4s cubic-bezier(.2,1.4,.4,1); }
-    .shout.on { opacity: 1; transform: scale(1); }
-    .page-404 .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    @media (max-width: 600px) { #hoops { height: 380px; } }
+    .cx .cell { --cw: clamp(16px, 4.2vw, 46px); --ch: clamp(26px, 6.4vw, 70px); }
+    .cx .flaps { --gap: clamp(2px, .4vw, 4px); }
+    .cx .red .cell { color: #ff5a45; }
+    .cx .line { margin: 0 0 10px; }
   </style>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-dep" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM22.07 9.64c-.21-.8-1.04-1.28-1.84-1.06L14.92 10 8 3.57l-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 2.59 4.49L21 11.49c.81-.23 1.28-1.05 1.07-1.85z"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M2.5 19h19v2h-19zM9.68 13.27l4.35 1.16 5.31 1.42c.8.21 1.62-.26 1.84-1.06.21-.8-.26-1.62-1.06-1.84l-5.31-1.42-2.76-9.02L10.12 2v8.28L5.15 8.95l-.93-2.32-1.45-.39v5.17l1.6.43 5.31 1.43z"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 2.07A8 8 0 0 1 19.93 11H13V4.07zM11 4.07V11H4.07A8 8 0 0 1 11 4.07zM4.07 13H11v6.93A8 8 0 0 1 4.07 13zM13 19.93V13h6.93A8 8 0 0 1 13 19.93z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 24 24"><path d="M4 3h7v18H4zm2 2v14h3V5zm7 6h5.17l-2.59-2.59L17 7l5 5-5 5-1.41-1.41L18.17 13H13z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path d="M19 15.18V7c0-2.21-1.79-4-4-4s-4 1.79-4 4v10c0 1.1-.9 2-2 2s-2-.9-2-2V8.82a3 3 0 1 0-2 0V17c0 2.21 1.79 4 4 4s4-1.79 4-4V7c0-1.1.9-2 2-2s2 .9 2 2v8.18a3 3 0 1 0 2 0z"/></symbol>
+    <symbol id="i-pass" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10.5 3.5h3V6h-3z"/></symbol>
+  </svg>
 </head>
 
 <body data-egg="lost">
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="logo" href="/" aria-label="Aaron Moradi, home"><span class="logo-mark">a</span><span>Aaron Moradi</span></a>
-      <nav class="nav" id="nav" aria-label="Main">
-        <a href="/#about">About</a>
-        <a href="/#projects">Work</a>
-        <a href="/#path">Path</a>
-        <a href="/map.html">Map</a>
+  <header class="topbar">
+    <div class="wrap in">
+      <a class="mark logo" href="/" aria-label="Aaron Moradi, home"><span class="code">AM</span>Aaron Moradi</a>
+      <nav class="topnav" id="topnav" aria-label="Main">
+        <a href="/#departures">Departures</a>
+        <a href="/#info">Information</a>
+        <a href="/#gates">Gates</a>
+        <a href="/departures/map.html">Route map</a>
+        <a href="/#pass">Boarding pass</a>
         <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="/#contact" class="cta">Contact</a>
       </nav>
-      <div class="header-tools">
-        <button class="icon-btn" data-terminal aria-label="Open terminal" title="Terminal (press `)">&gt;_</button>
-        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
-        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+      <div class="tools">
+        <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
+        <button class="tbtn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="topnav">☰</button>
       </div>
     </div>
   </header>
 
-  <main class="page-center page-404">
-    <div class="wrap" style="width:100%">
-      <span class="eyebrow">Error 404</span>
-      <h1>Air <em>ball.</em></h1>
-      <p>This page doesn't exist. But the hoop does. Drag back from the ball, aim, and let go. Hit 5 in a row and something good happens.</p>
-
-      <div class="court">
-        <canvas id="hoops" aria-label="Basketball mini-game: drag back from the ball and release to shoot"></canvas>
-        <div class="hud"><span>score <b id="score">0</b></span><span>streak <b id="streak">0</b></span><span>best <b id="best">0</b></span></div>
-        <div class="shout" id="shout">Swish!</div>
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      <div class="board cx">
+        <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-dep"/></svg>Departures · Error 404</span><span>Gate —</span></div>
+        <div class="line" id="cx1"></div>
+        <div class="line red" id="cx2"></div>
+        <div class="board-foot"><span id="cxPath"></span><span>We apologize for the inconvenience</span></div>
       </div>
-
-      <div class="actions">
-        <a class="btn" href="/">Take me home <span class="arrow">→</span></a>
-        <a class="btn ghost" href="/map.html">Open the map</a>
-      </div>
+      <p style="max-width:60ch;color:#c9c5bb;margin:24px 0 18px">The flight you were trying to board isn't on the schedule. Here are your rebooking options:</p>
+      <ul class="signs"><li><a href="/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/lounge/courtside.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
     </div>
   </main>
 
+  <footer class="arrivals" style="padding-top:30px">
+    <div class="wrap">
+      <div class="foot-row">
+        <span>© <span data-year></span> Aaron Moradi</span>
+        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a><a href="/departures/vault.html">Lost &amp; Found</a><a href="/departures/luggage.html">Unclaimed baggage</a><a href="/lounge/">Lounge</a><a href="/archive/">Archive</a></nav>
+        <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
+      </div>
+    </div>
+  </footer>
+  <script src="/departures/flap.js"></script>
+  <script src="/departures/departures-skin.js"></script>
   <script src="/js/main.js"></script>
   <script>
   (() => {
-    const cv = document.getElementById('hoops');
-    const ctx = cv.getContext('2d');
-    const $score = document.getElementById('score'), $streak = document.getElementById('streak'), $best = document.getElementById('best'), $shout = document.getElementById('shout');
-    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-    let W = 0, H = 0;
-    const R = 15, G = 0.38, RIM_W = 64, RIM_R = 4;
-    let hoop = { x: 0, y: 0 };            // x = backboard face, y = rim height
-    let ball, drag = null, inFlight = false, shotTime = 0, scoredThisShot = false;
-    let score = 0, streak = 0, best = Number(AM.store.get('am_hoops_best', 0)) || 0;
-    $best.textContent = best;
-
-    function resize() {
-      const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
-      W = r.width; H = r.height;
-      cv.width = W * dpr; cv.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      placeHoop(true);
-      resetBall();
-    }
-    function placeHoop(initial) {
-      hoop.x = W - Math.max(28, W * 0.06);
-      hoop.y = initial ? H * 0.38 : H * (0.25 + Math.random() * 0.3);
-    }
-    function resetBall() {
-      const startX = Math.max(60, W * (0.1 + Math.random() * 0.2));
-      ball = { x: startX, y: H - R - 30, vx: 0, vy: 0, spin: 0, home: { x: startX, y: H - R - 30 } };
-      inFlight = false; scoredThisShot = false;
-    }
-    const rimFront = () => ({ x: hoop.x - RIM_W, y: hoop.y });
-    const rimBack = () => ({ x: hoop.x - 2, y: hoop.y });
-
-    function collidePoint(p) {
-      const dx = ball.x - p.x, dy = ball.y - p.y, d = Math.hypot(dx, dy);
-      if (d < R + RIM_R && d > 0) {
-        const nx = dx / d, ny = dy / d, dot = ball.vx * nx + ball.vy * ny;
-        if (dot < 0) { ball.vx -= 1.75 * dot * nx; ball.vy -= 1.75 * dot * ny; }
-        ball.x = p.x + nx * (R + RIM_R); ball.y = p.y + ny * (R + RIM_R);
-      }
-    }
-
-    function physics() {
-      const prevY = ball.y;
-      ball.vy += G; ball.x += ball.vx; ball.y += ball.vy; ball.spin += ball.vx * 0.05;
-      collidePoint(rimFront()); collidePoint(rimBack());
-      // backboard
-      const top = hoop.y - 90, bottom = hoop.y + 14;
-      if (ball.x + R > hoop.x && ball.x < hoop.x + 10 && ball.y > top && ball.y < bottom && ball.vx > 0) { ball.x = hoop.x - R; ball.vx *= -0.6; }
-      // floor + left wall
-      if (ball.y + R > H) { ball.y = H - R; ball.vy *= -0.55; ball.vx *= 0.8; }
-      if (ball.x - R < 0) { ball.x = R; ball.vx *= -0.6; }
-      // score: center passes down through the rim
-      const f = rimFront();
-      if (!scoredThisShot && prevY < hoop.y && ball.y >= hoop.y && ball.x > f.x + R * 0.4 && ball.x < hoop.x - R * 0.4) {
-        scoredThisShot = true; onScore();
-      }
-      const done = (Math.abs(ball.vy) < 0.8 && ball.y + R >= H - 1 && Math.abs(ball.vx) < 0.4) || ball.x - R > W || performance.now() - shotTime > 6000;
-      if (done) endShot();
-    }
-
-    function shout(text) {
-      $shout.textContent = text; $shout.classList.add('on');
-      clearTimeout(shout.t); shout.t = setTimeout(() => $shout.classList.remove('on'), 900);
-    }
-    function onScore() {
-      score++; streak++;
-      $score.textContent = score; $streak.textContent = streak;
-      if (streak > best) { best = streak; AM.store.set('am_hoops_best', best); $best.textContent = best; }
-      shout(['Swish!', 'Buckets!', 'Count it!', 'Kobe!', 'Splash!'][Math.min(streak - 1, 4)]);
-      if (streak === 5) { AM.findEgg('hoops'); AM.confetti('lakers', 200); }
-      else AM.confetti('party', 24);
-    }
-    function endShot() {
-      if (!scoredThisShot) { if (streak > 0) shout('Brick.'); streak = 0; $streak.textContent = 0; }
-      else placeHoop(false);
-      resetBall();
-    }
-
-    function predict(vx, vy) {
-      const pts = []; let x = ball.x, y = ball.y;
-      for (let i = 0; i < 26; i++) { vy += G; x += vx; y += vy; if (i % 2) pts.push([x, y]); }
-      return pts;
-    }
-
-    function draw() {
-      const ink = css('--ink'), accent = css('--accent'), line = css('--line'), muted = css('--muted');
-      ctx.clearRect(0, 0, W, H);
-      // floor
-      ctx.fillStyle = line; ctx.fillRect(0, H - 4, W, 4);
-      // 3pt-ish arc
-      ctx.strokeStyle = line; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(hoop.x, H, W * 0.55, Math.PI, Math.PI * 1.5); ctx.stroke();
-      // pole + board
-      ctx.fillStyle = muted; ctx.fillRect(hoop.x + 8, hoop.y - 40, 6, H);
-      ctx.fillStyle = ink; ctx.fillRect(hoop.x, hoop.y - 90, 8, 104);
-      // net
-      const f = rimFront();
-      ctx.strokeStyle = muted; ctx.lineWidth = 1.2; ctx.beginPath();
-      for (let i = 0; i <= 4; i++) {
-        const x0 = f.x + (RIM_W * i) / 4, x1 = f.x + RIM_W * 0.2 + (RIM_W * 0.6 * i) / 4;
-        ctx.moveTo(x0, hoop.y); ctx.lineTo(x1, hoop.y + 42);
-      }
-      ctx.moveTo(f.x + 6, hoop.y + 14); ctx.lineTo(hoop.x - 6, hoop.y + 14);
-      ctx.moveTo(f.x + 10, hoop.y + 28); ctx.lineTo(hoop.x - 10, hoop.y + 28);
-      ctx.stroke();
-      // aim preview
-      if (drag) {
-        const v = shotVel(); ctx.fillStyle = muted;
-        predict(v.vx, v.vy).forEach(([x, y], i) => { ctx.globalAlpha = 1 - i / 14; ctx.beginPath(); ctx.arc(x, y, 3, 0, 7); ctx.fill(); });
-        ctx.globalAlpha = 1;
-      }
-      // ball
-      ctx.save(); ctx.translate(ball.x, ball.y); ctx.rotate(ball.spin);
-      ctx.fillStyle = '#f2541b'; ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
-      ctx.strokeStyle = '#1a0d06'; ctx.lineWidth = 1.5; ctx.beginPath();
-      ctx.moveTo(-R, 0); ctx.lineTo(R, 0); ctx.moveTo(0, -R); ctx.lineTo(0, R);
-      ctx.moveTo(-R * 0.7, -R * 0.7); ctx.quadraticCurveTo(0, 0, -R * 0.7, R * 0.7);
-      ctx.moveTo(R * 0.7, -R * 0.7); ctx.quadraticCurveTo(0, 0, R * 0.7, R * 0.7);
-      ctx.stroke(); ctx.restore();
-      // rim on top of ball for depth
-      ctx.strokeStyle = accent; ctx.lineWidth = RIM_R * 2; ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.moveTo(f.x, hoop.y); ctx.lineTo(hoop.x, hoop.y); ctx.stroke();
-      if (!inFlight && !drag && score === 0) {
-        ctx.fillStyle = muted; ctx.font = '12px JetBrains Mono, monospace';
-        ctx.fillText('← drag back, release to shoot', ball.x + R + 10, ball.y + 4);
-      }
-    }
-
-    function shotVel() {
-      const dx = drag.sx - drag.x, dy = drag.sy - drag.y, k = 0.13, max = 22;
-      let vx = dx * k, vy = dy * k; const m = Math.hypot(vx, vy);
-      if (m > max) { vx *= max / m; vy *= max / m; }
-      return { vx, vy };
-    }
-    const pt = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-    cv.addEventListener('pointerdown', (e) => {
-      if (inFlight) return;
-      const p = pt(e); drag = { sx: p.x, sy: p.y, x: p.x, y: p.y };
-      cv.setPointerCapture(e.pointerId);
-    });
-    cv.addEventListener('pointermove', (e) => { if (drag) { const p = pt(e); drag.x = p.x; drag.y = p.y; } });
-    cv.addEventListener('pointerup', () => {
-      if (!drag) return;
-      const v = shotVel(); drag = null;
-      if (Math.hypot(v.vx, v.vy) < 2) return;
-      ball.vx = v.vx; ball.vy = v.vy; inFlight = true; shotTime = performance.now();
-    });
-
-    let last = performance.now(), acc = 0;
-    function loop(now) {
-      acc += Math.min(now - last, 100); last = now;
-      while (acc >= 1000 / 60) { if (inFlight) physics(); acc -= 1000 / 60; }
-      draw(); requestAnimationFrame(loop);
-    }
-    addEventListener('resize', resize);
-    resize(); requestAnimationFrame(loop);
+    document.getElementById('cxPath').textContent = 'Requested: ' + location.pathname;
+    const a = Flap.row(document.getElementById('cx1'), 14), b = Flap.row(document.getElementById('cx2'), 14);
+    a.set('FLIGHT AM 404', { stagger: 40 }).then(() => b.set('CANCELLED', { stagger: 40 }));
   })();
   </script>
 </body>

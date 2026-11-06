@@ -30,7 +30,7 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
       flapdle: P + 'flapdle.html', wordle: P + 'flapdle.html', tower: P + 'tower.html', atc: P + 'tower.html', 'carry-on': P + 'carry-on.html', carryon: P + 'carry-on.html', arcade: '/lounge/', lounge: '/lounge/', games: '/lounge/', upgrade: '/lounge/upgrade.html', courtside: '/lounge/courtside.html', turbulence: '/lounge/turbulence.html',
       about: H + '#info', info: H + '#info', projects: H + '#gates', gates: H + '#gates', work: H + '#gates',
       experience: H + '#departures', path: H + '#departures', board: H + '#departures', contact: H + '#pass', pass: H + '#pass',
-      play: '/404.html', cancelled: P + 'cancelled.html', luggage: P + 'luggage.html', v2: '/v2/',
+      play: '/lounge/courtside.html', cancelled: P + 'cancelled.html', luggage: P + 'luggage.html', v2: '/v2/',
     },
     palettes: { party: ['#ffcd00', '#ffb000', '#f2eee3', '#111111', '#36d07a'] },
     eggs: {
@@ -42,7 +42,7 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
       mamba:     { icon: '💺', name: 'Seat 24A',             hint: 'Your boarding pass has a seat. Tap it 8 times. Or 24.' },
       courtside: { icon: '🏟️', name: 'Courtside',            hint: 'On the route map, zoom way, way into downtown LA.' },
       lost:      { icon: '❌', name: 'Flight cancelled',     hint: "Try to board a flight that doesn't exist." },
-      hoops:     { icon: '🏀', name: 'Buckets',              hint: 'Hit 5 in a row on the original court (/404.html).' },
+      hoops:     { icon: '🏀', name: 'Buckets',              hint: 'In the Lounge, make 5 in a row on the Courtside court.' },
       forgotten: { icon: '🧳', name: 'Unclaimed baggage',    hint: 'Some old luggage never got picked up. Check the footer.' },
       console:   { icon: '📦', name: 'Black box',            hint: 'Open the developer console and say hi.' },
       nightowl:  { icon: '🌙', name: 'Red-eye',              hint: 'Fly between 12 and 5am PT.' },
