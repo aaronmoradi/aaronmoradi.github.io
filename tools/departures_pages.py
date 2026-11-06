@@ -12,6 +12,9 @@ HEAD = """<!doctype html>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{title} · Departures · Aaron Moradi</title>
   <meta name="robots" content="{robots}" />
+  <meta property="og:title" content="{title} · Aaron Moradi" />
+  <meta property="og:image" content="https://aaronmoradi.com/assets/img/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0a0a0b" />
   <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}}catch(e){{}}</script>
   {extra_head}<link rel="stylesheet" href="/departures/departures.css" />
@@ -30,7 +33,7 @@ HEAD = """<!doctype html>
         <a href="/#gates">Gates</a>
         <a href="/departures/map.html"{map_cur}>Route map</a>
         <a href="/#pass">Boarding pass</a>
-        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/resume/">Resume</a>
       </nav>
       <div class="tools">
         <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
@@ -45,7 +48,7 @@ FOOT = """
     <div class="wrap">
       <div class="foot-row">
         <span>© <span data-year></span> Aaron Moradi</span>
-        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a><a href="/departures/vault.html">Lost &amp; Found</a><a href="/departures/luggage.html">Unclaimed baggage</a><a href="/lounge/">Lounge</a><a href="/archive/">Archive</a></nav>
+        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/resume/">Resume</a><a href="/departures/vault.html">Lost &amp; Found</a><a href="/departures/luggage.html">Unclaimed baggage</a><a href="/lounge/">Lounge</a><a href="/archive/">Archive</a></nav>
         <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
       </div>
     </div>

@@ -299,7 +299,7 @@
   /* The terminal                                                            */
   /* ---------------------------------------------------------------------- */
   const LINKS = {
-    resume: '/assets/AaronMoradiResume.pdf',
+    resume: '/resume/',
     github: 'https://github.com/aaronmoradi',
     linkedin: 'https://www.linkedin.com/in/aaronmoradi/',
     email: 'mailto:aaronmoradi2@gmail.com',
