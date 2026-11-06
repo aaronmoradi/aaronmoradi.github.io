@@ -30,7 +30,7 @@
     { id: 'mamba',     icon: '🐍', name: 'Mamba mentality',      hint: 'The sticker on the homepage wants 8 taps. Or 24.' },
     { id: 'courtside', icon: '🏟️', name: 'Courtside seats',      hint: 'On the map, zoom way, way into downtown LA.' },
     { id: 'lost',      icon: '🧭', name: 'Lost in the sauce',    hint: "Go somewhere that doesn't exist." },
-    { id: 'hoops',     icon: '🏀', name: 'Buckets',              hint: 'Hit 5 in a row where the lost people go.' },
+    { id: 'hoops',     icon: '🏀', name: 'Buckets',              hint: 'Hit 5 in a row on the court in the Lounge.' },
     { id: 'forgotten', icon: '🕸️', name: 'The forgotten page',   hint: 'Every site has an /about page. Mine forgot about it.' },
     { id: 'console',   icon: '🛠️', name: 'View-source energy',   hint: 'Open the developer console and say hi.' },
     { id: 'nightowl',  icon: '🦉', name: 'Night owl',            hint: 'Visit while Los Angeles is asleep (12–5am PT).' },
@@ -299,7 +299,7 @@
   /* The terminal                                                            */
   /* ---------------------------------------------------------------------- */
   const LINKS = {
-    resume: '/assets/AaronMoradiResume.pdf',
+    resume: '/resume/',
     github: 'https://github.com/aaronmoradi',
     linkedin: 'https://www.linkedin.com/in/aaronmoradi/',
     email: 'mailto:aaronmoradi2@gmail.com',
@@ -308,7 +308,7 @@
     '~': '/', home: '/', '/': '/', map: '/map.html', atlas: '/map.html',
     vault: '/vault.html', '.vault': '/vault.html',
     about: '/#about', projects: '/#projects', work: '/#projects', experience: '/#path', path: '/#path', contact: '/#contact',
-    play: '/404.html',
+    play: '/lounge/courtside.html',
     ...(SKIN.places || {}),
   };
   const PROMPT = SKIN.prompt || 'guest@am:~$';

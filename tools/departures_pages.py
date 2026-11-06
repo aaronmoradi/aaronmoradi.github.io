@@ -12,6 +12,9 @@ HEAD = """<!doctype html>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{title} · Departures · Aaron Moradi</title>
   <meta name="robots" content="{robots}" />
+  <meta property="og:title" content="{title} · Aaron Moradi" />
+  <meta property="og:image" content="https://aaronmoradi.com/assets/img/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0a0a0b" />
   <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('am_showtime'))document.documentElement.classList.add('showtime')}}catch(e){{}}</script>
   {extra_head}<link rel="stylesheet" href="/departures/departures.css" />
@@ -30,7 +33,7 @@ HEAD = """<!doctype html>
         <a href="/#gates">Gates</a>
         <a href="/departures/map.html"{map_cur}>Route map</a>
         <a href="/#pass">Boarding pass</a>
-        <a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/resume/">Resume</a>
       </nav>
       <div class="tools">
         <button class="tbtn" data-terminal title="Gate agent (press `)">Agent</button>
@@ -45,7 +48,7 @@ FOOT = """
     <div class="wrap">
       <div class="foot-row">
         <span>© <span data-year></span> Aaron Moradi</span>
-        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/assets/AaronMoradiResume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+        <nav aria-label="Footer"><a href="/">Departures</a><a href="/departures/map.html">Route map</a><a href="/resume/">Resume</a><a href="/departures/vault.html">Lost &amp; Found</a><a href="/departures/luggage.html">Unclaimed baggage</a><a href="/lounge/">Lounge</a><a href="/archive/">Archive</a></nav>
         <a class="egg-meter" href="/departures/vault.html" data-egg-meter hidden></a>
       </div>
     </div>
@@ -200,7 +203,38 @@ page("departures/cancelled.html", title="Flight cancelled", body_attr=' data-egg
         <div class="board-foot"><span id="cxPath"></span><span>We apologize for the inconvenience</span></div>
       </div>
       <p style="max-width:60ch;color:#c9c5bb;margin:24px 0 18px">The flight you were trying to board isn't on the schedule. Here are your rebooking options:</p>
-      <ul class="signs"><li><a href="/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/404.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
+      <ul class="signs"><li><a href="/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/lounge/courtside.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
+    </div>
+  </main>
+""",
+  after="""<script>
+  (() => {
+    document.getElementById('cxPath').textContent = 'Requested: ' + location.pathname;
+    const a = Flap.row(document.getElementById('cx1'), 14), b = Flap.row(document.getElementById('cx2'), 14);
+    a.set('FLIGHT AM 404', { stagger: 40 }).then(() => b.set('CANCELLED', { stagger: 40 }));
+  })();
+  </script>""")
+
+
+# GitHub Pages serves /404.html for any missing path, so it gets the same board
+page("404.html", title="Flight cancelled", body_attr=' data-egg="lost"',
+  style="""
+    .cx .cell { --cw: clamp(16px, 4.2vw, 46px); --ch: clamp(26px, 6.4vw, 70px); }
+    .cx .flaps { --gap: clamp(2px, .4vw, 4px); }
+    .cx .red .cell { color: #ff5a45; }
+    .cx .line { margin: 0 0 10px; }
+  """,
+  body="""
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      <div class="board cx">
+        <div class="board-head"><span class="title"><svg aria-hidden="true"><use href="#i-dep"/></svg>Departures · Error 404</span><span>Gate —</span></div>
+        <div class="line" id="cx1"></div>
+        <div class="line red" id="cx2"></div>
+        <div class="board-foot"><span id="cxPath"></span><span>We apologize for the inconvenience</span></div>
+      </div>
+      <p style="max-width:60ch;color:#c9c5bb;margin:24px 0 18px">The flight you were trying to board isn't on the schedule. Here are your rebooking options:</p>
+      <ul class="signs"><li><a href="/"><svg aria-hidden="true"><use href="#i-dep"/></svg>Back to Departures</a></li><li><a href="/departures/map.html"><svg aria-hidden="true"><use href="#i-route"/></svg>Route map</a></li><li><a class="alt" href="/lounge/courtside.html"><svg aria-hidden="true"><use href="#i-gate"/></svg>Shoot hoops while you wait</a></li></ul>
     </div>
   </main>
 """,
@@ -236,7 +270,7 @@ page("departures/luggage.html", title="Unclaimed baggage", body_attr=' data-egg=
       <div class="claim">
         <div>
           <p>This bag has been going around the carousel since the very first night this site existed. Inside: the first draft of an About page, two lines long, never finished.</p>
-          <p>It's been tagged and kept exactly as it was found. The real About section is at <a href="/#info" style="color:var(--sign)">Information</a>, and the original file still lives at <a href="/about.html" style="color:var(--sign)">/about.html</a>.</p>
+          <p>It's been tagged and kept exactly as it was found. The real About section is at <a href="/#info" style="color:var(--sign)">Information</a>, and its original two lines are kept on the tag, exactly as written.</p>
           <ul class="signs" style="margin-top:20px"><li><a href="/#info"><svg aria-hidden="true"><use href="#i-info"/></svg>Information desk</a></li></ul>
         </div>
         <div class="tag">
@@ -671,3 +705,61 @@ page("lounge/turbulence.html", title="Turbulence", extra_head=GAME_HEAD,
   </main>
 """,
   after='<script src="/departures/games/turbulence.js"></script>')
+
+
+# ------------------------------------------------------------------ retired v2 pages -> their Departures versions
+REDIRECT = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{title} · Aaron Moradi</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://aaronmoradi.com{to}" />
+  <meta http-equiv="refresh" content="0; url={to}" />
+  <script>location.replace('{to}' + location.hash);</script>
+</head>
+<body><p><a href="{to}">{title} moved here.</a></p></body>
+</html>
+"""
+for path, to, title in [("map.html", "/departures/map.html", "Route map"), ("vault.html", "/departures/vault.html", "Lost &amp; Found"), ("about.html", "/departures/luggage.html", "Unclaimed baggage")]:
+    open(path, "w").write(REDIRECT.format(to=to, title=title))
+    print("wrote", path, "->", to)
+
+# ------------------------------------------------------------------ archive: earlier designs, kept quietly
+os.makedirs("archive", exist_ok=True)
+ARCHIVE = [
+    ("v2", "/v2/", "Oct 2026", "The second site", "Serif headline, life map, terminal and the first easter eggs. Retired because it read as AI-made."),
+    ("program", "/program/", "Oct 2026", "Official game program", "The site as a Lakers game-night program, Kobe tribute and all."),
+    ("shoebox", "/shoebox/", "Oct 2026", "The shoebox", "A scrapbook of keepsakes: tickets, receipts, a pressed flower."),
+    ("spec", "/spec/", "Oct 2026", "AM-001 specification", "An engineering spec sheet for a person, with a transit-style route map."),
+    ("rev", "/rev/", "Oct 2026", "Build log", "The site told through its own git history."),
+    ("london", "/london/", "Oct 2026", "London edition", "Departures as the Underground: Johnston type, dot-matrix boards, roundels."),
+    ("nyc", "/nyc/", "Oct 2026", "New York edition", "Departures as the Subway: Helvetica signs and route bullets."),
+    ("la", "/la/", "Oct 2026", "Los Angeles edition", "Departures as Metro Rail: lettered line bullets, Metro orange."),
+]
+cards = "".join(f'''
+        <a class="ar-card" href="{u}"><span class="k">{when}</span><h3>{t}</h3><p>{d}</p><span class="go">Visit →</span></a>''' for _, u, when, t, d in ARCHIVE)
+page("archive/index.html", title="Archive", robots="noindex, nofollow",
+  style="""
+    .ar-intro { max-width: 60ch; color: #c9ccd2; margin: 0 0 28px; }
+    .ar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 3px; }
+    .ar-card { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px; background: #111214; border: 1px solid #1f2125; color: inherit; text-decoration: none; transition: border-color .2s; }
+    .ar-card:hover { border-color: var(--glyph); }
+    .ar-card .k { font: 700 12px var(--mono); color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
+    .ar-card h3 { margin: 0; font: 900 24px/1.05 var(--sans); }
+    .ar-card p { margin: 0; color: #b8bbc1; font-size: 15px; line-height: 1.45; }
+    .ar-card .go { margin-top: auto; padding-top: 8px; font: 600 12px var(--mono); color: var(--dim); text-transform: uppercase; }
+    .ar-note { margin-top: 26px; font-size: 14px; color: var(--dim); }
+    .ar-note a { color: var(--glyph); }
+  """,
+  body="""
+  <main class="zone" style="padding-top:40px">
+    <div class="wrap">
+      """ + ZONE.format(icon="i-doc", h="Archive", p="Earlier designs · kept as they were") + """
+      <p class="ar-intro">Before this site became a departures board, it went through a few other lives. They're kept here exactly as they were, the way an airport keeps its old terminals around for a while.</p>
+      <div class="ar-grid">""" + cards + """
+      </div>
+      <p class="ar-note">The very first version still lives on as the screenshot at <a href="/#gates">Gate A1</a>.</p>
+    </div>
+  </main>
+""")
