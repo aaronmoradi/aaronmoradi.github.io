@@ -68,8 +68,85 @@ Good evening. Type <span class="c-gold">help</span> for services, <span class="c
         desc: 'make an announcement',
         run(args, t) { const msg = t.esc(args.join(' ') || 'Now boarding all rows.'); window.AM.toast(`<span><b>PA</b> ${msg}</span>`); t.print('announced.'); },
       },
+      spongebob: {
+        desc: 'theme mode: Bikini Bottom (spongebob off to leave)',
+        run(args, t) {
+          const on = args[0] === 'on' || (args[0] !== 'off' && !bikini.on());
+          bikini.set(on);
+          t.print(on ? bikini.banner : '<span class="c-dim">Surfacing… back at Gate A1. Type spongebob any time to dive again.</span>');
+        },
+      },
+      order: {
+        hidden: true,
+        run(args, t) {
+          if (!bikini.on()) return t.print('<span class="c-dim">The kitchen is closed at this gate. (Try spongebob first.)</span>');
+          const n = Math.max(1, Math.min(9, parseInt(args[0], 10) || 1));
+          t.print(`<span class="c-gold">ORDER UP!</span>  ${n} × patty on a bun
+<span class="c-dim">----------------------------</span>
+  bun · patty · lettuce
+  cheese · onions · pickles
+  tomatoes · bun
+  secret formula .. <span class="c-gold">[REDACTED]</span>
+<span class="c-dim">----------------------------</span>
+  total ............... $${(n * 2.99).toFixed(2)}
+<span class="c-dim">Served with a smile.</span>`);
+        },
+      },
+      jellyfish: {
+        hidden: true,
+        run(args, t) {
+          if (!bikini.on()) return t.print('<span class="c-dim">No jellyfish fields near the gate. (Try spongebob first.)</span>');
+          bikini.jellies(8);
+          t.print('<span class="c-gold">🪼 jellyfishing!</span> <span class="c-dim">catch-and-release only.</span>');
+        },
+      },
+      ready: {
+        hidden: true,
+        run(args, t) { t.print(bikini.on() ? '<span class="c-gold">I\'m ready! I\'m ready! I\'m ready!</span>' : 'ready for what? <span class="c-dim">(spongebob)</span>'); },
+      },
     },
   };
+
+  /* ---------- Bikini Bottom: a theme mode for the gate agent terminal ---------- */
+  const bikini = {
+    key: 'am_bikini',
+    on() { return window.AM.store.get(this.key) === '1'; },
+    term() { return document.querySelector('.term'); },
+    banner: `<span class="c-gold">        \\|//
+       \\\\|///
+      .-'''''-.
+     /  #  #   \\      BIKINI BOTTOM TERMINAL
+    |  #  #  #  |     you are now 2,000 ft below Gate A1
+    |   #  #  # |
+     \\  #  #  /      try: <b>order</b> · <b>jellyfish</b> · <b>ready</b>
+      '-.....-'       <b>spongebob off</b> to surface</span>`,
+    set(on) {
+      window.AM.store.set(this.key, on ? '1' : '0');
+      this.apply();
+    },
+    apply() {
+      const el = this.term();
+      if (!el) return;
+      const on = this.on();
+      el.classList.toggle('bb', on);
+      el.querySelector('.term-bar span').textContent = on ? 'BIKINI BOTTOM · KRUSTY KRAB TERMINAL' : 'GATE AGENT · AM 2332';
+      window.AM.setPrompt(on ? 'krusty-krab>' : 'gate-agent>');
+    },
+    jellies(n) {
+      const el = this.term();
+      for (let i = 0; i < n; i++) {
+        const j = document.createElement('span');
+        j.className = 'bb-jelly';
+        j.textContent = '🪼';
+        j.style.left = 5 + Math.random() * 85 + '%';
+        j.style.animationDelay = i * 0.25 + 's';
+        el.appendChild(j);
+        j.addEventListener('animationend', () => j.remove());
+      }
+    },
+  };
+  // the mode sticks between visits: re-apply whenever the terminal is built
+  addEventListener('am:term', () => bikini.apply());
 
   window.AM_MAP_SKIN = {
     pin: (emoji, cls, i) => (i === null ? emoji : `<span>${i + 1}</span>`),

@@ -311,7 +311,9 @@
     play: '/lounge/courtside.html',
     ...(SKIN.places || {}),
   };
-  const PROMPT = SKIN.prompt || 'guest@am:~$';
+  let PROMPT = SKIN.prompt || 'guest@am:~$';
+  // terminal themes can swap the prompt (see the Bikini Bottom mode in departures-skin.js)
+  function setPrompt(p) { PROMPT = p; if (T.built) $('.term-in label', T.el).textContent = p; }
 
   const T = { built: false, el: null, out: null, input: null, backdrop: null, history: [], hIdx: 0 };
 
@@ -359,6 +361,7 @@
 Welcome, guest. Type <span class="c-gold">help</span> to see what you can do.
 <span class="c-dim">Tip: ↑/↓ for history, Tab to autocomplete, Esc to close.</span>
 `);
+    dispatchEvent(new CustomEvent('am:term', { detail: T.el }));
   }
 
   function print(html, cls) {
@@ -653,7 +656,7 @@ Off the clock: basketball, music, art. Purple & gold forever.`);
   window.aaron.hello = window.aaron.hi;
 
   // Public API for page-specific scripts (map, vault, hoops)
-  window.AM = { EGGS, foundEggs, foundDates, findEgg, resetEggs, confetti, toast, isDark, openTerminal, store, skin: SKIN };
+  window.AM = { EGGS, foundEggs, foundDates, findEgg, resetEggs, confetti, toast, isDark, openTerminal, setPrompt, store, skin: SKIN };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
   else wire();
